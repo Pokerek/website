@@ -3,7 +3,6 @@ interface User {
   username: string;
   email: string;
   password: string;
-  creator: object;
 }
 
 export default User;
