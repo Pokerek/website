@@ -5,6 +5,7 @@ import mongoose from 'mongoose';
 import path from 'path';
 import Controller from './interface/controller.interface';
 import errorMiddleware from './middleware/error.middleware';
+import cors from 'cors';
 
 class App {
   public app: express.Application;
@@ -21,6 +22,7 @@ class App {
     this.app.listen(process.env.PORT);
   }
   private initializeMiddleware() {
+    this.app.use(cors());
     this.app.use(bodyParser.json());
     this.app.use(bodyParser.urlencoded({ extended: false }));
     this.app.use(express.static(path.join(__dirname, 'public')));
