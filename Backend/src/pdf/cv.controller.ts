@@ -5,6 +5,7 @@ import NotFoundException from '../exceptions/NotFoundException';
 import cvModel, { CV } from './cv.model';
 import authMiddleware from '../middleware/authMiddleware';
 import generate from './func/generate';
+import convert from './func/convert';
 
 class CVController implements Controller {
   public path = '/cv';
@@ -24,6 +25,7 @@ class CVController implements Controller {
     this.cv.findOne().then((cvData) => {
       if (cvData) {
         generate(cvData);
+        convert();
       }
     });
     res.send('Cv generate!');

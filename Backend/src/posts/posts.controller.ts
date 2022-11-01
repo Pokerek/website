@@ -39,7 +39,7 @@ class PostsController implements Controller {
       .find()
       .sort({ createdDate: -1 })
       .then((posts) => {
-        res.send(posts);
+        res.status(200).json(posts);
       });
   };
 
@@ -52,7 +52,7 @@ class PostsController implements Controller {
     const postBody: Post = req.body;
     this.post.findByIdAndUpdate(id, postBody, { new: true }).then((post) => {
       if (post) {
-        res.send({ message: 'Post update!' });
+        res.json({ message: 'Post update!' });
       } else {
         next(new NotFoundException(id, 'Post'));
       }
@@ -62,7 +62,7 @@ class PostsController implements Controller {
   private createPost = (req: RequestWithUser, res: Response) => {
     const postData: Post = req.body;
     const createdPost = new this.post(postData);
-    createdPost.save().then(() => res.send({ message: 'Post created' }));
+    createdPost.save().then(() => res.json({ message: 'Post created' }));
   };
 
   private deletePost = (
@@ -73,7 +73,7 @@ class PostsController implements Controller {
     const { id } = req.params;
     this.post.findByIdAndDelete(id).then((successResponse) => {
       if (successResponse) {
-        res.send({ message: 'Post deleted' });
+        res.json({ message: 'Post deleted' });
       } else {
         next(new NotFoundException(id, 'Post'));
       }

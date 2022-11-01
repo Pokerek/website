@@ -25,7 +25,7 @@ const newFormData = (filename: string) => {
 };
 
 const convert = () => {
-  const formData = newFormData('index.html');
+  const formData = newFormData('cv.html');
   axios
     .post('https://api.pspdfkit.com/build', formData, {
       headers: formData.getHeaders({
