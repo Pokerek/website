@@ -5,8 +5,24 @@ const Schema = mongoose.Schema;
 const techSchema = new Schema({
   name: { type: String, required: true },
   url: { type: String, required: true },
+  link: String,
   area: { type: String, required: true },
   learned: { type: Boolean, required: true }
+});
+
+const experienceSchema = new Schema({
+  position: { type: String, required: true },
+  company: { type: String, required: true },
+  duration: { type: String, required: true },
+  location: { type: String, default: false },
+  responsibility: { type: String, required: true },
+  stack: [String],
+  projects: [
+    {
+      name: { type: String, required: true },
+      url: { type: String, required: true }
+    }
+  ]
 });
 
 const cvSchema = new Schema({
@@ -22,37 +38,11 @@ const cvSchema = new Schema({
   devLanguage: { type: String, required: true },
   motivation: { type: String, required: true },
   skills: [techSchema],
-  experience: [
-    {
-      position: { type: String, required: true },
-      company: { type: String, required: true },
-      duration: { type: String, required: true },
-      location: { type: String, default: false },
-      responsibility: { type: String, required: true },
-      stack: [String],
-      projects: [
-        {
-          name: { type: String, required: true },
-          url: { type: String, required: true }
-        }
-      ]
-    }
-  ],
-  projects: [
-    {
-      name: { type: String, required: true },
-      technology: [String],
-      description: { type: String, required: true },
-      links: {
-        online: { type: String, required: true },
-        github: { type: String, required: true }
-      }
-    }
-  ],
+  experience: [experienceSchema],
   social: [
     {
       name: { type: String, required: true },
-      icon: { type: String, required: true },
+      body: { type: String, required: true },
       url: { type: String, required: true }
     }
   ],

@@ -1,0 +1,12 @@
+.journal {
+  &__inner {
+    display: flex;
+    width: 100%;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  &__btn {
+    font-size: 2rem;
+    margin: 1rem 0;
+  }
+}

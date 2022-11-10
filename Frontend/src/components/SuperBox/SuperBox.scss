@@ -1,0 +1,54 @@
+@use "../../styles/variable";
+@use "../../styles/mixin";
+
+.superBox {
+  height: calc(100vh - 8rem - 3px);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__left {
+    min-width: 230px;
+    flex-direction: column;
+    justify-content: start;
+    align-items: flex-end;
+    margin-right: 1rem;
+    padding-right: 1rem;
+    border-right: 1px solid variable.$font-color;
+    font-size: 2rem;
+  }
+
+  &__right {
+    overflow: auto;
+    flex-direction: column;
+  }
+
+  &__left,
+  &__right {
+    height: calc(100% - 2rem);
+    display: flex;
+    padding: 1rem;
+  }
+
+  @include mixin.mq(variable.$screen-md) {
+    flex-direction: column;
+    &__left,
+    &__right {
+      flex-grow: 1;
+      width: 100%;
+      border-right: none;
+    }
+
+    &__left {
+      height: 50px;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+  @include mixin.mq(variable.$screen-sm) {
+    margin: 0;
+    padding: 0;
+    height: calc(100vh - 9rem - 2px);
+  }
+}

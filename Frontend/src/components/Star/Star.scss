@@ -1,0 +1,25 @@
+.star {
+  position: relative;
+  &__start {
+    margin-left: 0.5rem;
+    margin-top: 0.5rem;
+    padding-left: 0.75em;
+    &::before {
+      left: 0;
+    }
+  }
+  &__end {
+    padding-right: 0.75em;
+    &::after {
+      right: 0.25em;
+    }
+  }
+
+  &__start::before,
+  &__end::after {
+    content: "*";
+    font-size: 0.75em;
+    position: absolute;
+    top: -0.25em;
+  }
+}
