@@ -1,23 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import "./App.scss";
+import { Routes, Route } from "react-router-dom";
+import { Footer } from "./components/Layout/footer/Footer";
+import { Header } from "./components/Layout/header/Header";
+import { Welcome } from "./pages/welcome/Welcome";
+import About from "./pages/About/About";
+import ErrorPage from "./pages/ErrorPage/ErrorPage";
+import Journal from "./pages/Journal/Journal";
+import Projects from "./pages/Projects/Projects";
+import { Container } from "./components/Layout/container/Container";
 
 function App() {
-  fetch(`${process.env.REACT_APP_BACKEND_URL}/posts`, {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  })
-    .then((res) => res.json())
-    .then((posts) => console.log(posts))
-    .catch((error) => console.error(error));
-
   return (
-    <div className='App'>
-      <header className='App-header'>
-        <img src={logo} className='App-logo' alt='logo' />
-        <p>Check console!</p>
-      </header>
+    <div className="App">
+      <Header />
+      <Container>
+        <Routes>
+          <Route path="/">
+            <Route index element={<Welcome />} />
+            <Route path="about.me" element={<About />} />
+            <Route path="journal.dev" element={<Journal />} />
+            <Route path="project.file" element={<Projects />} />
+            <Route path="*" element={<ErrorPage />} />
+          </Route>
+        </Routes>
+      </Container>
+      <Footer />
     </div>
   );
 }

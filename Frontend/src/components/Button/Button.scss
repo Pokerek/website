@@ -1,0 +1,40 @@
+@use '../../styles/variable';
+@use '../../styles/mixin';
+
+.btn {
+   border: none;
+   background-color: variable.$background-color;
+   color: variable.$font-color;
+   font-size: 2rem;
+   min-width: 3rem;
+   min-height: 2rem;
+   cursor: pointer;
+   text-decoration: none;
+
+   @include mixin.hover-animation;
+   
+   &.active {
+       color: variable.$font-alter;
+   }
+
+   &__text {
+       font-size: inherit;
+       min-width: 0;
+       min-height: 0;
+       display: inline;
+   }
+
+   
+   &--green {
+      background-color: variable.$font-alter;
+      color: variable.$background-color;
+      margin-top: 1rem;
+      padding: 1rem;
+      border-radius: .25rem;
+      text-decoration:none;
+
+      &:hover {
+          color: variable.$font-color;
+      }
+  }
+}

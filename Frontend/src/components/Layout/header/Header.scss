@@ -1,0 +1,58 @@
+@use '../../../styles/variable';
+@use '../../../styles/mixin';
+
+.header {
+   border-bottom: variable.$main-border-style;
+
+   &__inner {
+       text-align: center;
+       width: 100%;
+       display: flex;
+       justify-content: center;
+       align-items: center;
+       position: relative;
+       height: 4rem;
+   }
+   &__left {
+       left: 0;
+   }
+   &__right {
+       left: calc(100vw - 6.5rem);
+       display: flex;
+   }
+   &__icon {
+
+       font-size: 2.5rem;
+
+       &:not(:last-child) {
+           margin-right: 1rem;
+       }
+
+       &,
+       &:visited {
+           color: variable.$font-color;
+           text-decoration: none;
+       }
+       
+       i { @include mixin.hover-animation; }
+   }
+
+   &__left,
+   &__right {
+       position: absolute;
+   }
+   &__title {
+       font-size: 3rem;
+       font-weight: bold;
+       color: variable.$font-color;
+       text-decoration: none;
+       @include mixin.hover-animation;
+   }
+
+   @include mixin.mq(variable.$screen-md) {
+       &__left {
+          position: relative;
+          z-index: 1000;
+       }
+   }
+}

@@ -4,8 +4,9 @@ import RequestWithUser from '../interface/requestWithUser.interface';
 import NotFoundException from '../exceptions/NotFoundException';
 import cvModel, { CV } from './cv.model';
 import authMiddleware from '../middleware/authMiddleware';
-import generate from './func/generate';
-import convert from './func/convert';
+//import generate from './func/generate';
+//import convert from './func/convert';
+import HttpException from '../exceptions/HttpException';
 
 class CVController implements Controller {
   public path = '/cv';
@@ -17,21 +18,51 @@ class CVController implements Controller {
   }
 
   private initializeRoutes() {
-    this.router.get(this.path, this.createCV);
-    this.router.patch(`${this.path}/:id`, authMiddleware, this.modifyCV);
+    this.router.get(this.path, this.getCVInformation);
+    this.router.get(`${this.path}/social`, this.getSocialIcons);
+    this.router.patch(`${this.path}/:id`, authMiddleware, this.modifyData);
   }
 
-  private createCV = (req: Request, res: Response) => {
-    this.cv.findOne().then((cvData) => {
-      if (cvData) {
-        generate(cvData);
-        convert();
+  private getCVInformation = (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    this.cv.findOne().then((cvInformation) => {
+      if (!cvInformation) {
+        next(new HttpException(500, 'Something went wrong.'));
       }
+
+      res.send(cvInformation);
     });
-    res.send('Cv generate!');
   };
 
-  private modifyCV = (
+  private getSocialIcons = (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    this.cv.findOne().then((cvInformation) => {
+      if (!cvInformation) {
+        next(new HttpException(500, 'Something went wrong.'));
+      }
+
+      const socialIcons = cvInformation?.social;
+
+      res.send(socialIcons);
+    });
+  };
+
+  // private createDocument = (req: Request, res: Response) => {
+  //   this.cv.findOne().then((cvData) => {
+  //     if (cvData) {
+  //       generate(cvData);
+  //       convert();
+  //     }
+  //   });
+  // };
+
+  private modifyData = (
     req: RequestWithUser,
     res: Response,
     next: NextFunction
@@ -39,11 +70,11 @@ class CVController implements Controller {
     const { id } = req.params;
     const cvBody: CV = req.body;
     this.cv.findByIdAndUpdate(id, cvBody, { new: true }).then((cv) => {
-      if (cv) {
-        res.send({ message: 'CV update!' });
+      if (!cv) {
+        next(new NotFoundException(id, 'CV'));
       }
 
-      next(new NotFoundException(id, 'CV'));
+      res.send({ message: 'CV update!' });
     });
   };
 }

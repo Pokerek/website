@@ -1,0 +1,8 @@
+@keyframes blink {
+   50% {opacity: 0;}
+}
+
+.commandLine::after {
+   content: '|';
+   animation: blink 1s step-start infinite;
+}

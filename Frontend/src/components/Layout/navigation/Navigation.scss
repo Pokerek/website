@@ -1,0 +1,71 @@
+@use '../../../styles/variable';
+@use '../../../styles/mixin';
+
+$border: 2px solid variable.$font-color;
+$menu-width: 50vw;
+
+.navigation {
+    transition: transform .3s .1s ease-in-out;
+    &__list {
+        padding: .25rem .5rem;
+        border-left: $border;
+        border-right: $border;
+        display: inline-block;
+    }
+    &__item {
+        display: inline;
+        font-size: 2rem;
+        margin: 0 .5rem;
+        a:visited,a {
+            color: variable.$font-color;
+            text-decoration: none;
+        }
+        a { @include mixin.hover-animation };
+    }
+
+    &--active {
+        transform: translateX(0px);
+    }
+
+    @include mixin.mq(variable.$screen-md) {
+        height: 100vh;
+        width: $menu-width;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        transform: translatex(-$menu-width);
+        background-color: variable.$background-color;
+        color: variable.$font-color;
+    
+        &__item {
+            font-size: 1.5rem;
+            padding: 1.5rem 1rem;
+
+            &:not(:last-child) {
+                border-bottom: 1px solid variable.$font-color;
+            }
+        }
+
+        &__item > a {
+            display: block;
+        }
+
+        &__list {
+            border-left: none;
+            border-right: none;
+            display: flex;
+            flex-direction: column;
+            margin-top: 4rem;
+            border-top: 1px solid variable.$font-color;
+        }
+
+        &--active {
+            transform: translatex(0px);
+        }
+
+}
+}
+
+
+

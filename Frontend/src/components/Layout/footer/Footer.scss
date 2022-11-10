@@ -1,0 +1,19 @@
+@use '../../../styles/variable';
+@use '../../../styles/mixin';
+
+.footer {
+   border-top: variable.$main-border-style;
+   font-size: 1.25rem;
+   
+   &__inner {
+       display: flex;
+       justify-content: center;
+       align-items: center;
+       height: 4rem;
+   }
+
+   @include mixin.mq(variable.$screen-sm) { 
+       z-index: 1000;
+       position: relative;
+   }
+}

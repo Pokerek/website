@@ -1,0 +1,119 @@
+@use "../../styles/variable";
+@use "../../styles/mixin";
+
+.about {
+  &__title {
+    margin-bottom: 1rem;
+  }
+
+  &__btn {
+    padding: 0.5rem;
+  }
+
+  &__btn::before {
+    content: ">";
+    margin-right: 0.2rem;
+    visibility: hidden;
+  }
+
+  &__btn.active::before {
+    visibility: visible;
+  }
+
+  &__inner {
+    display: none;
+    flex-direction: column;
+    margin-right: 0.5rem;
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  &__inner.active {
+    display: flex;
+  }
+
+  &__box {
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid variable.$font-color;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    &:last-child {
+      border: none;
+    }
+  }
+
+  &__subtitle {
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  &__head-info {
+    font-size: 1.2rem;
+  }
+
+  &__info {
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-bottom: 0.25rem;
+    line-height: 1rem;
+    display: block;
+  }
+
+  &__text {
+    font-size: 1.5rem;
+    margin: 0.5rem 0;
+    line-height: 2rem;
+  }
+
+  &__subtext {
+    font-size: 1.75rem;
+    color: variable.$font-alter;
+    display: inline-block;
+    text-align: left;
+  }
+
+  &__list {
+    margin-top: 0.5rem;
+  }
+
+  &__item {
+    margin-bottom: 0.75rem;
+    line-height: 1.5rem;
+    font-size: 1.25rem;
+  }
+
+  &__link {
+    text-decoration: none;
+    font-weight: bold;
+    color: variable.$font-alter;
+    &:visited {
+      color: variable.$font-alter;
+    }
+  }
+
+  &__experience {
+    display: flex;
+    flex-direction: column;
+  }
+
+  @include mixin.mq(variable.$screen-md) {
+    &__left {
+      height: 100px;
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+
+    &__btn {
+      width: 50%;
+    }
+
+    &__title {
+      width: 100%;
+    }
+  }
+}

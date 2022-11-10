@@ -1,0 +1,39 @@
+@use "../../styles/variable";
+
+.post {
+  border: 2px dotted variable.$font-color;
+  padding: 0.5rem;
+  width: calc(100% - 4px - 2rem);
+
+  &:not(:last-child) {
+    margin-bottom: 1rem;
+  }
+
+  &__header {
+    border-bottom: 1px dotted variable.$font-color;
+    padding-bottom: 0.25rem;
+    margin-bottom: 0.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__title {
+    font-size: 1.75rem;
+  }
+
+  &__text {
+    line-height: 1.5rem;
+    font-size: 1.25rem;
+  }
+
+  &__date {
+    font-size: 1rem;
+    font-style: italic;
+  }
+
+  &__btn {
+    text-decoration: none;
+    font-size: 2rem;
+  }
+}
