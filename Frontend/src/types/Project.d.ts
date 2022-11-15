@@ -4,8 +4,8 @@ export type TProject = {
   description: string;
   imageUrl: string;
   links: {
-    online: string;
-    github: string;
+    online?: string;
+    github?: string;
   };
   showInCv: boolean;
 };
