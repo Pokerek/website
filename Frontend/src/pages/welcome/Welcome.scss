@@ -1,86 +1,87 @@
-@use '../../styles/variable';
-@use '../../styles/mixin';
+@use "../../styles/variable";
+@use "../../styles/mixin";
 
 @-webkit-keyframes fade-in {
-   0% {
-       opacity: 0;
-   }
+  0% {
+    opacity: 0;
+  }
 
-   100% {
-       opacity: 1;
-   }
+  100% {
+    opacity: 1;
+  }
 }
 
 @keyframes fade-in {
-   0% {
-       opacity: 0;
-   }
+  0% {
+    opacity: 0;
+  }
 
-   100% {
-       opacity: 1;
-   }
+  100% {
+    opacity: 1;
+  }
 }
 
 .welcome {
-   &__inner {
-       width: 100%;
-       display: flex;
-       justify-content: space-around;
-       align-items: center;
-       flex-direction: column;
-   }
-   &__img {
-       max-width: 500px;
-       margin-bottom: 1rem;
-   }
+  &__inner {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+  }
+  &__img {
+    max-width: 380px;
+    margin-bottom: 1rem;
+  }
 
-   &__info {
-       display: flex;
-       flex-direction: column;
-       align-items: center;
-   }
+  &__info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 
-   &__title {
-       color: variable.$font-color;
-       font-size: 3rem;
-       font-weight: 700;
-       display: flex;
-       align-items: center;
-       i {
-           font-size: 4rem;
-           margin: 0 1rem;
-       }
-   }
+  &__title {
+    color: variable.$font-color;
+    font-size: 2.5rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    i {
+      font-size: 4rem;
+      margin: 0 1rem;
+    }
+  }
 
-   &__text {
-       font-size: 2rem;
-       margin-top: .5rem;
-   }
+  &__text {
+    font-size: 1.5rem;
+    margin-top: 0.5rem;
+  }
 
-   @include mixin.mq(variable.$screen-lg) {
-       &__img {
-           max-width: 450px;
-       }
-   }
-   @include mixin.mq(variable.$screen-md) {
-       &__img {
-           max-width: 400px;
-       }
-   }
+  @include mixin.mq(variable.$screen-lg) {
+    &__img {
+      max-width: 360px;
+    }
+  }
 
-   @media (max-height: 660px) {
-       &__img {
-           display: none;
-       }
-   }
+  @include mixin.mq(variable.$screen-sm) {
+    &__img {
+      max-width: 360px;
+    }
+  }
 
-   @media (max-height: 290px) {
-      &__title {
-           font-size: 2rem;
-           margin-bottom: .5rem;
-      }
-      &__text {
-           font-size: 1.5rem;
-      }
-   }
+  @media (max-height: 660px) {
+    &__img {
+      display: none;
+    }
+  }
+
+  @media (max-height: 290px) {
+    &__title {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+    &__text {
+      font-size: 1.5rem;
+    }
+  }
 }

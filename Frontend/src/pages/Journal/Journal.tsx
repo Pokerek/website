@@ -21,7 +21,9 @@ export default function Journal() {
   const postsList = posts?.map((post) => <Post key={post.title} post={post} />);
   return (
     <SuperBox className="journal">
-      <h2 className="journal__title superBox__left">Journal</h2>
+      <div className="superBox__left">
+        <h2 className="journal__title">Journal</h2>
+      </div>
       <div className="journal__inner superBox__right">
         {postsList || <Loading />}
       </div>
