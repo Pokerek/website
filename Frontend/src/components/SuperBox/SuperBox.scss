@@ -2,7 +2,7 @@
 @use "../../styles/mixin";
 
 .superBox {
-  height: calc(100vh - 8rem - 3px);
+  height: calc(100vh - 6rem - 3px);
 
   display: flex;
   justify-content: center;
@@ -38,6 +38,7 @@
       flex-grow: 1;
       width: 100%;
       border-right: none;
+      padding: 0;
     }
 
     &__left {
@@ -49,6 +50,6 @@
   @include mixin.mq(variable.$screen-sm) {
     margin: 0;
     padding: 0;
-    height: calc(100vh - 9rem - 2px);
+    height: calc(100vh - 6rem - 2px);
   }
 }

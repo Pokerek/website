@@ -1,5 +1,4 @@
 import "./Welcome.scss";
-import logo from "../../assets/images/logo.png";
 import { SuperBox } from "../../components/SuperBox/SuperBox";
 import { Button } from "../../components/Button/Button";
 import { Write } from "../../components/Write";
@@ -15,7 +14,11 @@ export const Welcome = () => {
     <SuperBox className="welcome">
       <div className="welcome__inner">
         <a href="/about.me">
-          <img src={logo} alt="Logo images" className="welcome__img" />
+          <img
+            src="./images/logo.png"
+            alt="Logo images"
+            className="welcome__img"
+          />
         </a>
         <div className="welcome__info">
           <Write elements={[...elementsToWrite]} />

@@ -1,58 +1,64 @@
-@use '../../../styles/variable';
-@use '../../../styles/mixin';
+@use "../../../styles/variable";
+@use "../../../styles/mixin";
 
 .header {
-   border-bottom: variable.$main-border-style;
+  border-bottom: variable.$main-border-style;
 
-   &__inner {
-       text-align: center;
-       width: 100%;
-       display: flex;
-       justify-content: center;
-       align-items: center;
-       position: relative;
-       height: 4rem;
-   }
-   &__left {
-       left: 0;
-   }
-   &__right {
-       left: calc(100vw - 6.5rem);
-       display: flex;
-   }
-   &__icon {
+  &__inner {
+    text-align: center;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    height: 4rem;
+  }
+  &__left {
+    left: 0;
+  }
+  &__right {
+    left: calc(100vw - 6.5rem);
+    display: flex;
+  }
+  &__iconBox {
+    align-items: center;
+  }
 
-       font-size: 2.5rem;
+  &__icon {
+    font-size: 2rem;
+    line-height: 1rem;
 
-       &:not(:last-child) {
-           margin-right: 1rem;
-       }
+    &:not(:last-child) {
+      margin-right: 1rem;
+    }
 
-       &,
-       &:visited {
-           color: variable.$font-color;
-           text-decoration: none;
-       }
-       
-       i { @include mixin.hover-animation; }
-   }
+    &,
+    &:visited {
+      color: variable.$font-color;
+      text-decoration: none;
+    }
 
-   &__left,
-   &__right {
-       position: absolute;
-   }
-   &__title {
-       font-size: 3rem;
-       font-weight: bold;
-       color: variable.$font-color;
-       text-decoration: none;
-       @include mixin.hover-animation;
-   }
+    i {
+      @include mixin.hover-animation;
+    }
+  }
 
-   @include mixin.mq(variable.$screen-md) {
-       &__left {
-          position: relative;
-          z-index: 1000;
-       }
-   }
+  &__left,
+  &__right {
+    position: absolute;
+  }
+  &__title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: variable.$font-color;
+    text-decoration: none;
+    @include mixin.hover-animation;
+  }
+
+  @include mixin.mq(variable.$screen-md) {
+    &__left {
+      position: relative;
+      z-index: 1000;
+    }
+  }
 }

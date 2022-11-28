@@ -24,7 +24,10 @@ export default function Projects() {
 
   return (
     <SuperBox className="project">
-      <h2 className="project__title superBox__left">Projects</h2>
+      <div className="superBox__left">
+        <h2 className="project__title">Projects</h2>
+      </div>
+
       <div className="project__inner superBox__right">
         {projectsList || <Loading />}
       </div>
