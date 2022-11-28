@@ -5,7 +5,10 @@
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>CV - <%= cv.firstName + ' ' + cv.lastName %></title>
-   <link rel="stylesheet" href="style.css">
+   <style>
+      <%= cvStyle %>
+   </style>
+   
 </head>
 <body>
 <div class="page">
@@ -56,7 +59,7 @@
          <section class="experience">
             <h2 class="title">Projects:</h2>
             <div class="line"></div>
-            <% for (project of cv.projects) { %>
+            <% for (project of projects) { %>
                <article class="experience__box">
                   <h3 class="experience__title"><%= project.name %> ( <a href="<%= project.links.online %>" target="_blank">Online</a> / <a href="<%= project.links.github %>" target="_blank">Github</a> )</h3>
                   <ul class="experience__list">

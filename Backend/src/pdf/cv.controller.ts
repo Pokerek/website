@@ -4,14 +4,16 @@ import RequestWithUser from '../interface/requestWithUser.interface';
 import NotFoundException from '../exceptions/NotFoundException';
 import cvModel, { CV } from './cv.model';
 import authMiddleware from '../middleware/authMiddleware';
-//import generate from './func/generate';
+import generate from './func/generate';
 //import convert from './func/convert';
 import HttpException from '../exceptions/HttpException';
+import projectModel from '../projects/projects.model';
 
 class CVController implements Controller {
   public path = '/cv';
   public router = Router();
   private cv = cvModel;
+  private project = projectModel;
 
   constructor() {
     this.initializeRoutes();
@@ -19,6 +21,7 @@ class CVController implements Controller {
 
   private initializeRoutes() {
     this.router.get(this.path, this.getCVInformation);
+    this.router.get(`${this.path}/document`, this.createDocument);
     this.router.get(`${this.path}/social`, this.getSocialIcons);
     this.router.patch(`${this.path}/:id`, authMiddleware, this.modifyData);
   }
@@ -53,14 +56,17 @@ class CVController implements Controller {
     });
   };
 
-  // private createDocument = (req: Request, res: Response) => {
-  //   this.cv.findOne().then((cvData) => {
-  //     if (cvData) {
-  //       generate(cvData);
-  //       convert();
-  //     }
-  //   });
-  // };
+  private createDocument = async (req: Request, res: Response) => {
+    const responseCvData = await this.cv.findOne();
+    const responseProjectData = await this.project.find();
+
+    const convertedCvData: CV = this.convertForType(responseCvData);
+    const convertedProjectData: Project[] =
+      this.convertForType(responseProjectData);
+    generate(convertedCvData, convertedProjectData);
+    //convert();
+    res.send('CV was created.');
+  };
 
   private modifyData = (
     req: RequestWithUser,
@@ -76,6 +82,10 @@ class CVController implements Controller {
 
       res.send({ message: 'CV update!' });
     });
+  };
+
+  private convertForType = (data: any) => {
+    return JSON.parse(JSON.stringify(data));
   };
 }
 
