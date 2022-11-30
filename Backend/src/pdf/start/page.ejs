@@ -6,6 +6,9 @@
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>CV - <%= cv.firstName + ' ' + cv.lastName %></title>
    <style>
+      html {
+         font-family: 'Open Sans', sans-serif;
+      }
       <%= cvStyle %>
    </style>
    
@@ -60,20 +63,31 @@
             <h2 class="title">Projects:</h2>
             <div class="line"></div>
             <% for (project of projects) { %>
-               <article class="experience__box">
-                  <h3 class="experience__title"><%= project.name %> ( <a href="<%= project.links.online %>" target="_blank">Online</a> / <a href="<%= project.links.github %>" target="_blank">Github</a> )</h3>
-                  <ul class="experience__list">
-                     <li class="experience__item">
-                        <span>Tech stack:</span>
-                        <% for (item of project.technology) { %>
-                           <span class="experience__one"><%= item %></span>
+               <% if (project.showInCv) { %>
+                  <article class="experience__box">
+                     <h3 class="experience__title"><%= project.name %>
+                        <%
+                           const length = Object.keys(project.links).length
+                           if(length) { 
+                        %>
+                           ( <%_ if (project.links.online) { %> <a href="<%= project.links.online %>" target="_blank">Online</a> <% } -%>
+                           <%_ if (length) { %> / <% }-%>
+                           <%_ if (project.links.github) { %> <a href="<%= project.links.github %>" target="_blank">Github</a> <% } -%> )
                         <% } %>
-                     </li>
-                     <li class="experience__item">
-                        <span>Description:</span> <%= project.description %>
-                     </li>
-                  </ul>
-               </article>
+                     </h3>
+                     <ul class="experience__list">
+                        <li class="experience__item">
+                           <span>Tech stack:</span>
+                           <% for (item of project.stack) { %>
+                              <span class="experience__one"><%= item %></span>
+                           <% } %>
+                        </li>
+                        <li class="experience__item">
+                           <span>Description:</span> <%= project.description %>
+                        </li>
+                     </ul>
+                  </article>
+               <% } %>
             <% } %>
             
          </section>

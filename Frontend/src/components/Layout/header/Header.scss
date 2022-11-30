@@ -17,11 +17,15 @@
     left: 0;
   }
   &__right {
-    left: calc(100vw - 6.5rem);
+    left: calc(100vw - 9.5rem);
     display: flex;
   }
   &__iconBox {
     align-items: center;
+  }
+
+  &__cv {
+    margin-right: 0.5rem;
   }
 
   &__icon {

@@ -14,3 +14,10 @@ export const applyStyleFromFile = (name: string) => {
     return '';
   }
 };
+
+export const getFile = (name: string) => {
+  const filePath = path.join(__dirname, '../public', name);
+  const file = fs.createReadStream(filePath);
+  const stat = fs.statSync(filePath);
+  return { file, stat };
+};

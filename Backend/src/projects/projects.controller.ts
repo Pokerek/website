@@ -5,8 +5,7 @@ import RequestWithUser from '../interface/requestWithUser.interface';
 import authMiddleware from '../middleware/authMiddleware';
 import validationMiddleware from '../middleware/validation.middleware';
 import CreateProjectDto from './project.dto';
-import Project from './project.interface';
-import projectModel from './projects.model';
+import projectModel, { Project } from './projects.model';
 
 class ProjectsController implements Controller {
   public path = '/projects';

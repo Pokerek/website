@@ -1,14 +1,22 @@
 import ejs from 'ejs';
 import path from 'path';
 import { createHtmlFile, applyStyleFromFile } from './fileHelpers';
+import { CV } from '../cv.model';
+import { Project } from '../../projects/projects.model';
 
-const generate = (cvData: any, projectData: any, name = 'page.ejs') => {
+const generateHTML = (
+  cvData: CV,
+  projectData: Project[],
+  name = 'page.ejs'
+) => {
   const filePath = path.join(__dirname, '../start', name);
   const style = applyStyleFromFile('style.css');
 
-  ejs.renderFile(filePath, { cv: data, cvStyle: style }).then((result) => {
-    createHtmlFile('cv.html', result);
-  });
+  ejs
+    .renderFile(filePath, { cv: cvData, projects: projectData, cvStyle: style })
+    .then((result) => {
+      createHtmlFile(`${cvData.firstName}_${cvData.lastName}_cv.html`, result);
+    });
 };
 
-export default generate;
+export default generateHTML;
