@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-import Project from './project.interface';
 
 const Schema = mongoose.Schema;
 
@@ -14,6 +13,13 @@ const projectSchema = new Schema({
   },
   showInCv: { type: Boolean, required: true }
 });
+export type Project = {
+  name: string;
+  image: { src: string; alt: string };
+  link: string;
+  tags: [string];
+  technologies: [string];
+};
 
 const projectModel = mongoose.model<Project & mongoose.Document>(
   'Project',

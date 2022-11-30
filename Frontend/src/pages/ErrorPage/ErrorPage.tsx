@@ -9,7 +9,7 @@ export default function ErrorPage() {
       <p className="error-page__text">
         Sorry, an unexpected error has occurred.
       </p>
-      <Button className="btn--green" href="/" text="Back to start" />
+      <Button className="btn--green" link="/" text="Back to start" />
     </SuperBox>
   );
 }

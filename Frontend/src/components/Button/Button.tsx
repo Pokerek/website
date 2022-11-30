@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import "./Button.scss";
 
 type props = {
+  link?: string;
   href?: string;
   text: string;
   className: string;
@@ -16,7 +17,7 @@ export const Button: FC<props> = (props) => {
     </button>
   );
 
-  if (props.href) button = <Link to={props.href}>{button}</Link>;
-
+  if (props.link) button = <Link to={props.link}>{button}</Link>;
+  if (props.href) button = <a href={props.href}>{button}</a>;
   return button;
 };

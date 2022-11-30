@@ -23,7 +23,7 @@ export const Welcome = () => {
         <div className="welcome__info">
           <Write elements={[...elementsToWrite]} />
           <Button
-            href="/about.me"
+            link="/about.me"
             className="btn--green hidden"
             text="Drop the mask"
           />

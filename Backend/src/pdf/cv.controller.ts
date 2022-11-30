@@ -4,14 +4,18 @@ import RequestWithUser from '../interface/requestWithUser.interface';
 import NotFoundException from '../exceptions/NotFoundException';
 import cvModel, { CV } from './cv.model';
 import authMiddleware from '../middleware/authMiddleware';
-//import generate from './func/generate';
-//import convert from './func/convert';
+import generate from './func/generate';
+import convert from './func/convert';
 import HttpException from '../exceptions/HttpException';
+import projectModel, { Project } from '../projects/projects.model';
+import ServerErrorException from '../exceptions/ServerErrorException';
+import { getFile } from './func/fileHelpers';
 
 class CVController implements Controller {
   public path = '/cv';
   public router = Router();
   private cv = cvModel;
+  private project = projectModel;
 
   constructor() {
     this.initializeRoutes();
@@ -19,7 +23,9 @@ class CVController implements Controller {
 
   private initializeRoutes() {
     this.router.get(this.path, this.getCVInformation);
+    this.router.get(`${this.path}/get`, this.getCV);
     this.router.get(`${this.path}/social`, this.getSocialIcons);
+    this.router.get(`${this.path}/create`, authMiddleware, this.createDocument);
     this.router.patch(`${this.path}/:id`, authMiddleware, this.modifyData);
   }
 
@@ -53,14 +59,34 @@ class CVController implements Controller {
     });
   };
 
-  // private createDocument = (req: Request, res: Response) => {
-  //   this.cv.findOne().then((cvData) => {
-  //     if (cvData) {
-  //       generate(cvData);
-  //       convert();
-  //     }
-  //   });
-  // };
+  private createDocument = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    try {
+      const responseCvData = await this.cv.findOne();
+      if (!responseCvData) throw new ServerErrorException();
+
+      const responseProjectData: Project[] = await this.project.find();
+
+      generate(responseCvData, responseProjectData);
+
+      convert();
+      res.send('Your cv is ready.');
+    } catch {
+      next(new ServerErrorException());
+    }
+  };
+
+  private getCV = (req: Request, res: Response) => {
+    const name = `Karol_Chrobok`;
+    const { file, stat } = getFile('Karol_Chrobok_cv.pdf');
+    res.setHeader('Content-Length', stat.size);
+    res.setHeader('Content-Type', 'application/pdf');
+    res.setHeader('Content-Disposition', `attachment; filename=${name}_cv.pdf`);
+    file.pipe(res);
+  };
 
   private modifyData = (
     req: RequestWithUser,
