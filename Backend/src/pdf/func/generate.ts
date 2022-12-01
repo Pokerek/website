@@ -9,7 +9,7 @@ const generateHTML = (
   projectData: Project[],
   name = 'page.ejs'
 ) => {
-  const filePath = path.join(__dirname, '../start', name);
+  const filePath = path.join(__dirname, '../../public/template', name);
   const style = applyStyleFromFile('style.css');
 
   ejs

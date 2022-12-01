@@ -19,13 +19,13 @@ const newFormData = (filename: string) => {
       ]
     })
   );
-  const readPath = path.join(__dirname, '../public', filename);
+  const readPath = path.join(__dirname, '../../public', filename);
   formData.append(filename, fs.createReadStream(readPath));
   return formData;
 };
 
-const convert = () => {
-  const formData = newFormData('cv.html');
+const convert = (name: string) => {
+  const formData = newFormData(`${name}_cv.html`);
   axios
     .post('https://api.pspdfkit.com/build', formData, {
       headers: formData.getHeaders({
@@ -34,7 +34,7 @@ const convert = () => {
       responseType: 'stream'
     })
     .then((response) => {
-      const resultPath = path.join(__dirname, '../public', 'cv.pdf');
+      const resultPath = path.join(__dirname, '../../public', `${name}_cv.pdf`);
       response.data.pipe(fs.createWriteStream(resultPath));
     })
     .catch(() => new HttpException(409, 'Convert failed!'));

@@ -25,7 +25,7 @@ class CVController implements Controller {
     this.router.get(this.path, this.getCVInformation);
     this.router.get(`${this.path}/get`, this.getCV);
     this.router.get(`${this.path}/social`, this.getSocialIcons);
-    this.router.get(`${this.path}/create`, authMiddleware, this.createDocument);
+    this.router.get(`${this.path}/create`, this.createDocument);
     this.router.patch(`${this.path}/:id`, authMiddleware, this.modifyData);
   }
 
@@ -67,12 +67,12 @@ class CVController implements Controller {
     try {
       const responseCvData = await this.cv.findOne();
       if (!responseCvData) throw new ServerErrorException();
-
+      const name = `${responseCvData.firstName}_${responseCvData.lastName}`;
       const responseProjectData: Project[] = await this.project.find();
 
       generate(responseCvData, responseProjectData);
 
-      convert();
+      convert(name);
       res.send('Your cv is ready.');
     } catch {
       next(new ServerErrorException());
@@ -81,7 +81,7 @@ class CVController implements Controller {
 
   private getCV = (req: Request, res: Response) => {
     const name = `Karol_Chrobok`;
-    const { file, stat } = getFile('Karol_Chrobok_cv.pdf');
+    const { file, stat } = getFile(`${name}_cv.pdf`);
     res.setHeader('Content-Length', stat.size);
     res.setHeader('Content-Type', 'application/pdf');
     res.setHeader('Content-Disposition', `attachment; filename=${name}_cv.pdf`);
