@@ -25,7 +25,7 @@ class CVController implements Controller {
     this.router.get(this.path, this.getCVInformation);
     this.router.get(`${this.path}/get`, this.getCV);
     this.router.get(`${this.path}/social`, this.getSocialIcons);
-    this.router.get(`${this.path}/create`, this.createDocument);
+    this.router.get(`${this.path}/create`, authMiddleware, this.createDocument);
     this.router.patch(`${this.path}/:id`, authMiddleware, this.modifyData);
   }
 
