@@ -1,12 +1,14 @@
+import React from "react";
+
 import "./Welcome.scss";
-import { SuperBox } from "../../components/SuperBox/SuperBox";
-import { Button } from "../../components/Button/Button";
-import { Write } from "../../components/Write";
+import { SuperBox } from "../../components/custom/SuperBox/SuperBox";
+import { Button } from "../../components/custom/Button/Button";
+import { Write } from "../../components/custom/Write";
 
 const elementsToWrite = [
   { className: "welcome__title", text: "HELLO FRIEND" },
   { className: "welcome__text", text: "I'm Karol Chrobok" },
-  { className: "welcome__text", text: "Padawan of Fullstack" },
+  { className: "welcome__text", text: "Padawan of JavaScript" },
 ];
 
 export const Welcome = () => {
@@ -18,6 +20,7 @@ export const Welcome = () => {
             src="./images/logo.png"
             alt="Logo images"
             className="welcome__img"
+            loading="lazy"
           />
         </a>
         <div className="welcome__info">

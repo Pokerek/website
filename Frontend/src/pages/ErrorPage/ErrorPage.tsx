@@ -1,5 +1,5 @@
-import { Button } from "../../components/Button/Button";
-import { SuperBox } from "../../components/SuperBox/SuperBox";
+import { Button } from "../../components/custom/Button/Button";
+import { SuperBox } from "../../components/custom/SuperBox/SuperBox";
 import "./ErrorPage.scss";
 
 export default function ErrorPage() {

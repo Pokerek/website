@@ -1,9 +1,9 @@
 import { useFetch } from "usehooks-ts";
 import { useState, useEffect } from "react";
 
-import { SuperBox } from "../../components/SuperBox/SuperBox";
+import { SuperBox } from "../../components/custom/SuperBox/SuperBox";
 import { TCV } from "../../types/cv/CV";
-import { Button } from "../../components/Button/Button";
+import { Button } from "../../components/custom/Button/Button";
 import { AboutMe } from "./AboutMe";
 import { AboutTech } from "./AboutTech";
 

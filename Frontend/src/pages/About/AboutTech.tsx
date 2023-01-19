@@ -1,10 +1,11 @@
 import { FC, Fragment } from "react";
 import { Link } from "react-router-dom";
-import { TextBox } from "../../components/TextBox/TextBox";
 
+import { TextBox } from "../../components/custom/TextBox/TextBox";
 import { TCV } from "../../types/cv/CV";
 import { Experience } from "./Experience";
 import { SkillBox } from "./SkillBox";
+import { Button } from "../../components/custom/Button/Button";
 
 type props = {
   data: TCV;
@@ -60,7 +61,13 @@ export const AboutTech: FC<props> = (props) => {
         <SkillBox skills={toolSkills} name="Tools" />
       </article>
       <article className="about__box">
-        <h3 className="about__subtitle">Learn map (Coming soon...)</h3>
+        <h3 className="about__subtitle">
+          Follow my learn path on{" "}
+          <Button
+            href="https://www.instagram.com/chrobok.dev/"
+            text="Instagram"
+          />
+        </h3>
       </article>
     </Fragment>
   );

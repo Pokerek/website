@@ -1,4 +1,5 @@
 import { FC } from "react";
+import ReactMarkdown from "react-markdown";
 
 import { TPost } from "../../types/Post";
 
@@ -16,7 +17,7 @@ export const Post: FC<props> = (props) => {
         <h3 className="post__title">{props.post.title}</h3>
         <span className="post__date">{date.slice(0, date.indexOf("T"))}</span>
       </header>
-      <p className="post__text">{props.post.text}</p>
+      <ReactMarkdown className="post__text">{props.post.text}</ReactMarkdown>
     </article>
   );
 };

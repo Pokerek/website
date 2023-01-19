@@ -1,15 +1,18 @@
-import { Fragment, useState } from "react";
+import { Fragment, useState, useContext } from "react";
 import { Link } from "react-router-dom";
+
 import { BurgerMenu } from "./BurgerMenu";
+import { IconBox } from "../../custom/IconBox/IconBox";
+import { SecretContext } from "../../../context/SecretContext";
 import "./Navigation.scss";
 
 export const Navigation = () => {
   const [isActive, setIsActive] = useState(false);
+  const secret = useContext(SecretContext);
 
   const handleToggleNavigation = () => {
     setIsActive((prevStatus) => !prevStatus);
   };
-
   return (
     <Fragment>
       <BurgerMenu onClick={handleToggleNavigation} />
@@ -27,7 +30,13 @@ export const Navigation = () => {
           <li className="navigation__item">
             <Link to="/project.file">Project.file</Link>
           </li>
+          {secret.isAdmin && (
+            <li className="navigation__item">
+              <Link to="/admin">Admin</Link>
+            </li>
+          )}
         </ul>
+        <IconBox />
       </nav>
     </Fragment>
   );

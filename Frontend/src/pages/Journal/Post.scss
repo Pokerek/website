@@ -25,6 +25,9 @@
   &__text {
     line-height: 1.5rem;
     font-size: 1.25rem;
+    & > * {
+      margin-bottom: 0.75rem;
+    }
   }
 
   &__date {
