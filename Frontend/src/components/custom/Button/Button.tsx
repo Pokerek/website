@@ -6,8 +6,9 @@ type props = {
   link?: string;
   href?: string;
   text: string;
-  className: string;
+  className?: string;
   onClick?: MouseEventHandler;
+  type?: string;
 };
 
 export const Button: FC<props> = (props) => {

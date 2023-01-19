@@ -1,9 +1,9 @@
 import { useFetch } from "usehooks-ts";
 import { useEffect, useState } from "react";
 
-import { SuperBox } from "../../components/SuperBox/SuperBox";
+import { SuperBox } from "../../components/custom/SuperBox/SuperBox";
 import { SingleProject } from "./SingleProject";
-import { Loading } from "../../components/Loading/Loading";
+import { Loading } from "../../components/custom/Loading/Loading";
 import { TProject } from "../../types/Project";
 
 import "./Projects.scss";

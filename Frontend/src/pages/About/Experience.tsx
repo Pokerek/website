@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { TextBox } from "../../components/TextBox/TextBox";
+import { TextBox } from "../../components/custom/TextBox/TextBox";
 
 type props = {
   experience: {

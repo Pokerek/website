@@ -17,34 +17,9 @@
     left: 0;
   }
   &__right {
-    left: calc(100vw - 9.5rem);
+    left: calc(100vw - 4rem);
     display: flex;
-  }
-  &__iconBox {
     align-items: center;
-  }
-
-  &__cv {
-    margin-right: 0.5rem;
-  }
-
-  &__icon {
-    font-size: 2rem;
-    line-height: 1rem;
-
-    &:not(:last-child) {
-      margin-right: 1rem;
-    }
-
-    &,
-    &:visited {
-      color: variable.$font-color;
-      text-decoration: none;
-    }
-
-    i {
-      @include mixin.hover-animation;
-    }
   }
 
   &__left,

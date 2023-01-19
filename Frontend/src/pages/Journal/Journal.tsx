@@ -1,10 +1,10 @@
 import { useFetch } from "usehooks-ts";
 import { useState, useEffect } from "react";
 
-import { SuperBox } from "../../components/SuperBox/SuperBox";
+import { SuperBox } from "../../components/custom/SuperBox/SuperBox";
 import { TPost } from "../../types/Post";
 import { Post } from "./Post";
-import { Loading } from "../../components/Loading/Loading";
+import { Loading } from "../../components/custom/Loading/Loading";
 
 import "./Journal.scss";
 

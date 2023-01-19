@@ -1,7 +1,7 @@
 import { FC } from "react";
 
-import { Star } from "../../components/Star/Star";
-import { TextBox } from "../../components/TextBox/TextBox";
+import { Star } from "../../components/custom/Star/Star";
+import { TextBox } from "../../components/custom/TextBox/TextBox";
 import { TCV } from "../../types/cv/CV";
 
 type props = {

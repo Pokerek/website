@@ -1,0 +1,33 @@
+@use "../../../styles/variable";
+@use "../../../styles/mixin";
+
+.iconBox {
+  display: flex;
+  position: absolute;
+  left: 100%;
+  margin-right: 0.5rem;
+
+  &__icon {
+    font-size: 2rem;
+    line-height: 1rem;
+
+    &:not(:last-child) {
+      margin-right: 1rem;
+    }
+
+    &,
+    &:visited {
+      color: variable.$font-color;
+      text-decoration: none;
+    }
+
+    i {
+      @include mixin.hover-animation;
+    }
+  }
+
+  @include mixin.mq(variable.$screen-md) {
+    position: relative;
+    left: 0;
+  }
+}

@@ -1,5 +1,5 @@
-@use "../../styles/variable";
-@use "../../styles/mixin";
+@use "../../../styles/variable";
+@use "../../../styles/mixin";
 
 .superBox {
   height: calc(100vh - 6rem - 3px);
