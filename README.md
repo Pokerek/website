@@ -35,6 +35,9 @@ database in the cloud.
 ![SASS](https://img.shields.io/badge/SASS-hotpink.svg?style=for-the-badge&logo=SASS&logoColor=white)
 
 ## Views
+![Main view](https://github.com/Pokerek/website_v2/blob/main/Images/welcome.png)
+
+![Journal view](https://github.com/Pokerek/website_v2/blob/main/Images/journal.png)
 
 ## License
 
