@@ -18,7 +18,8 @@
     align-items: center;
   }
 
-  &__title {
+  &__title,
+  &__input {
     font-size: 1.5rem;
   }
 
@@ -30,6 +31,19 @@
     }
   }
 
+  &__input,
+  &__textArea {
+    border: none;
+    background: variable.$background-color;
+    color: variable.$font-color;
+  }
+
+  &__textArea {
+    width: 100%;
+    min-height: 50%;
+    font-size: 1.25rem;
+  }
+
   &__date {
     font-size: 1.1rem;
     font-style: italic;
@@ -39,5 +53,9 @@
   &__btn {
     text-decoration: none;
     font-size: 2rem;
+  }
+
+  &__edit {
+    width: 100%;
   }
 }

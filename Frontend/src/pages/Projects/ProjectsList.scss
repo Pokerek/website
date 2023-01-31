@@ -1,0 +1,10 @@
+@use "../../styles/mixin";
+@use "../../styles/variable";
+
+.projectsList {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+}

@@ -22,7 +22,12 @@ class App {
     this.app.listen(process.env.PORT);
   }
   private initializeMiddleware() {
-    this.app.use(cors());
+    this.app.use(
+      cors({
+        origin: 'http://localhost:3000',
+        credentials: true
+      })
+    );
     this.app.use(bodyParser.json());
     this.app.use(bodyParser.urlencoded({ extended: false }));
     this.app.use(express.static(path.join(__dirname, './public')));

@@ -19,6 +19,7 @@ class PostsController implements Controller {
 
   private initializeRoutes() {
     this.router.get(this.path, this.getAllPosts);
+    this.router.get(`${this.path}/:id`, this.getPost);
     this.router.post(
       this.path,
       authMiddleware,
@@ -41,6 +42,16 @@ class PostsController implements Controller {
       .then((posts) => {
         res.status(200).json(posts);
       });
+  };
+
+  private getPost = (req: Request, res: Response, next: NextFunction) => {
+    const { id } = req.params;
+
+    this.post.findById(id).then((post) => {
+      if (!post) next(new NotFoundException(id, 'Post'));
+
+      res.status(200).json(post);
+    });
   };
 
   private modifyPost = (

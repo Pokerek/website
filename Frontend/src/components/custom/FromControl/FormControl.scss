@@ -7,6 +7,10 @@
   }
   label {
     font-size: 1.3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 40px;
   }
   input {
     margin-left: 0.5rem;

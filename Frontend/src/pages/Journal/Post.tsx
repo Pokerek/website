@@ -1,23 +1,57 @@
-import { FC } from "react";
+import { FC, useContext } from "react";
 import ReactMarkdown from "react-markdown";
-
+import { ButtonGroup, Button } from "@mui/material";
 import { TPost } from "../../types/Post";
 
 import "./Post.scss";
+import { FaEdit } from "react-icons/fa";
+import { useLocation, useNavigate } from "react-router-dom";
+import { WriteContext } from "../../context/WriteContext";
+import { AuthContext } from "../../context/AuthContext";
 
-type props = {
+interface IProps {
   post: TPost;
-};
+}
 
-export const Post: FC<props> = (props) => {
-  const date = new Date(props.post.createdDate).toISOString();
+export const Post: FC<IProps> = ({ post }) => {
+  const navigate = useNavigate();
+  const Write = useContext(WriteContext);
+  const Authentication = useContext(AuthContext);
+  const location = useLocation();
+
+  const postDate = new Date(post.createdDate).toISOString();
+
+  const isEdit = location.pathname.endsWith("edit");
+
+  const handleEditAction = () => {
+    if (Write) {
+      Write.handlePostChange(post);
+
+      navigate("/admin/edit");
+    }
+  };
+
   return (
     <article className="post">
       <header className="post__header">
-        <h3 className="post__title">{props.post.title}</h3>
-        <span className="post__date">{date.slice(0, date.indexOf("T"))}</span>
+        <h3 className="post__title">{post.title}</h3>
+        {Authentication?.isLogin && !isEdit && (
+          <ButtonGroup>
+            <Button
+              variant="contained"
+              color="success"
+              startIcon={<FaEdit />}
+              onClick={handleEditAction}
+            >
+              Edit
+            </Button>
+          </ButtonGroup>
+        )}
+        <span className="post__date">
+          {postDate.slice(0, postDate.indexOf("T"))}
+        </span>
       </header>
-      <ReactMarkdown className="post__text">{props.post.text}</ReactMarkdown>
+      <ReactMarkdown className="post__text">{post.text}</ReactMarkdown>
     </article>
   );
 };
