@@ -35,13 +35,19 @@ class PostsController implements Controller {
     this.router.delete(`${this.path}/:id`, authMiddleware, this.deletePost);
   }
 
-  private getAllPosts = (req: Request, res: Response) => {
-    this.post
+  private getAllPosts = async (req: Request, res: Response) => {
+    const page = req.query.page ? +req.query.page : 1;
+
+    const posts = await this.post
       .find()
       .sort({ createdDate: -1 })
-      .then((posts) => {
-        res.status(200).json(posts);
-      });
+      .skip((page - 1) * 5)
+      .limit(5);
+    const total = await this.post.countDocuments();
+
+    const pages = parseInt((total / 5 + 1).toFixed());
+
+    res.status(200).json({ total, pages, posts });
   };
 
   private getPost = (req: Request, res: Response, next: NextFunction) => {

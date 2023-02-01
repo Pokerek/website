@@ -1,4 +1,4 @@
-import { useFetch } from "usehooks-ts";
+import { useFetch } from "../../hooks/useFetch";
 import { useEffect, useState } from "react";
 
 import { SuperBox } from "../../components/custom/SuperBox/SuperBox";
@@ -9,7 +9,7 @@ import { TProject } from "../../types/Project";
 import "./ProjectsList.scss";
 
 export default function Projects() {
-  const { data } = useFetch<TProject[]>(
+  const [data, isLoading] = useFetch<TProject[]>(
     `${process.env.REACT_APP_BACKEND_URL}/projects`,
   );
   const [projects, setProjects] = useState(data);
@@ -29,7 +29,8 @@ export default function Projects() {
       </div>
 
       <div className="superBox__right projectsList">
-        {projectsList || <Loading />}
+        {isLoading && <Loading />}
+        {data && projectsList}
       </div>
     </SuperBox>
   );

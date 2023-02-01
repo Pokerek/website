@@ -1,4 +1,4 @@
-import { useFetch } from "usehooks-ts";
+import { useFetch } from "../../hooks/useFetch";
 import { useState, useEffect } from "react";
 
 import { SuperBox } from "../../components/custom/SuperBox/SuperBox";
@@ -8,9 +8,12 @@ import { AboutMe } from "./AboutMe";
 import { AboutTech } from "./AboutTech";
 
 import "./About.scss";
+import Loading from "react-loading";
 
 export default function About() {
-  const { data } = useFetch<TCV>(`${process.env.REACT_APP_BACKEND_URL}/cv`);
+  const [data, isLoading] = useFetch<TCV>(
+    `${process.env.REACT_APP_BACKEND_URL}/cv`,
+  );
   const [cvData, setCvData] = useState(data);
   const [isPersonal, setIsPersonal] = useState(true);
   let section: JSX.Element;
@@ -50,7 +53,10 @@ export default function About() {
           onClick={changeSectionTech}
         />
       </div>
-      <div className="about__right superBox__right">{section}</div>
+      <div className="about__right superBox__right">
+        {isLoading && <Loading />}
+        {data && section}
+      </div>
     </SuperBox>
   );
 }

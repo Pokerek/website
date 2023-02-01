@@ -2,16 +2,16 @@ import { createContext, useState, FC } from "react";
 import { TPost } from "../types/Post";
 
 interface Write {
-  post: TPost | undefined;
-  handlePostChange: (post: TPost) => void;
+  post: TPost | null;
+  handlePostChange: (post: TPost | null) => void;
 }
 
 export const WriteContext = createContext<Write | null>(null);
 
 export const WriteProvider: FC<{ children: JSX.Element }> = ({ children }) => {
-  const [post, setPost] = useState<TPost>();
+  const [post, setPost] = useState<TPost | null>(null);
 
-  const handlePostChange = (post: TPost) => {
+  const handlePostChange = (post: TPost | null) => {
     setPost(post);
   };
 
