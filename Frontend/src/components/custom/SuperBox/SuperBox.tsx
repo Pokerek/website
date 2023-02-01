@@ -3,9 +3,11 @@ import "./SuperBox.scss";
 
 type props = {
   children: ReactNode;
-  className: string;
+  className?: string;
 };
 
-export const SuperBox: FC<props> = (props) => (
-  <div className={`superBox ${props.className}`}>{props.children}</div>
-);
+export const SuperBox: FC<props> = (props) => {
+  const style = props.className || "";
+
+  return <div className={`superBox ${style}`}>{props.children}</div>;
+};
