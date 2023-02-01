@@ -49,7 +49,6 @@ export default function Journal() {
     };
 
     const container = containerRef.current;
-    console.log(container);
     if (!container) return;
 
     container.addEventListener("scroll", handleScroll);
