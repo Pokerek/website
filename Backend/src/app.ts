@@ -24,7 +24,7 @@ class App {
   private initializeMiddleware() {
     this.app.use(
       cors({
-        origin: 'http://localhost:3000',
+        origin: ['http://localhost:3000', 'https://www.chrobok.dev/'],
         credentials: true
       })
     );
