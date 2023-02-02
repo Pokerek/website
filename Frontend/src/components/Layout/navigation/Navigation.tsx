@@ -5,13 +5,20 @@ import { BurgerMenu } from "./BurgerMenu";
 import { IconBox } from "../../custom/IconBox/IconBox";
 import { AuthContext } from "../../../context/AuthContext";
 import "./Navigation.scss";
+import { useCookies } from "react-cookie";
 
 export const Navigation = () => {
   const [isActive, setIsActive] = useState(false);
   const Authentication = useContext(AuthContext);
+  const [, , removeCookie] = useCookies();
 
   const handleToggleNavigation = () => {
     setIsActive((prevStatus) => !prevStatus);
+  };
+
+  const handleLogout = () => {
+    Authentication?.changeIsLogin();
+    removeCookie("Authorization");
   };
 
   return (
@@ -31,13 +38,16 @@ export const Navigation = () => {
           <li className="navigation__item">
             <Link to="/project.file">Project.file</Link>
           </li>
-          {Authentication?.isAdmin && (
+          {Authentication?.isAdmin && !Authentication.isLogin && (
             <li className="navigation__item">
-              {Authentication.isLogin ? (
-                <Link to="/journal.dev" />
-              ) : (
-                <Link to="/admin">Admin</Link>
-              )}
+              <Link to="/auth">Admin</Link>
+            </li>
+          )}
+          {Authentication?.isLogin && (
+            <li className="navigation__item">
+              <Link onClick={() => handleLogout()} to="/">
+                Logout
+              </Link>
             </li>
           )}
         </ul>

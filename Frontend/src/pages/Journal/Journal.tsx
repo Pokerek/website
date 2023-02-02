@@ -35,7 +35,8 @@ export default function Journal() {
       if (!container) return;
 
       const bottomReached =
-        container.scrollHeight - container.scrollTop <= container.clientHeight;
+        container.scrollHeight - +container.scrollTop.toFixed() <=
+        container.clientHeight;
       if (!bottomReached) return;
 
       const response = await fetch(
@@ -70,7 +71,7 @@ export default function Journal() {
             variant="contained"
             color="success"
             onClick={() => {
-              navigate("/admin/edit");
+              navigate("/edit");
             }}
           >
             Write new Post

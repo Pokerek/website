@@ -27,7 +27,7 @@ export const Post: FC<IProps> = ({ post }) => {
     if (Write) {
       Write.handlePostChange(post);
 
-      navigate("/admin/edit");
+      navigate("/edit");
     }
   };
 

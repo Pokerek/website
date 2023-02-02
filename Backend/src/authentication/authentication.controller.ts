@@ -97,7 +97,7 @@ class AuthenticationController implements Controller {
   }
 
   private createCookie(tokenData: TokenData) {
-    return `Authorization=${tokenData.token}; Max-Age=${tokenData.expiresIn}; Path=/`;
+    return `Authorization=${tokenData.token}; Max-Age=${tokenData.expiresIn}; Path=/; Domain=${process.env.FRONTEND_URL}`;
   }
 }
 

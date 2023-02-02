@@ -1,6 +1,6 @@
 import "./App.scss";
-import { Routes, Route } from "react-router-dom";
-import { useContext } from "react";
+import { Routes, Route, useLocation } from "react-router-dom";
+import { useContext, useEffect } from "react";
 
 import { Footer } from "./components/Layout/footer/Footer";
 import { Header } from "./components/Layout/header/Header";
@@ -13,9 +13,19 @@ import { Container } from "./components/Layout/container/Container";
 import { LoginForm } from "./pages/Admin/LoginForm";
 import { WritePost } from "./pages/Journal/WritePost";
 import { AuthContext } from "./context/AuthContext";
+import { WriteContext } from "./context/WriteContext";
 
 function App() {
   const Authentication = useContext(AuthContext);
+  const Write = useContext(WriteContext);
+
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    if (pathname !== "/admin/edit" && Write) {
+      Write.handlePostChange(null);
+    }
+  }, [pathname]);
 
   return (
     <div className="App" onKeyDown={Authentication?.handleKeyPress}>
@@ -28,10 +38,10 @@ function App() {
             <Route path="journal.dev" element={<Journal />} />
             <Route path="project.file" element={<ProjectList />} />
             {Authentication?.isAdmin && (
-              <Route path="admin/">
-                <Route index element={<LoginForm />} />
-                <Route path="edit" element={<WritePost />} />
-              </Route>
+              <Route path="auth" element={<LoginForm />} />
+            )}
+            {Authentication?.isLogin && (
+              <Route path="edit" element={<WritePost />} />
             )}
             <Route path="*" element={<ErrorPage />} />
           </Route>

@@ -24,7 +24,7 @@ class App {
   private initializeMiddleware() {
     this.app.use(
       cors({
-        origin: ['http://localhost:3000', 'https://www.chrobok.dev'],
+        origin: this.formatFrontendURL(),
         credentials: true
       })
     );
@@ -44,6 +44,15 @@ class App {
   private connectDB() {
     const { DB_USER, DB_PASSWORD, DB_PATH } = process.env;
     mongoose.connect(`mongodb+srv://${DB_USER}:${DB_PASSWORD}@${DB_PATH}`);
+  }
+
+  private formatFrontendURL() {
+    const URL = process.env.FRONTEND_URL;
+    if (!URL) return '*';
+
+    return URL.includes('localhost')
+      ? `http://${process.env.FRONTEND_URL}:${process.env.FRONTEND_PORT}`
+      : URL;
   }
 }
 

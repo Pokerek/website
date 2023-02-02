@@ -52,10 +52,16 @@
       height: 3rem;
       justify-content: center;
       align-items: center;
+      flex-direction: row;
     }
 
     &__right {
       margin: 0;
+      margin-bottom: 0.5rem;
+    }
+
+    &__half {
+      width: 100%;
     }
   }
   @include mixin.mq(variable.$screen-sm) {

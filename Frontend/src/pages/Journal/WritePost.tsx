@@ -9,6 +9,7 @@ import { Post } from "./Post";
 
 import "./Post.scss";
 import { Button } from "../../components/custom/Button/Button";
+import useCookies from "react-cookie/cjs/useCookies";
 
 const NEW_POST: TPost = {
   title: "New Post",
@@ -17,18 +18,12 @@ const NEW_POST: TPost = {
   tags: [],
 };
 
-const getCookie = (name: string) => {
-  const cookies = document.cookie.split(";");
-  const cookie = cookies.find((c) => c.trim().startsWith(`${name}=`));
-  if (!cookie) return null;
-  return cookie.split("=")[1];
-};
-
 export const WritePost = () => {
   const [title, setTitle] = useState("New Post");
   const [text, setText] = useState("Write new post...");
   const [post, setPost] = useState<TPost>(NEW_POST);
   const navigate = useNavigate();
+  const [cookies] = useCookies();
 
   const Write = useContext(WriteContext);
   const Authentication = useContext(AuthContext);
@@ -54,12 +49,10 @@ export const WritePost = () => {
   }, [title, text]);
 
   const handleSavePost = (post: TPost) => {
-    const AuthCookie = getCookie("Authorization");
+    const AuthCookie = cookies["Authorization"];
     if (!AuthCookie) return navigate("/admin");
 
     const cookie = `Authorization=${AuthCookie}`;
-
-    console.log(post._id);
 
     if (post._id) {
       fetch(`${process.env.REACT_APP_BACKEND_URL}/posts/${post._id}`, {
@@ -90,8 +83,6 @@ export const WritePost = () => {
         })
         .catch((error) => console.log(error?.message));
     }
-
-    Write.handlePostChange(null);
     return navigate("/journal.dev");
   };
 
