@@ -52,7 +52,7 @@ class App {
 
     return URL.includes('localhost')
       ? `http://${process.env.FRONTEND_URL}:${process.env.FRONTEND_PORT}`
-      : URL;
+      : `https://${URL}`;
   }
 }
 
