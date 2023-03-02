@@ -15,6 +15,12 @@ export const Write: FC<props> = (props) => {
   const [index, setIndex] = useState(0);
   const [wroteLines, setWroteLines] = useState<lines>([]);
 
+  const emptyLines = props.elements.map((el, i) => {
+    if (i < index + 1) return;
+
+    return <p key={i} style={{ height: "46px" }}></p>;
+  });
+
   const specialClassName = props.elements[index].className
     ? props.elements[index].className
     : "";
@@ -40,7 +46,7 @@ export const Write: FC<props> = (props) => {
       </p>
     );
 
-    setWroteLines((prevWroteLines) => prevWroteLines.concat(newLine));
+    setWroteLines((prevWroteLines) => [...prevWroteLines, newLine]);
     setIndex(index + 1);
     setTypedString("");
   }
@@ -49,6 +55,7 @@ export const Write: FC<props> = (props) => {
     <Fragment>
       {wroteLines}
       <p className={`commandLine ${specialClassName}`}>{typedString}</p>
+      {emptyLines}
     </Fragment>
   );
 };

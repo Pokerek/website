@@ -40,7 +40,7 @@ export default function About() {
 
   return (
     <SuperBox className="about">
-      <div className="about__left superBox__left">
+      <div className="superBox__left">
         <h2 className="about__title">About</h2>
         <Button
           className={`about__btn ${isPersonal ? "active" : ""}`}
@@ -53,7 +53,7 @@ export default function About() {
           onClick={changeSectionTech}
         />
       </div>
-      <div className="about__right superBox__right">
+      <div className="superBox__right">
         {isLoading && <Loading />}
         {data && section}
       </div>

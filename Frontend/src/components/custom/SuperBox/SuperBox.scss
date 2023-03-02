@@ -17,11 +17,13 @@
     padding-right: 1rem;
     border-right: 1px solid variable.$font-color;
     font-size: 1.5rem;
+    gap: 1rem;
   }
 
   &__right {
     overflow: auto;
     flex-direction: column;
+    width: 100%;
   }
 
   &__left,
@@ -48,11 +50,13 @@
 
     &__left {
       padding: 1rem;
-      margin: 0;
       height: 3rem;
       justify-content: center;
       align-items: center;
       flex-direction: row;
+      border-bottom: 1px solid variable.$font-color;
+      margin-bottom: 1rem;
+      margin-right: 0;
     }
 
     &__right {

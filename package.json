@@ -1,5 +1,5 @@
 {
-  "name": "website_v2",
+  "name": "website",
   "version": "1.0.0",
   "author": "Pokerek <karolchrobok@gmail.com>",
   "license": "MIT",
@@ -22,7 +22,8 @@
     "server": "yarn workspace backend dev",
     "build-app": "yarn workspace frontend build",
     "build-server": "yarn workspace backend build",
-    "start": "concurrently --kill-others-on-fail \"yarn app\" \"yarn server\""
+    "start": "concurrently --kill-others-on-fail \"yarn app\" \"yarn server\"",
+    "build": "concurrently --kill-others-on-fail \"yarn build-app\" \"yarn build-server\""
   },
   "engines": {
     "node": "16.17.0"

@@ -12,10 +12,7 @@ database in the cloud.
    Markdown** to convert text wrote in Markdown format.
 -  Character sequence function to activate admin panel like in old arcane game.
    Just click on _Logo_ and write your secret code.
-
-#### In progress:
-
--  I write admin panel with login and create edit form for post.
+-  I write admin panel with login and create/edit form for post in my journal.
 
 ## Quick start
 

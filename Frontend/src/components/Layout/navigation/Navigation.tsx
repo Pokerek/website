@@ -2,7 +2,7 @@ import { Fragment, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 
 import { BurgerMenu } from "./BurgerMenu";
-import { IconBox } from "../../custom/IconBox/IconBox";
+import Socials from "./Socials/Socials";
 import { AuthContext } from "../../../context/AuthContext";
 import "./Navigation.scss";
 import { useCookies } from "react-cookie";
@@ -51,7 +51,7 @@ export const Navigation = () => {
             </li>
           )}
         </ul>
-        <IconBox />
+        <Socials />
       </nav>
     </Fragment>
   );

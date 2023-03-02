@@ -1,19 +1,16 @@
-@use "../../../styles/variable";
-@use "../../../styles/mixin";
+@use "../../../../styles/variable";
+@use "../../../../styles/mixin";
 
-.iconBox {
+.socials {
   display: flex;
   position: absolute;
   left: 100%;
   margin-right: 0.5rem;
+  gap: 1rem;
 
   &__icon {
     font-size: 2rem;
     line-height: 1rem;
-
-    &:not(:last-child) {
-      margin-right: 1rem;
-    }
 
     &,
     &:visited {
@@ -21,7 +18,11 @@
       text-decoration: none;
     }
 
-    i {
+    &:hover {
+      color: variable.$font-alter;
+    }
+
+    & {
       @include mixin.hover-animation;
     }
   }

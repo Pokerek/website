@@ -15,22 +15,17 @@ export const Welcome = () => {
   return (
     <SuperBox className="welcome">
       <div className="welcome__inner">
-        <a href="/about.me">
-          <img
-            src="./images/logo.png"
-            alt="Logo images"
-            className="welcome__img"
-            loading="lazy"
-          />
+        <a href="/about.me" className="welcome__img">
+          <img src="./images/logo.png" alt="Logo images" loading="lazy" />
         </a>
         <div className="welcome__info">
           <Write elements={[...elementsToWrite]} />
-          <Button
-            link="/about.me"
-            className="btn--green hidden"
-            text="Drop the mask"
-          />
         </div>
+        <Button
+          link="/about.me"
+          className="btn--green hidden"
+          text="Remove the hood"
+        />
       </div>
     </SuperBox>
   );
