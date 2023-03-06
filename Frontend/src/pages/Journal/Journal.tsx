@@ -34,9 +34,10 @@ export default function Journal() {
       const container = containerRef.current;
       if (!container) return;
 
-      const bottomReached =
-        container.scrollHeight - +container.scrollTop.toFixed() <=
-        container.clientHeight;
+      const { scrollTop, scrollHeight, clientHeight } = container;
+
+      const bottomReached = scrollHeight - scrollTop - 2 < clientHeight;
+
       if (!bottomReached) return;
 
       const response = await fetch(
