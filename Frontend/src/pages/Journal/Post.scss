@@ -30,6 +30,14 @@
     & > * {
       margin-bottom: 0.75rem;
     }
+    & a {
+      text-decoration: none;
+      border: 1px solid variable.$font-alter;
+      border-radius: 1rem;
+      padding: 0 1rem;
+
+      @include mixin.hover-animation;
+    }
   }
 
   &__input,
@@ -40,8 +48,9 @@
   }
 
   &__textArea {
-    width: 100%;
-    min-height: 350px;
+    width: calc(100% - 1rem);
+    height: calc(100% - 7.5rem);
+    padding: 0.5rem;
     font-size: 1.25rem;
     border-bottom: 1px solid variable.$font-color;
     margin-bottom: 1rem;

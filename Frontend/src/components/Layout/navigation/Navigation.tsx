@@ -1,5 +1,5 @@
 import { Fragment, useState, useContext } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 import { BurgerMenu } from "./BurgerMenu";
 import Socials from "./Socials/Socials";
@@ -30,22 +30,24 @@ export const Navigation = () => {
       >
         <ul className="navigation__list">
           <li className="navigation__item">
-            <Link to="/about.me">About.me</Link>
+            <NavLink to="/about.me">About.me</NavLink>
           </li>
           <li className="navigation__item">
-            <Link to="/journal.dev">Journal.dev</Link>
+            <NavLink to="/journal.dev">Journal.dev</NavLink>
           </li>
           <li className="navigation__item">
-            <Link to="/project.file">Project.file</Link>
+            <NavLink to="/project.file">Project.file</NavLink>
           </li>
           {Authentication?.isAdmin && !Authentication.isLogin && (
             <li className="navigation__item">
-              <Link to="/auth">Admin</Link>
+              <NavLink to="/auth">Admin</NavLink>
             </li>
           )}
           {Authentication?.isLogin && (
             <li className="navigation__item">
-              <Link /*onClick={() => handleLogout()}*/ to="/">Logout</Link>
+              <NavLink onClick={() => handleLogout()} to="/">
+                Logout
+              </NavLink>
             </li>
           )}
         </ul>

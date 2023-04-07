@@ -28,6 +28,9 @@ $menu-width: 50vw;
     a {
       @include mixin.hover-animation;
     }
+    a.active {
+      color: variable.$font-alter;
+    }
   }
 
   &--active {
