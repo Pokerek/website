@@ -1,11 +1,11 @@
 import { NextFunction, Request, Response, Router } from 'express';
-import NotFoundException from '../exceptions/NotFoundException';
-import Controller from '../interface/controller.interface';
-import RequestWithUser from '../interface/requestWithUser.interface';
+import NotFoundException from '../errors/NotFoundException';
+import Controller from '../types/controller';
+import RequestWithUser from '../types/requestWithUser';
 import authMiddleware from '../middleware/authMiddleware';
 import validationMiddleware from '../middleware/validation.middleware';
-import CreateProjectDto from './project.dto';
-import projectModel, { Project } from './projects.model';
+import CreateProjectDto from '../validations/project.dto';
+import projectModel, { Project } from '../database/model/projects.model';
 
 class ProjectsController implements Controller {
   public path = '/projects';

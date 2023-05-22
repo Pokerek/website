@@ -1,14 +1,14 @@
 import { NextFunction, Request, Response, Router } from 'express';
-import Controller from '../interface/controller.interface';
-import RequestWithUser from '../interface/requestWithUser.interface';
-import NotFoundException from '../exceptions/NotFoundException';
+import Controller from '../types/controller';
+import RequestWithUser from '../types/requestWithUser';
+import NotFoundException from '../errors/NotFoundException';
 import cvModel, { CV } from './cv.model';
 import authMiddleware from '../middleware/authMiddleware';
 import generate from './func/generate';
 import convert from './func/convert';
-import HttpException from '../exceptions/HttpException';
-import projectModel, { Project } from '../projects/projects.model';
-import ServerErrorException from '../exceptions/ServerErrorException';
+import HttpException from '../errors/HttpException';
+import projectModel, { Project } from '../database/model/projects.model';
+import ServerErrorException from '../errors/ServerErrorException';
 import { getFile } from './func/fileHelpers';
 
 class CVController implements Controller {

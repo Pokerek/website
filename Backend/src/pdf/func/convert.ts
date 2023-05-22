@@ -2,7 +2,7 @@ import axios from 'axios';
 import FormData from 'form-data';
 import fs from 'fs';
 import path from 'path';
-import HttpException from '../../exceptions/HttpException';
+import HttpException from '../../errors/HttpException';
 
 const newFormData = (filename: string) => {
   const formData = new FormData();

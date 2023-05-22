@@ -1,7 +1,7 @@
 import { plainToInstance } from 'class-transformer';
 import { validate, ValidationError } from 'class-validator';
 import express from 'express';
-import HttpException from '../exceptions/HttpException';
+import HttpException from '../errors/HttpException';
 
 function validationMiddleware<T>(
   type: any,

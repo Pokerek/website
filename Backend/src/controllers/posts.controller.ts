@@ -1,12 +1,12 @@
 import { NextFunction, Request, Response, Router } from 'express';
-import NotFoundException from '../exceptions/NotFoundException';
-import Controller from '../interface/controller.interface';
-import RequestWithUser from '../interface/requestWithUser.interface';
+import NotFoundException from '../errors/NotFoundException';
+import Controller from '../types/controller';
+import RequestWithUser from '../types/requestWithUser';
 import authMiddleware from '../middleware/authMiddleware';
 import validationMiddleware from '../middleware/validation.middleware';
-import CreatePostDto from './post.dto';
-import Post from './post.interface';
-import postModel from './posts.model';
+import CreatePostDto from '../validations/post.dto';
+import Post from '../types/post';
+import postModel from '../database/model/posts.model';
 
 class PostsController implements Controller {
   public path = '/posts';

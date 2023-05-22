@@ -2,7 +2,7 @@ import ejs from 'ejs';
 import path from 'path';
 import { createHtmlFile, applyStyleFromFile } from './fileHelpers';
 import { CV } from '../cv.model';
-import { Project } from '../../projects/projects.model';
+import { Project } from '../../database/model/projects.model';
 
 const generateHTML = (
   cvData: CV,

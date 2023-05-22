@@ -3,7 +3,7 @@ import cookieParser from 'cookie-parser';
 import express from 'express';
 import mongoose from 'mongoose';
 import path from 'path';
-import Controller from './interface/controller.interface';
+import Controller from './types/controller';
 import errorMiddleware from './middleware/error.middleware';
 import cors from 'cors';
 

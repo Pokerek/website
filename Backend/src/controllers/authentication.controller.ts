@@ -1,15 +1,15 @@
 import bcrypt from 'bcrypt';
 import { sign } from 'jsonwebtoken';
 import { NextFunction, Request, Response, Router } from 'express';
-import UserAlreadyExistException from '../exceptions/UserAlreadyExistException';
-import WrongCredentialsException from '../exceptions/WrongCredentialsException';
-import Controller from '../interface/controller.interface';
+import UserAlreadyExistException from '../errors/UserAlreadyExistException';
+import WrongCredentialsException from '../errors/WrongCredentialsException';
+import Controller from '../types/controller';
 import validationMiddleware from '../middleware/validation.middleware';
-import CreateUserDto from '../users/user.dto';
-import User from '../users/user.interface';
-import userModel from '../users/users.model';
-import { DataStoredInToken, TokenData } from './authentication.interface';
-import LogInDto from './logIn.dto';
+import CreateUserDto from '../validations/user.dto';
+import User from '../types/user';
+import userModel from '../database/model/users.model';
+import { DataStoredInToken, TokenData } from '../types/authentication';
+import LogInDto from '../validations/logIn.dto';
 import blockEndpoint from '../utils/blockEndpoint';
 
 class AuthenticationController implements Controller {
