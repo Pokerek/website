@@ -26,7 +26,7 @@
     "build": "concurrently --kill-others-on-fail \"yarn build-app\" \"yarn build-server\""
   },
   "engines": {
-    "node": "16.17.0"
+    "node": "18.16.0"
   },
   "dependencies": {
     "concurrently": "^7.5.0"
