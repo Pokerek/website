@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response, Router } from 'express';
-import Controller from '../types/controller';
-import RequestWithUser from '../types/requestWithUser';
+import Controller from '../types/router';
+import RequestWithUser from '../types/request';
 import NotFoundException from '../errors/NotFoundException';
 import cvModel, { CV } from './cv.model';
 import authMiddleware from '../middleware/authMiddleware';

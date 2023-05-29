@@ -3,7 +3,7 @@ import { sign } from 'jsonwebtoken';
 import { NextFunction, Request, Response, Router } from 'express';
 import UserAlreadyExistException from '../errors/UserAlreadyExistException';
 import WrongCredentialsException from '../errors/WrongCredentialsException';
-import Controller from '../types/controller';
+import Controller from '../types/router';
 import validationMiddleware from '../middleware/validation.middleware';
 import CreateUserDto from '../validations/user.dto';
 import User from '../types/user';

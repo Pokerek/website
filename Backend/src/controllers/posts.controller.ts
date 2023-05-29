@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response, Router } from 'express';
 import NotFoundException from '../errors/NotFoundException';
-import Controller from '../types/controller';
-import RequestWithUser from '../types/requestWithUser';
+import Controller from '../types/router';
+import RequestWithUser from '../types/request';
 import authMiddleware from '../middleware/authMiddleware';
 import validationMiddleware from '../middleware/validation.middleware';
 import CreatePostDto from '../validations/post.dto';

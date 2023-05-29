@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 import { DataStoredInToken } from '../types/authentication';
 import AuthenticationTokenMissedException from '../errors/AuthenticationTokenMissedException';
 import WrongAuthenticationTokenException from '../errors/WrongAuthenticationTokenException';
-import RequestWithUser from '../types/requestWithUser';
+import { RequestWithUser } from '../types/request';
 import userModel from '../database/model/users.model';
 
 async function authMiddleware(
