@@ -3,18 +3,18 @@ import cookieParser from 'cookie-parser';
 import express from 'express';
 import mongoose from 'mongoose';
 import path from 'path';
-import Controller from './types/controller';
+import RouterWithPath from './types/router';
 import errorMiddleware from './middleware/error.middleware';
 import cors from 'cors';
 
 class App {
   public app: express.Application;
-  constructor(controllers: Controller[]) {
+  constructor(routes: RouterWithPath[]) {
     this.app = express();
 
     this.connectDB();
     this.initializeMiddleware();
-    this.initializeControllers(controllers);
+    this.initializeRoutes(routes);
     this.initializeErrorHandler();
   }
 
@@ -33,9 +33,9 @@ class App {
     this.app.use(express.static(path.join(__dirname, './public')));
     this.app.use(cookieParser());
   }
-  private initializeControllers(controllers: Controller[]) {
-    controllers.forEach((controller) => {
-      this.app.use('/', controller.router);
+  private initializeRoutes(routes: RouterWithPath[]) {
+    routes.forEach(({ router }) => {
+      this.app.use('/', router);
     });
   }
   private initializeErrorHandler() {
