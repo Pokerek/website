@@ -2,6 +2,19 @@ import mongoose from 'mongoose';
 
 const Schema = mongoose.Schema;
 
+interface Project {
+  name: string;
+  stack: string[];
+  description: string;
+  imageUrl: string;
+  links: {
+    online: string;
+    github: string;
+  };
+}
+
+type ProjectDocument = Project & mongoose.Document;
+
 const projectSchema = new Schema({
   name: { type: String, required: true },
   stack: [String],
@@ -12,16 +25,7 @@ const projectSchema = new Schema({
     github: String
   }
 });
-export type Project = {
-  name: string;
-  image: { src: string; alt: string };
-  link: string;
-  tags: [string];
-  technologies: [string];
-};
 
-const projectModel = mongoose.model<Project & mongoose.Document>(
-  'Project',
-  projectSchema
-);
+const projectModel = mongoose.model<ProjectDocument>('Project', projectSchema);
 export default projectModel;
+export { Project };

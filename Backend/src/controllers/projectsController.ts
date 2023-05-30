@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import NotFoundException from '../errors/NotFoundException';
 import { RequestWithUser } from '../types/request';
-import projectModel, { Project } from '../database/model/projects.model';
+import projectModel, { Project } from '../database/model/projectsModel';
 
 class ProjectsController {
   private project = projectModel;

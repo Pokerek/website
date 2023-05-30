@@ -4,7 +4,7 @@ import { DataStoredInToken } from '../types/authentication';
 import AuthenticationTokenMissedException from '../errors/AuthenticationTokenMissedException';
 import WrongAuthenticationTokenException from '../errors/WrongAuthenticationTokenException';
 import { RequestWithUser } from '../types/request';
-import userModel from '../database/model/users.model';
+import userModel from '../database/model/usersModel';
 
 async function authMiddleware(
   req: RequestWithUser,

@@ -1,6 +1,15 @@
 import mongoose from 'mongoose';
-import Post from '../../types/post';
+
 const Schema = mongoose.Schema;
+
+interface Post {
+  title: string;
+  createdDate: Date;
+  text: string;
+  tags: string[];
+}
+
+type PostDocument = Post & mongoose.Document;
 
 const postSchema = new Schema({
   title: {
@@ -19,5 +28,7 @@ const postSchema = new Schema({
   tags: [String]
 });
 
-const postModel = mongoose.model<Post & mongoose.Document>('Post', postSchema);
+const postModel = mongoose.model<PostDocument>('Post', postSchema);
+
 export default postModel;
+export { Post };
