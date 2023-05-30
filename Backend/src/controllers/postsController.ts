@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import NotFoundException from '../errors/NotFoundException';
 import { RequestWithUser } from '../types/request';
-import postModel, { Post } from '../database/model/postsModel';
+import postModel, { Post } from '../database/models/postsModel';
 
 class PostsController {
   private post = postModel;

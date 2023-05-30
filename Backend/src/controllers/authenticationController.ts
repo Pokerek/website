@@ -4,7 +4,7 @@ import { NextFunction, Request, Response } from 'express';
 import UserAlreadyExistException from '../errors/UserAlreadyExistException';
 import WrongCredentialsException from '../errors/WrongCredentialsException';
 import User, { LoginAttributes, RegistrationAttributes } from '../types/user';
-import userModel from '../database/model/usersModel';
+import userModel from '../database/models/usersModel';
 import { DataStoredInToken, TokenData } from '../types/authentication';
 
 class AuthenticationController {

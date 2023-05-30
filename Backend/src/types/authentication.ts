@@ -1,4 +1,4 @@
-import { User } from '../database/model/usersModel';
+import { User } from '../database/models/usersModel';
 
 type LoginAttributes = Pick<User, 'email' | 'password'>;
 type RegisterAttributes = Pick<User, 'username' | 'email' | 'password'>;
