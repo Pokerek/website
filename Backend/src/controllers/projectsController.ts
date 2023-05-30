@@ -1,44 +1,16 @@
-import { NextFunction, Request, Response, Router } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import NotFoundException from '../errors/NotFoundException';
-import Controller from '../types/router';
-import RequestWithUser from '../types/request';
-import authMiddleware from '../middleware/authMiddleware';
-import validationMiddleware from '../middleware/validation.middleware';
-import CreateProjectDto from '../validations/project.dto';
+import { RequestWithUser } from '../types/request';
 import projectModel, { Project } from '../database/model/projects.model';
 
-class ProjectsController implements Controller {
-  public path = '/projects';
-  public router = Router();
+class ProjectsController {
   private project = projectModel;
 
-  constructor() {
-    this.initializeRoutes();
-  }
-
-  private initializeRoutes() {
-    this.router.get(this.path, this.getAllProjects);
-    this.router.get(`${this.path}/:id`, this.getProject);
-    this.router.post(
-      this.path,
-      authMiddleware,
-      validationMiddleware(CreateProjectDto),
-      this.createProject
-    );
-    this.router.patch(
-      `${this.path}/:id`,
-      authMiddleware,
-      validationMiddleware(CreateProjectDto, true),
-      this.modifyProject
-    );
-    this.router.delete(`${this.path}/:id`, authMiddleware, this.deleteProject);
-  }
-
-  private getAllProjects = (req: Request, res: Response) => {
+  public getAllProjects = (req: Request, res: Response) => {
     this.project.find().then((projects) => res.send(projects));
   };
 
-  private getProject = (req: Request, res: Response, next: NextFunction) => {
+  public getProject = (req: Request, res: Response, next: NextFunction) => {
     const { id } = req.params;
     this.project.findById(id).then((project) => {
       if (project) {
@@ -49,7 +21,7 @@ class ProjectsController implements Controller {
     });
   };
 
-  private createProject = (req: RequestWithUser, res: Response) => {
+  public createProject = (req: RequestWithUser, res: Response) => {
     const projectData: Project = req.body;
     const createdProject = new this.project(projectData);
     createdProject.save().then(() => {
@@ -57,7 +29,7 @@ class ProjectsController implements Controller {
     });
   };
 
-  private modifyProject = (
+  public modifyProject = (
     req: RequestWithUser,
     res: Response,
     next: NextFunction
@@ -75,7 +47,7 @@ class ProjectsController implements Controller {
       });
   };
 
-  private deleteProject = (
+  public deleteProject = (
     req: RequestWithUser,
     res: Response,
     next: NextFunction

@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import PostsController from '../controllers/posts.controller';
+import PostsController from '../controllers/postsController';
 import RouterWithPath from '../types/router';
 import authMiddleware from '../middleware/authMiddleware';
 
