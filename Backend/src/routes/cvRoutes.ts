@@ -4,7 +4,7 @@ import RouterWithPath from '../types/router';
 import multer from 'multer';
 import authMiddleware from '../middleware/authMiddleware';
 
-class CVRouter implements RouterWithPath {
+class CVRoutes implements RouterWithPath {
   public path = '/cv';
   public router = Router();
 
@@ -34,4 +34,4 @@ class CVRouter implements RouterWithPath {
   }
 }
 
-export default CVRouter;
+export default CVRoutes;

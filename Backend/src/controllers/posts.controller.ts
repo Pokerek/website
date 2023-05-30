@@ -1,41 +1,13 @@
-import { NextFunction, Request, Response, Router } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import NotFoundException from '../errors/NotFoundException';
-import Controller from '../types/router';
-import RequestWithUser from '../types/request';
-import authMiddleware from '../middleware/authMiddleware';
-import validationMiddleware from '../middleware/validation.middleware';
-import CreatePostDto from '../validations/post.dto';
+import { RequestWithUser } from '../types/request';
 import Post from '../types/post';
 import postModel from '../database/model/posts.model';
 
-class PostsController implements Controller {
-  public path = '/posts';
-  public router = Router();
+class PostsController {
   private post = postModel;
 
-  constructor() {
-    this.initializeRoutes();
-  }
-
-  private initializeRoutes() {
-    this.router.get(this.path, this.getAllPosts);
-    this.router.get(`${this.path}/:id`, this.getPost);
-    this.router.post(
-      this.path,
-      authMiddleware,
-      validationMiddleware(CreatePostDto),
-      this.createPost
-    );
-    this.router.patch(
-      `${this.path}/:id`,
-      authMiddleware,
-      validationMiddleware(CreatePostDto, true),
-      this.modifyPost
-    );
-    this.router.delete(`${this.path}/:id`, authMiddleware, this.deletePost);
-  }
-
-  private getAllPosts = async (req: Request, res: Response) => {
+  public getAllPosts = async (req: Request, res: Response) => {
     const page = req.query.page ? +req.query.page : 1;
 
     const posts = await this.post
@@ -50,7 +22,7 @@ class PostsController implements Controller {
     res.status(200).json({ total, pages, posts });
   };
 
-  private getPost = (req: Request, res: Response, next: NextFunction) => {
+  public getPost = (req: Request, res: Response, next: NextFunction) => {
     const { id } = req.params;
 
     this.post.findById(id).then((post) => {
@@ -60,7 +32,7 @@ class PostsController implements Controller {
     });
   };
 
-  private modifyPost = (
+  public modifyPost = (
     req: RequestWithUser,
     res: Response,
     next: NextFunction
@@ -76,13 +48,13 @@ class PostsController implements Controller {
     });
   };
 
-  private createPost = (req: RequestWithUser, res: Response) => {
+  public createPost = (req: RequestWithUser, res: Response) => {
     const postData: Post = req.body;
     const createdPost = new this.post(postData);
     createdPost.save().then(() => res.json({ message: 'Post created' }));
   };
 
-  private deletePost = (
+  public deletePost = (
     req: RequestWithUser,
     res: Response,
     next: NextFunction
