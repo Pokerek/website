@@ -29,7 +29,7 @@ class ProjectsRoutes implements RouterWithPath {
       validationMiddleware(createProjectSchema),
       this.projectsController.createProject
     );
-    this.router.patch(
+    this.router.put(
       `${this.path}/:id`,
       authMiddleware,
       validationMiddleware(updateProjectSchema),

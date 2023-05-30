@@ -3,7 +3,7 @@ import { sign } from 'jsonwebtoken';
 import { NextFunction, Request, Response } from 'express';
 import UserAlreadyExistException from '../errors/UserAlreadyExistException';
 import WrongCredentialsException from '../errors/WrongCredentialsException';
-import User, { LoginAttributes, RegistrationAttributes } from '../types/user';
+import { LoginAttributes, RegisterAttributes } from '../types/authentication';
 import userModel from '../database/models/userModel';
 import { DataStoredInToken, TokenData } from '../types/authentication';
 
@@ -15,7 +15,7 @@ class AuthenticationController {
     res: Response,
     next: NextFunction
   ) => {
-    const userData = req.body as RegistrationAttributes;
+    const userData = req.body as RegisterAttributes;
     if (await this.user.findOne({ email: userData.email })) {
       next(new UserAlreadyExistException());
     } else {
@@ -52,7 +52,7 @@ class AuthenticationController {
     }
   };
 
-  private createToken(user: User): TokenData {
+  private createToken(user: any): TokenData {
     const expiresIn = 60 * 60;
     const secret = process.env.JWT_SECRET;
     const dataStoredInToken: DataStoredInToken = {

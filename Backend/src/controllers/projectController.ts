@@ -1,50 +1,73 @@
 import { NextFunction, Request, Response } from 'express';
 import NotFoundException from '../errors/NotFoundException';
 import { RequestWithUser } from '../types/request';
-import projectModel, { Project } from '../database/models/projectModel';
+import { Project } from '../database/models/projectModel';
+import ProjectService from '../services/projectServices';
 
 class ProjectsController {
-  private project = projectModel;
+  private projectService = new ProjectService();
 
-  public getAllProjects = (req: Request, res: Response) => {
-    this.project.find().then((projects) => res.send(projects));
+  public getAllProjects = async (req: Request, res: Response) => {
+    const data = await this.projectService.getAllProjects();
+
+    const projects = data.map((project) => {
+      return {
+        name: project.name,
+        stack: project.stack,
+        description: project.description,
+        imageUrl: project.imageUrl,
+        links: project.links
+      };
+    });
+
+    res.send(projects);
   };
 
-  public getProject = (req: Request, res: Response, next: NextFunction) => {
+  public getProject = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
     const { id } = req.params;
-    this.project.findById(id).then((project) => {
-      if (project) {
-        res.send(project);
-      } else {
-        next(new NotFoundException(id, 'Project'));
-      }
-    });
+    const data = await this.projectService.getProject(id);
+
+    if (!data) return next(new NotFoundException(id, 'Project'));
+
+    const project = {
+      name: data.name,
+      stack: data.stack,
+      description: data.description,
+      imageUrl: data.imageUrl,
+      links: data.links
+    };
+
+    res.send(project);
   };
 
-  public createProject = (req: RequestWithUser, res: Response) => {
-    const projectData: Project = req.body;
-    const createdProject = new this.project(projectData);
-    createdProject.save().then(() => {
-      res.send({ message: 'Project created' });
-    });
+  public createProject = async (req: RequestWithUser, res: Response) => {
+    const projectBody = req.body as Project;
+
+    const addedProject = await this.projectService.createProject(projectBody);
+
+    res.send(addedProject);
   };
 
-  public modifyProject = (
+  public modifyProject = async (
     req: RequestWithUser,
     res: Response,
     next: NextFunction
   ) => {
     const { id } = req.params;
-    const projectBody: Project = req.body;
-    this.project
-      .findByIdAndUpdate(id, projectBody, { new: true })
-      .then((post) => {
-        if (post) {
-          res.send({ message: 'Project update!' });
-        } else {
-          next(new NotFoundException(id, 'Project'));
-        }
-      });
+    const projectBody = req.body as Project;
+
+    const modifiedProject = await this.projectService.modifyProject(
+      id,
+      projectBody
+    );
+
+    if (!modifiedProject) return next(new NotFoundException(id, 'Project'));
+
+    res.send({ status: 'success', message: 'Project modified successfully!' });
   };
 
   public deleteProject = (
@@ -53,13 +76,11 @@ class ProjectsController {
     next: NextFunction
   ) => {
     const { id } = req.params;
-    this.project.findByIdAndDelete(id).then((successResponse) => {
-      if (successResponse) {
-        res.send({ message: 'Post deleted' });
-      } else {
-        next(new NotFoundException(id, 'Project'));
-      }
-    });
+
+    const deletedProject = this.projectService.deleteProject(id);
+    if (!deletedProject) return next(new NotFoundException(id, 'project'));
+
+    res.send({ status: 'success', message: 'Project deleted successfully!' });
   };
 }
 
