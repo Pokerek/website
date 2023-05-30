@@ -2,16 +2,17 @@ import 'dotenv/config';
 import validateEnv from './utils/validateEnv';
 import App from './app';
 
-import CVRoutes from './routes/cvRoutes';
 import PostsRoutes from './routes/postRoutes';
 import ProjectsRoutes from './routes/projectsRoutes';
+import AuthenticationRoutes from './routes/authenticationRoutes';
+import CVRoutes from './routes/cvRoutes';
 
 validateEnv();
 
 const app = new App([
   new PostsRoutes(),
   new ProjectsRoutes(),
-  // new AuthenticationController(),
+  new AuthenticationRoutes(),
   new CVRoutes()
 ]);
 

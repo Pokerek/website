@@ -1,41 +1,18 @@
 import bcrypt from 'bcrypt';
 import { sign } from 'jsonwebtoken';
-import { NextFunction, Request, Response, Router } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import UserAlreadyExistException from '../errors/UserAlreadyExistException';
 import WrongCredentialsException from '../errors/WrongCredentialsException';
-import Controller from '../types/router';
-import validationMiddleware from '../middleware/validation.middleware';
 import CreateUserDto from '../validations/user.dto';
 import User from '../types/user';
 import userModel from '../database/model/users.model';
 import { DataStoredInToken, TokenData } from '../types/authentication';
 import LogInDto from '../validations/logIn.dto';
-import blockEndpoint from '../utils/blockEndpoint';
 
-class AuthenticationController implements Controller {
-  public path = '/auth';
-  public router = Router();
+class AuthenticationController {
   private user = userModel;
 
-  constructor() {
-    this.initializeRoutes();
-  }
-
-  private initializeRoutes() {
-    this.router.post(
-      `${this.path}/login`,
-      validationMiddleware(LogInDto),
-      this.loggingIn
-    );
-    this.router.post(
-      `${this.path}/registration`,
-      blockEndpoint,
-      validationMiddleware(CreateUserDto),
-      this.registration
-    );
-  }
-
-  private registration = async (
+  public registration = async (
     req: Request,
     res: Response,
     next: NextFunction
@@ -57,7 +34,7 @@ class AuthenticationController implements Controller {
     }
   };
 
-  private loggingIn = async (
+  public loggingIn = async (
     req: Request,
     res: Response,
     next: NextFunction
@@ -96,7 +73,7 @@ class AuthenticationController implements Controller {
     };
   }
 
-  private createCookie(tokenData: TokenData) {
+  public createCookie(tokenData: TokenData) {
     return `Authorization=${tokenData.token}; Max-Age=${tokenData.expiresIn}; Path=/; Domain=.${process.env.FRONTEND_URL}`;
   }
 }
