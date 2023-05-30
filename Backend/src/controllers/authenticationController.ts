@@ -3,11 +3,9 @@ import { sign } from 'jsonwebtoken';
 import { NextFunction, Request, Response } from 'express';
 import UserAlreadyExistException from '../errors/UserAlreadyExistException';
 import WrongCredentialsException from '../errors/WrongCredentialsException';
-import CreateUserDto from '../validations/user.dto';
-import User from '../types/user';
+import User, { LoginAttributes, RegistrationAttributes } from '../types/user';
 import userModel from '../database/model/users.model';
 import { DataStoredInToken, TokenData } from '../types/authentication';
-import LogInDto from '../validations/logIn.dto';
 
 class AuthenticationController {
   private user = userModel;
@@ -17,7 +15,7 @@ class AuthenticationController {
     res: Response,
     next: NextFunction
   ) => {
-    const userData: CreateUserDto = req.body;
+    const userData = req.body as RegistrationAttributes;
     if (await this.user.findOne({ email: userData.email })) {
       next(new UserAlreadyExistException());
     } else {
@@ -34,24 +32,20 @@ class AuthenticationController {
     }
   };
 
-  public loggingIn = async (
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ) => {
-    const logInData: LogInDto = req.body;
+  public login = async (req: Request, res: Response, next: NextFunction) => {
+    const { email, password } = req.body as LoginAttributes;
     try {
-      const user = await this.user.findOne({ email: logInData.email });
+      const user = await this.user.findOne({ email });
       if (user) {
         const isPasswordMatching = await bcrypt.compare(
-          logInData.password,
+          password,
           user.password
         );
         if (!isPasswordMatching) throw new WrongCredentialsException();
 
         const tokenData = this.createToken(user);
         res.setHeader('Set-Cookie', [this.createCookie(tokenData)]);
-        res.status(200).json({ message: 'Login!' });
+        res.json({ message: `Welcome ${user.username}` });
       } else throw new WrongCredentialsException();
     } catch (error) {
       next(error);

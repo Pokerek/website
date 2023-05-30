@@ -1,6 +1,13 @@
 import { Router } from 'express';
+
 import ProjectsController from '../controllers/projectsController';
 import authMiddleware from '../middleware/authMiddleware';
+import validationMiddleware from '../middleware/validationMiddleware';
+import {
+  createProjectSchema,
+  updateProjectSchema
+} from '../validations/project';
+
 import RouterWithPath from '../types/router';
 
 class ProjectsRoutes implements RouterWithPath {
@@ -19,13 +26,13 @@ class ProjectsRoutes implements RouterWithPath {
     this.router.post(
       this.path,
       authMiddleware,
-      // validationMiddleware(CreateProjectDto),
+      validationMiddleware(createProjectSchema),
       this.projectsController.createProject
     );
     this.router.patch(
       `${this.path}/:id`,
       authMiddleware,
-      // validationMiddleware(CreateProjectDto, true),
+      validationMiddleware(updateProjectSchema),
       this.projectsController.modifyProject
     );
     this.router.delete(

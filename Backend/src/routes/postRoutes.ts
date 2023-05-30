@@ -2,6 +2,8 @@ import { Router } from 'express';
 import PostsController from '../controllers/postsController';
 import RouterWithPath from '../types/router';
 import authMiddleware from '../middleware/authMiddleware';
+import validationMiddleware from '../middleware/validationMiddleware';
+import { createPostSchema, updatePostSchema } from '../validations/post';
 
 class PostsRoutes implements RouterWithPath {
   public path = '/posts';
@@ -19,13 +21,13 @@ class PostsRoutes implements RouterWithPath {
     this.router.post(
       this.path,
       authMiddleware,
-      // validationMiddleware(CreatePostDto),
+      validationMiddleware(createPostSchema),
       this.postsController.createPost
     );
     this.router.patch(
       `${this.path}/:id`,
       authMiddleware,
-      // validationMiddleware(CreatePostDto, true),
+      validationMiddleware(updatePostSchema),
       this.postsController.modifyPost
     );
     this.router.delete(

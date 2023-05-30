@@ -10,8 +10,7 @@ const projectSchema = new Schema({
   links: {
     online: String,
     github: String
-  },
-  showInCv: { type: Boolean, required: true }
+  }
 });
 export type Project = {
   name: string;
