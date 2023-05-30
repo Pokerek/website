@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import ProjectsController from '../controllers/projectsController';
+import ProjectsController from '../controllers/projectController';
 import authMiddleware from '../middleware/authMiddleware';
 import validationMiddleware from '../middleware/validationMiddleware';
 import {

@@ -1,5 +1,5 @@
 import { Request } from 'express';
-import { User } from '../database/models/usersModel';
+import { User } from '../database/models/userModel';
 
 export interface RequestWithUser extends Request {
   user?: User;

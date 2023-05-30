@@ -7,7 +7,7 @@ import authMiddleware from '../middleware/authMiddleware';
 import generate from './func/generate';
 import convert from './func/convert';
 import HttpException from '../errors/HttpException';
-import projectModel, { Project } from '../database/models/projectsModel';
+import projectModel, { Project } from '../database/models/projectModel';
 import ServerErrorException from '../errors/ServerErrorException';
 import { getFile } from './func/fileHelpers';
 
