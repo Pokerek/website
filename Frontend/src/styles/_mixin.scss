@@ -1,12 +1,5 @@
 @import "./variable";
 
-@mixin hamburger-line {
-  width: 100%;
-  height: 3px;
-  background-color: $color-text;
-  position: absolute;
-}
-
 @mixin hover-animation {
   transition: color 0.5s ease-in;
   color: $color-text;

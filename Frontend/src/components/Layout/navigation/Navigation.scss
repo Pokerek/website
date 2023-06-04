@@ -1,80 +1,39 @@
-@use "../../../styles/variable";
-@use "../../../styles/mixin";
+@import "../../../styles/variable";
 
-$border: 2px solid variable.$font-color;
-$menu-width: 50vw;
+$header-height: 68px;
+$menuAnimation: left 0.3s ease-in-out;
 
 .navigation {
-  transition: transform 0.3s 0.1s ease-in-out;
-  position: relative;
-  display: flex;
-  align-items: center;
-  &__list {
-    padding: 0.25rem 0.5rem;
-    margin: 0 1rem;
-    border-left: $border;
-    border-right: $border;
-    display: inline-block;
+  position: absolute;
+  z-index: 100;
+  width: 100%;
+  top: $header-height;
+  height: calc(100vh - $header-height);
+  background-color: $color-background;
+  left: 100%;
+  transition: $menuAnimation;
+
+  & &__list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0 1rem;
+    gap: 0.5rem;
   }
-  &__item {
-    display: inline;
-    font-size: 1.75rem;
-    margin: 0 0.5rem;
-    a:visited,
-    a {
-      color: variable.$font-color;
-      text-decoration: none;
-    }
-    a {
-      @include mixin.hover-animation;
-    }
-    a.active {
-      color: variable.$font-alter;
-    }
+
+  & &__item {
+    list-style: none;
+    font-size: 1.5rem;
+    margin: 0;
+    padding: 1rem 0;
+    width: 100%;
+    text-align: center;
   }
 
   &--active {
-    transform: translateX(0px);
-  }
-
-  @include mixin.mq(variable.$screen-md) {
-    height: 100vh;
-    width: $menu-width;
-    position: absolute;
-    top: 0;
     left: 0;
-    z-index: 1;
-    transform: translatex(-$menu-width);
-    background-color: variable.$background-color;
-    color: variable.$font-color;
-    flex-direction: column;
-
-    &__item {
-      font-size: 1.25rem;
-      padding: 1.5rem 1rem;
-
-      &:not(:last-child) {
-        border-bottom: 1px solid variable.$font-color;
-      }
-    }
-
-    &__item > a {
-      display: block;
-    }
-
-    &__list {
-      width: 100%;
-      border-left: none;
-      border-right: none;
-      display: flex;
-      flex-direction: column;
-      margin: 0;
-      margin-top: 4rem;
-      border-top: 1px solid variable.$font-color;
-    }
-
-    &--active {
-      transform: translatex(0);
-    }
+    transition: $menuAnimation;
   }
 }
