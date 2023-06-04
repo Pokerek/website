@@ -6,7 +6,7 @@ import ReactDOM from "react-dom/client";
 // import { WriteProvider } from "./context/WriteContext";
 // import { AuthProvider } from "./context/AuthContext";
 
-import "./index.scss";
+import "./styles/index.scss";
 import App from "./App";
 
 const root = ReactDOM.createRoot(

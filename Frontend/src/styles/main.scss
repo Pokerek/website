@@ -1,5 +1,6 @@
-@use "./styles/variable";
-@import-normalize;
+@import "./variable";
+@import "./mixin";
+@import "./font";
 
 // Custom style
 * {
@@ -16,10 +17,9 @@ html {
 }
 
 body {
-  color: variable.$font-color;
-  font-size: 14px;
+  color: $color-text;
   font-family: "JetBrains Mono", monospace;
-  background-color: variable.$background-color;
+  background-color: $color-background;
 }
 
 img {
@@ -30,7 +30,7 @@ img {
 /* Firefox */
 * {
   scrollbar-width: auto;
-  scrollbar-color: variable.$font-color;
+  scrollbar-color: $color-text;
 }
 
 /* Chrome, Edge, and Safari */
@@ -39,11 +39,11 @@ img {
 }
 
 *::-webkit-scrollbar-track {
-  background: variable.$background-color;
+  background: $color-background;
 }
 
 *::-webkit-scrollbar-thumb {
-  background-color: variable.$font-color;
+  background-color: $color-text;
   border-radius: 10px;
-  border: 3px solid variable.$font-color;
+  border: 3px solid $color-text;
 }
