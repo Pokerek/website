@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect, FC, KeyboardEvent } from "react";
-import { useCookies } from "react-cookie";
+// import { useCookies } from "react-cookie";
 
 interface Authentication {
   isAdmin: boolean;
@@ -8,7 +8,7 @@ interface Authentication {
   changeIsLogin: () => void;
 }
 
-const SECRET_PASSWORD = process.env.REACT_APP_SECRET_PASSWORD;
+const SECRET_PASSWORD = "123"; //process.env.REACT_APP_SECRET_PASSWORD;
 
 export const AuthContext = createContext<Authentication | null>(null);
 
@@ -16,7 +16,7 @@ export const AuthProvider: FC<{ children: JSX.Element }> = ({ children }) => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
   const [keysPressed, setKeysPressed] = useState<string[]>([]);
-  const [cookies] = useCookies();
+  // const [cookies] = useCookies();
 
   const authCode = {
     answer: SECRET_PASSWORD,
@@ -42,7 +42,7 @@ export const AuthProvider: FC<{ children: JSX.Element }> = ({ children }) => {
   }, [keysPressed]);
 
   useEffect(() => {
-    const authorization = cookies["Authorization"];
+    const authorization = null; // cookies["Authorization"];
     if (!authorization) return;
 
     setIsLogin(true);

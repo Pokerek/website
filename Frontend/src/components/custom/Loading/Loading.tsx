@@ -1,5 +1,4 @@
-import ReactLoading from "react-loading";
+// import ReactLoading from "react-loading";
 
-export const Loading = () => (
-  <ReactLoading type="spinningBubbles" height={200} width={200} />
-);
+export const Loading = () =>
+  console.log("Loading..."); // <ReactLoading type="spinningBubbles" height={200} width={200} />

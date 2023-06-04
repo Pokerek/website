@@ -9,7 +9,7 @@ import { Post } from "./Post";
 
 import "./Post.scss";
 import { Button } from "../../components/custom/Button/Button";
-import useCookies from "react-cookie/cjs/useCookies";
+// import useCookies from "react-cookie/cjs/useCookies";
 
 const NEW_POST: TPost = {
   title: "New Post",
@@ -23,7 +23,7 @@ export const WritePost = () => {
   const [text, setText] = useState("Write new post...");
   const [post, setPost] = useState<TPost>(NEW_POST);
   const navigate = useNavigate();
-  const [cookies] = useCookies();
+  // const [cookies] = useCookies();
 
   const Write = useContext(WriteContext);
   const Authentication = useContext(AuthContext);
@@ -34,22 +34,22 @@ export const WritePost = () => {
 
   const date = new Date(post.createdDate).toISOString();
 
-  useEffect(() => {
-    if (Write.post) {
-      setTitle(Write.post.title);
-      setText(Write.post.text);
-      setPost(Write.post);
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (Write.post) {
+  //     setTitle(Write.post.title);
+  //     setText(Write.post.text);
+  //     setPost(Write.post);
+  //   }
+  // }, []);
 
-  useEffect(() => {
-    setPost((prevPost) => {
-      return { ...prevPost, title, text };
-    });
-  }, [title, text]);
+  // useEffect(() => {
+  //   setPost((prevPost) => {
+  //     return { ...prevPost, title, text };
+  //   });
+  // }, [title, text]);
 
   const handleSavePost = (post: TPost) => {
-    const AuthCookie = cookies["Authorization"];
+    const AuthCookie = null; // cookies["Authorization"];
     if (!AuthCookie) return navigate("/admin");
 
     const cookie = `Authorization=${AuthCookie}`;

@@ -1,10 +1,10 @@
 import { FC, useContext } from "react";
 import ReactMarkdown from "react-markdown";
-import { ButtonGroup, Button } from "@mui/material";
+// import { ButtonGroup, Button } from "@mui/material";
 import { TPost } from "../../types/Post";
 
 import "./Post.scss";
-import { FaEdit } from "react-icons/fa";
+// import { FaEdit } from "react-icons/fa";
 import { useLocation, useNavigate } from "react-router-dom";
 import { WriteContext } from "../../context/WriteContext";
 import { AuthContext } from "../../context/AuthContext";
@@ -35,7 +35,7 @@ export const Post: FC<IProps> = ({ post }) => {
     <article className="post">
       <header className="post__header">
         <h3 className="post__title">{post.title}</h3>
-        {Authentication?.isLogin && !isEdit && (
+        {/* {Authentication?.isLogin && !isEdit && (
           <ButtonGroup>
             <Button
               variant="contained"
@@ -46,7 +46,7 @@ export const Post: FC<IProps> = ({ post }) => {
               Edit
             </Button>
           </ButtonGroup>
-        )}
+        )} */}
         <span className="post__date">
           {postDate.slice(0, postDate.indexOf("T"))}
         </span>

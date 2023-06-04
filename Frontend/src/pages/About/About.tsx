@@ -8,7 +8,7 @@ import { AboutMe } from "./AboutMe";
 import { AboutTech } from "./AboutTech";
 
 import "./About.scss";
-import Loading from "react-loading";
+// import Loading from "react-loading";
 
 export default function About() {
   const [data, isLoading] = useFetch<TCV>(
@@ -54,7 +54,7 @@ export default function About() {
         />
       </div>
       <div className="superBox__right">
-        {isLoading && <Loading />}
+        {/* {isLoading && <Loading />} */}
         {data && section}
       </div>
     </SuperBox>

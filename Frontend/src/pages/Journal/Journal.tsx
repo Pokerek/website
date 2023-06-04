@@ -1,7 +1,7 @@
 import { useFetch } from "../../hooks/useFetch";
 import { useState, useEffect, useContext, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { Button } from "@mui/material";
+// import { Button } from "@mui/material";
 
 import { SuperBox } from "../../components/custom/SuperBox/SuperBox";
 import { TPost } from "../../types/Post";
@@ -66,7 +66,7 @@ export default function Journal() {
     <SuperBox className="journal">
       <div className="superBox__left">
         <h2 className="journal__title">Journal</h2>
-        {Authentication?.isLogin && (
+        {/* {Authentication?.isLogin && (
           <Button
             variant="contained"
             color="success"
@@ -76,10 +76,10 @@ export default function Journal() {
           >
             Write new Post
           </Button>
-        )}
+        )} */}
       </div>
       <div className="journal__inner superBox__right" ref={containerRef}>
-        {isLoading && <Loading />}
+        {/* {isLoading && <Loading />} */}
         {data && postsList}
       </div>
     </SuperBox>

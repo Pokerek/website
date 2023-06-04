@@ -19,17 +19,17 @@ function App() {
   const Authentication = useContext(AuthContext);
   const Write = useContext(WriteContext);
 
-  const { pathname } = useLocation();
+  // const { pathname } = useLocation();
 
-  useEffect(() => {
-    if (pathname !== "/admin/edit" && Write) {
-      Write.handlePostChange(null);
-    }
-  }, [pathname]);
+  // useEffect(() => {
+  //   if (pathname !== "/admin/edit" && Write) {
+  //     Write.handlePostChange(null);
+  //   }
+  // }, [pathname]);
 
   return (
     <div className="App" onKeyDown={Authentication?.handleKeyPress}>
-      <Header />
+      {/* <Header />
       <Container>
         <Routes>
           <Route path="/">
@@ -47,7 +47,8 @@ function App() {
           </Route>
         </Routes>
       </Container>
-      <Footer />
+      <Footer /> */}
+      Hello world!
     </div>
   );
 }

@@ -5,21 +5,21 @@ import { BurgerMenu } from "./BurgerMenu";
 import Socials from "./Socials/Socials";
 import { AuthContext } from "../../../context/AuthContext";
 import "./Navigation.scss";
-import { useCookies } from "react-cookie";
+// import { useCookies } from "react-cookie";
 
 export const Navigation = () => {
   const [isActive, setIsActive] = useState(false);
   const Authentication = useContext(AuthContext);
-  const [, , removeCookie] = useCookies();
+  // const [, , removeCookie] = useCookies();
 
   const handleToggleNavigation = () => {
     setIsActive((prevStatus) => !prevStatus);
   };
 
-  const handleLogout = () => {
-    Authentication?.changeIsLogin();
-    removeCookie("Authorization");
-  };
+  // const handleLogout = () => {
+  //   Authentication?.changeIsLogin();
+  //   removeCookie("Authorization");
+  // };
 
   return (
     <Fragment>
@@ -45,9 +45,7 @@ export const Navigation = () => {
           )}
           {Authentication?.isLogin && (
             <li className="navigation__item">
-              <Link onClick={() => handleLogout()} to="/">
-                Logout
-              </Link>
+              <Link /*onClick={() => handleLogout()}*/ to="/">Logout</Link>
             </li>
           )}
         </ul>
