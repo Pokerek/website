@@ -10,9 +10,6 @@ $main-border-space: 0.5rem;
 $main-border-style: 1px solid $color-text;
 
 // Screen variable
-$screen-xxlg: 1799px;
-$screen-xlg: 1499px;
-$screen-lg: 1199px;
-$screen-md: 991px;
-$screen-sm: 767px;
-$screen-xsm: 576px;
+$screen-desktop: 1024px;
+$screen-tablet: 768px;
+$screen-mobile: 480px;
