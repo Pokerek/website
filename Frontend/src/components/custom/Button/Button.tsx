@@ -1,24 +1,21 @@
-import { FC, MouseEventHandler } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import "./Button.scss";
 
-type props = {
+type props = React.HTMLAttributes<HTMLButtonElement> & {
   link?: string;
   href?: string;
-  text: string;
-  className?: string;
-  onClick?: MouseEventHandler;
-  type?: string;
 };
 
-export const Button: FC<props> = (props) => {
+export const Button = (props: props) => {
+  const { className, onClick, children, link, href } = props;
   let button = (
-    <button className={`btn ${props.className}`} onClick={props.onClick}>
-      {props.text}
+    <button className={`btn ${className}`} onClick={onClick}>
+      {children}
     </button>
   );
 
-  if (props.link) button = <Link to={props.link}>{button}</Link>;
-  if (props.href) button = <a href={props.href}>{button}</a>;
+  if (link) button = <Link to={link}>{button}</Link>;
+  if (href) button = <a href={href}>{button}</a>;
   return button;
 };

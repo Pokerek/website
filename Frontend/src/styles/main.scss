@@ -4,8 +4,7 @@
 
 // Custom style
 * {
-  padding: 0;
-  margin: 0;
+  box-sizing: border-box;
 }
 
 ul {
@@ -18,7 +17,7 @@ html {
 
 body {
   color: $color-text;
-  font-family: "JetBrains Mono", monospace;
+  font-family: $font-family;
   background-color: $color-background;
 }
 

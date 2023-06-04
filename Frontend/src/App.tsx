@@ -28,8 +28,8 @@ function App() {
 
   return (
     <div className="App" onKeyDown={Authentication?.handleKeyPress}>
-      {/* <Header />
-      <Container>
+      <Header />
+      {/* <Container>
         <Routes>
           <Route path="/">
             <Route index element={<Welcome />} />
@@ -47,7 +47,6 @@ function App() {
         </Routes>
       </Container>
       <Footer /> */}
-      Hello world!
     </div>
   );
 }
