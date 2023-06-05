@@ -9,8 +9,12 @@ type props = React.HTMLAttributes<HTMLButtonElement> & {
 
 export const Button = (props: props) => {
   const { className, onClick, children, link, href } = props;
+
+  const classes = "btn";
+  if (className) classes.concat(" ", className);
+
   let button = (
-    <button className={`btn ${className}`} onClick={onClick}>
+    <button className={classes} onClick={onClick}>
       {children}
     </button>
   );

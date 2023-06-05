@@ -6,7 +6,7 @@ const Terminal = (props: props) => {
   return (
     <div className="terminal">
       <div className="terminal__header">
-        <h2 className="terminal__title">chrobok.dev@admin: ~/welcome.exe</h2>
+        <p className="terminal__title">chrobok.dev@admin: ~/welcome.exe</p>
       </div>
       <div className="terminal__body">
         <p className="terminal__text">Hello stranger!</p>
