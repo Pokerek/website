@@ -1,5 +1,6 @@
 import Terminal from "./Terminal/Terminal";
 import CenterBox from "./CenterBox/CenterBox";
+import About from "./About/About";
 
 const elementsToWrite = [
   { className: "welcome__title", text: "HELLO FRIEND" },
@@ -13,6 +14,7 @@ const Main = () => {
       <CenterBox>
         <Terminal />
       </CenterBox>
+      <About />
     </div>
   );
 };

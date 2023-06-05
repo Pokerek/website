@@ -3,6 +3,7 @@
 $line-height: 20px;
 
 .terminal {
+  width: 100%;
   & &__header {
     height: 20px;
     background-color: $color-secondary;
@@ -28,8 +29,6 @@ $line-height: 20px;
 
   & &__text {
     color: $color-primary;
-    font-size: 1rem;
-    font-weight: 400;
     line-height: $line-height;
     min-height: $line-height;
   }
