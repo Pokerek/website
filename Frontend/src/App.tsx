@@ -20,6 +20,7 @@ function App() {
       <Container>
         <Welcome />
       </Container>
+      <Footer />
     </div>
   );
 }
