@@ -4,6 +4,7 @@ import About from "./About/About";
 import Skills from "./Skills/Skills";
 import Experience from "./Experience/Experience";
 import OtherActivities from "./OtherActivities/OtherActivities";
+import Contact from "./Contact/Contact";
 
 const elementsToWrite = [
   { className: "welcome__title", text: "HELLO FRIEND" },
@@ -21,8 +22,11 @@ const Main = () => {
         <About />
       </CenterBox>
       <Skills />
+
       <Experience />
+
       <OtherActivities />
+      <Contact />
     </div>
   );
 };

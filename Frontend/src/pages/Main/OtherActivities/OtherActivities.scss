@@ -4,6 +4,11 @@
   gap: 1rem;
   text-align: center;
 
+  & &__text {
+    font-size: 1rem;
+    font-weight: 300;
+  }
+
   & &__stroke {
     height: 1px;
     width: 75%;

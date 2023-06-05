@@ -4,6 +4,7 @@ $line-height: 20px;
 
 .terminal {
   width: 100%;
+  text-align: left;
   & &__header {
     height: 20px;
     background-color: $color-secondary;
