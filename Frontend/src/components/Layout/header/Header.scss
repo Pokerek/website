@@ -1,9 +1,11 @@
+@import "../../../styles/variables.scss";
+
 .header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0.5rem;
-  height: 4.25rem;
+  height: $header-height;
 
   & &__logo {
     font-size: 1.5rem;

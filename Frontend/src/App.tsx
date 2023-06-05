@@ -2,8 +2,8 @@ import { useContext, useEffect } from "react";
 
 import { Footer } from "./components/Layout/footer/Footer";
 import { Header } from "./components/Layout/header/Header";
-import { Welcome } from "./pages/welcome/Welcome";
-import About from "./pages/About/About";
+import Welcome from "./pages/Main/Main";
+
 import ErrorPage from "./pages/ErrorPage/ErrorPage";
 import Journal from "./pages/Journal/Journal";
 import ProjectList from "./pages/Projects/ProjectsList";

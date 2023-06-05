@@ -2,7 +2,7 @@ import "./Terminal.scss";
 
 type props = {};
 
-export const Terminal = (props: props) => {
+const Terminal = (props: props) => {
   return (
     <div className="terminal">
       <div className="terminal__header">
@@ -18,3 +18,5 @@ export const Terminal = (props: props) => {
     </div>
   );
 };
+
+export default Terminal;
