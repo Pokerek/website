@@ -4,4 +4,8 @@
   overflow-y: scroll;
   height: calc(100vh - $header-height);
   scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

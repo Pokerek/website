@@ -1,3 +1,4 @@
+import CenterBox from "../CenterBox/CenterBox";
 import Terminal from "../Terminal/Terminal";
 
 const elementsToWrite = [
@@ -7,7 +8,11 @@ const elementsToWrite = [
 ];
 
 const Welcome = () => {
-  return <Terminal elements={elementsToWrite} />;
+  return (
+    <CenterBox>
+      <Terminal elements={elementsToWrite} />
+    </CenterBox>
+  );
 };
 
 export default Welcome;
