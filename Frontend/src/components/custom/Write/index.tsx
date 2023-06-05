@@ -3,45 +3,35 @@ import "./Write.scss";
 
 type props = {
   elements: Array<{
-    className: string;
     text: string;
   }>;
+  fontColor?: string;
 };
 
 type lines = JSX.Element[];
 
-export const Write: FC<props> = (props) => {
+export const Write: FC<props> = ({ elements, fontColor }) => {
   const [typedString, setTypedString] = useState("");
   const [index, setIndex] = useState(0);
   const [wroteLines, setWroteLines] = useState<lines>([]);
 
-  const emptyLines = props.elements.map((el, i) => {
-    if (i < index + 1) return;
-
-    return <p key={i} style={{ height: "46px" }}></p>;
-  });
-
-  const specialClassName = props.elements[index].className
-    ? props.elements[index].className
-    : "";
+  if (!elements) return <Fragment></Fragment>;
 
   useEffect(() => {
     const delay = setTimeout(() => {
-      setTypedString(
-        props.elements[index].text.slice(0, typedString.length + 1),
-      );
+      setTypedString(elements[index].text.slice(0, typedString.length + 1));
     }, 100);
 
     return () => clearTimeout(delay);
   }, [typedString]);
 
   if (
-    props.elements[index].text.length === typedString.length &&
-    index < props.elements.length - 1
+    elements[index].text.length === typedString.length &&
+    index < elements.length - 1
   ) {
-    const element = props.elements[index];
+    const element = elements[index];
     const newLine = (
-      <p key={index + "_line"} className={element.className}>
+      <p key={index + "_line"} style={{ color: fontColor || "white" }}>
         {element.text}
       </p>
     );
@@ -54,8 +44,9 @@ export const Write: FC<props> = (props) => {
   return (
     <Fragment>
       {wroteLines}
-      <p className={`commandLine ${specialClassName}`}>{typedString}</p>
-      {emptyLines}
+      <p className={`commandLine`} style={{ color: fontColor || "white" }}>
+        {typedString}
+      </p>
     </Fragment>
   );
 };

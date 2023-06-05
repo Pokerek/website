@@ -1,8 +1,9 @@
+import ScrollSection from "../ScrollSection/ScrollSection";
 import "./OtherActivities.scss";
 
 const OtherActivities = () => {
   return (
-    <section className="other-activities">
+    <ScrollSection id="others">
       <h2>Beyond the Code</h2>
       <div className="other-activities__item">
         <h3 className="other-activities__title">Developer's Journal</h3>
@@ -15,7 +16,7 @@ const OtherActivities = () => {
         <p className="other-activities__text">Level: High School</p>
         <p className="other-activities__text">Since IX 2015</p>
       </div>
-    </section>
+    </ScrollSection>
   );
 };
 

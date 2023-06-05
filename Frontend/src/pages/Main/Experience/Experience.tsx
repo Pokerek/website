@@ -1,9 +1,10 @@
 import { Button } from "../../../components/custom/Button/Button";
+import ScrollSection from "../ScrollSection/ScrollSection";
 import "./Experience.scss";
 
 const Experience = () => {
   return (
-    <section className="experience">
+    <ScrollSection id="experience">
       <h2>Battle-tested Experience</h2>
       <div className="experience__container">
         <div className="experience__item">
@@ -41,7 +42,7 @@ const Experience = () => {
         </div>
       </div>
       <Button>Go to projects</Button>
-    </section>
+    </ScrollSection>
   );
 };
 

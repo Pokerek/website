@@ -1,18 +1,20 @@
+import { useEffect } from "react";
+import { Write } from "../../../components/custom/Write";
 import "./Terminal.scss";
 
-type props = {};
+type props = {
+  elements: { text: string }[];
+};
 
-const Terminal = (props: props) => {
+const Terminal = ({ elements }: props) => {
   return (
     <div className="terminal">
       <div className="terminal__header">
         <p className="terminal__title">chrobok.dev@admin: ~/welcome.exe</p>
       </div>
       <div className="terminal__body">
-        <p className="terminal__text">Hello stranger!</p>
-        <p className="terminal__text">I'm Karol Chrobok</p>
-        <p className="terminal__text">Padawan of Fullstack</p>
-        <p className="terminal__text"> </p>
+        <Write elements={elements} fontColor="#7bc74d" />
+        <p className="terminal__text"></p>
         <p className="terminal__text">Press any key to continue ...</p>
       </div>
     </div>

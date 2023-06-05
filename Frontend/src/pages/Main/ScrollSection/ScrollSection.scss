@@ -1,0 +1,7 @@
+@import "../../../styles/variables.scss";
+
+.scrollSection {
+  overflow-y: scroll;
+  height: calc(100vh - $header-height);
+  scroll-snap-align: start;
+}

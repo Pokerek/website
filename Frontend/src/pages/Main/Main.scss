@@ -1,0 +1,7 @@
+@import "../../styles/variables.scss";
+
+.main {
+  overflow: auto;
+  height: calc(100vh - $header-height);
+  scroll-snap-type: y mandatory;
+}

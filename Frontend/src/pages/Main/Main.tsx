@@ -1,32 +1,49 @@
-import Terminal from "./Terminal/Terminal";
+import { useState, useEffect } from "react";
+
 import CenterBox from "./CenterBox/CenterBox";
 import About from "./About/About";
 import Skills from "./Skills/Skills";
 import Experience from "./Experience/Experience";
 import OtherActivities from "./OtherActivities/OtherActivities";
 import Contact from "./Contact/Contact";
+import Welcome from "./Welcome/Welcome";
 
-const elementsToWrite = [
-  { className: "welcome__title", text: "HELLO FRIEND" },
-  { className: "welcome__text", text: "I'm Karol Chrobok" },
-  { className: "welcome__text", text: "Padawan of JavaScript" },
-];
+import "./Main.scss";
 
 const Main = () => {
+  const [firstTime, setFirstTime] = useState(true);
+
+  const handleKeyPress = () => {
+    setFirstTime(false);
+    window.removeEventListener("keypress", handleKeyPress);
+    window.removeEventListener("touchstart", handleKeyPress);
+  };
+
+  useEffect(() => {
+    window.addEventListener("keypress", handleKeyPress);
+    window.addEventListener("touchstart", handleKeyPress);
+    window.scrollTo(0, 0);
+    return () => {
+      window.removeEventListener("keypress", handleKeyPress);
+      window.removeEventListener("touchstart", handleKeyPress);
+    };
+  }, []);
+
   return (
-    <div>
-      <CenterBox>
-        <Terminal />
-      </CenterBox>
-      <CenterBox>
-        <About />
-      </CenterBox>
-      <Skills />
+    <div className="main">
+      {firstTime ? (
+        <Welcome />
+      ) : (
+        <>
+          <About />
+          <Skills />
 
-      <Experience />
+          <Experience />
 
-      <OtherActivities />
-      <Contact />
+          <OtherActivities />
+          <Contact />
+        </>
+      )}
     </div>
   );
 };
