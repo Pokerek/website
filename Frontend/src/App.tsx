@@ -17,6 +17,9 @@ function App() {
   return (
     <div className="App">
       <Header />
+      <Container>
+        <Welcome />
+      </Container>
     </div>
   );
 }

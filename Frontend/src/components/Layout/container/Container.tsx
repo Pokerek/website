@@ -1,6 +1,6 @@
-import { FC, ReactNode } from "react";
+import { HTMLAttributes } from "react";
 import "./Container.scss";
 
-export const Container: FC<{ children: ReactNode }> = (props) => (
-  <div className="container">{props.children}</div>
+export const Container = ({ children }: HTMLAttributes<HTMLDivElement>) => (
+  <div className="container">{children}</div>
 );
