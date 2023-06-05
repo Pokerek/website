@@ -5,16 +5,17 @@ import "./Button.scss";
 type props = React.HTMLAttributes<HTMLButtonElement> & {
   link?: string;
   href?: string;
+  type?: "button" | "submit" | "reset" | undefined;
 };
 
 export const Button = (props: props) => {
-  const { className, onClick, children, link, href } = props;
+  const { className, onClick, children, link, href, type } = props;
 
   const classes = "btn";
   if (className) classes.concat(" ", className);
 
   let button = (
-    <button className={classes} onClick={onClick}>
+    <button type={type} className={classes} onClick={onClick}>
       {children}
     </button>
   );
