@@ -1,9 +1,19 @@
-h1 {
-  font-size: 3rem;
+@mixin header() {
   font-weight: 700;
   line-height: 1.2;
   text-align: center;
   margin: 0;
+  margin-bottom: 1rem;
+}
+
+h1 {
+  font-size: 2.5rem;
+  @include header();
+}
+
+h2 {
+  font-size: 2rem;
+  @include header();
 }
 
 p {

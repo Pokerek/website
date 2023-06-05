@@ -2,8 +2,8 @@ import "./About.scss";
 
 const About = () => {
   return (
-    <section className="about">
-      <h1>About</h1>
+    <section id="about" className="about">
+      <h2>Who am I?</h2>
       <p className="about__text">
         Junior with ambitions to become a Senior. He has worked in various
         places, but has always been drawn to programming. Perfectionist 90% of
