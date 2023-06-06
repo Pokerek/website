@@ -11,7 +11,7 @@ class MailController {
 
     try {
       await transporter.sendMail(mailOptions);
-      return res.json({ status: 'success', message: 'Email sent' });
+      return res.json({ message: 'Email sent' });
     } catch (error) {
       return new HttpException(500, 'Error sending email');
     }

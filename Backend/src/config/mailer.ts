@@ -13,7 +13,7 @@ const MailOptions = (mailBody: MailMessage) => {
   return {
     from: mailBody.email,
     to: process.env.EMAIL,
-    subject: `Contact message from ${mailBody.name}`,
+    subject: mailBody.subject,
     text: mailBody.message
   };
 };

@@ -13,8 +13,6 @@ const Skills = () => {
     fetchSkills();
   }, []);
 
-  console.log(`${BACKEND_URL}/skills`);
-
   const fetchSkills = async () => {
     try {
       const response = await fetch(`${BACKEND_URL}/skills`);
