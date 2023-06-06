@@ -27,18 +27,16 @@ const Skills = () => {
 
   if (!skills.length) return <></>;
 
-  const strongSkills = skills.filter((skill) => skill.type === "strong");
-  const weakSkills = skills.filter((skill) => skill.type === "weak");
-  const neutralSkills = skills.filter((skill) => skill.type === "neutral");
+  const frontendSkills = skills.filter((skill) => skill.type === "frontend");
+  const backendSkills = skills.filter((skill) => skill.type === "backend");
+  const toolSkills = skills.filter((skill) => skill.type === "tool");
 
   return (
     <ScrollSection id="skills">
       <h2>Forceful Skills</h2>
-      <SkillsList elements={strongSkills} />
-      <h2>Emerging Techniques</h2>
-      <SkillsList elements={weakSkills} />
-      <h2>Developer Toolset</h2>
-      <SkillsList elements={neutralSkills} />
+      <SkillsList elements={backendSkills} title="Backend" />
+      <SkillsList elements={frontendSkills} title="Frontend" />
+      <SkillsList elements={toolSkills} title="Tools" />
     </ScrollSection>
   );
 };
