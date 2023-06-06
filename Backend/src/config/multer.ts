@@ -14,7 +14,7 @@ const uploadCV = multer({ storage: storageCV });
 
 const storageSkillImage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'uploads/skills/');
+    cb(null, 'uploads/images/');
   },
   filename: function (req, file, cb) {
     cb(null, `${randomUUID()}.png`);

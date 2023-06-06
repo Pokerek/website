@@ -3,12 +3,18 @@ import NotFoundException from '../errors/NotFoundException';
 import { RequestWithUser } from '../types/request';
 import { Project } from '../database/models/projectModel';
 import ProjectService from '../services/projectService';
+import HttpException from '../errors/HttpException';
 
 class ProjectsController {
   private projectService = new ProjectService();
 
-  public getAllProjects = async (req: Request, res: Response) => {
+  public getAllProjects = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
     const data = await this.projectService.getAllProjects();
+    if (data instanceof HttpException) return next(data);
 
     const projects = data.map((project) => {
       return {
@@ -30,7 +36,7 @@ class ProjectsController {
   ) => {
     const { id } = req.params;
     const data = await this.projectService.getProject(id);
-
+    if (data instanceof HttpException) return next(data);
     if (!data) return next(new NotFoundException(id, 'Project'));
 
     const project = {
@@ -44,12 +50,29 @@ class ProjectsController {
     res.send(project);
   };
 
-  public createProject = async (req: RequestWithUser, res: Response) => {
+  public createProject = async (
+    req: RequestWithUser,
+    res: Response,
+    next: NextFunction
+  ) => {
     const projectBody = req.body as Project;
 
-    const addedProject = await this.projectService.createProject(projectBody);
+    const data = await this.projectService.createProject(projectBody);
+    if (data instanceof HttpException) return next(data);
 
-    res.send(addedProject);
+    const project = {
+      name: data.name,
+      stack: data.stack,
+      description: data.description,
+      imageUrl: data.imageUrl,
+      links: data.links
+    };
+
+    res.send({
+      status: 'success',
+      message: 'Project added successfully!',
+      project
+    });
   };
 
   public modifyProject = async (
@@ -60,12 +83,9 @@ class ProjectsController {
     const { id } = req.params;
     const projectBody = req.body as Project;
 
-    const modifiedProject = await this.projectService.modifyProject(
-      id,
-      projectBody
-    );
-
-    if (!modifiedProject) return next(new NotFoundException(id, 'Project'));
+    const data = await this.projectService.modifyProject(id, projectBody);
+    if (data instanceof HttpException) return next(data);
+    if (!data) return next(new NotFoundException(id, 'Project'));
 
     res.send({ status: 'success', message: 'Project modified successfully!' });
   };
@@ -77,8 +97,9 @@ class ProjectsController {
   ) => {
     const { id } = req.params;
 
-    const deletedProject = this.projectService.deleteProject(id);
-    if (!deletedProject) return next(new NotFoundException(id, 'project'));
+    const data = this.projectService.deleteProject(id);
+    if (data instanceof HttpException) return next(data);
+    if (!data) return next(new NotFoundException(id, 'project'));
 
     res.send({ status: 'success', message: 'Project deleted successfully!' });
   };

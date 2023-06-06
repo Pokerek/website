@@ -1,5 +1,7 @@
 import skillModel, { Skill } from '../database/models/skillModel';
 import AlreadyExistException from '../errors/AlreadyExistException';
+import HttpException from '../errors/HttpException';
+import ServerErrorException from '../errors/ServerErrorException';
 
 class SkillService {
   private skill = skillModel;
@@ -8,7 +10,7 @@ class SkillService {
     try {
       return await this.skill.find();
     } catch (error) {
-      throw new Error('Server error!');
+      return new ServerErrorException();
     }
   };
 
@@ -16,21 +18,24 @@ class SkillService {
     if (!skillBody.alt) skillBody.alt = `${skillBody.name} logo`;
 
     try {
-      await this.checkUnique(skillBody.name);
+      const isUnique = await this.checkUnique(skillBody.name);
+      if (isUnique instanceof HttpException) return isUnique;
 
-      return await this.skill.create(skillBody);
+      const skill = await this.skill.create(skillBody);
+      return skill;
     } catch (error) {
-      throw new Error('Server error!');
+      return new ServerErrorException();
     }
   };
 
   public modifySkill = async (id: string, skillBody: Skill) => {
     try {
-      await this.checkUnique(skillBody.name);
+      const isUnique = await this.checkUnique(skillBody.name);
+      if (isUnique instanceof HttpException) return isUnique;
 
       return await this.skill.findOneAndUpdate({ _id: id }, skillBody);
     } catch (error) {
-      throw new Error('Server error!');
+      return new ServerErrorException();
     }
   };
 
@@ -38,16 +43,16 @@ class SkillService {
     try {
       return this.skill.findByIdAndDelete(id);
     } catch (error) {
-      throw new Error('Server error!');
+      return new ServerErrorException();
     }
   }
 
   private checkUnique = async (name: string) => {
     try {
       const unique = await this.skill.findOne({ name });
-      if (unique) throw new AlreadyExistException('Skill');
+      if (unique) return new AlreadyExistException('Skill');
     } catch (error) {
-      throw new Error('Server error!');
+      return new ServerErrorException();
     }
   };
 }

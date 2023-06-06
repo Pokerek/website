@@ -17,6 +17,7 @@ class imageMiddleware {
       throw new RequiredException('Image');
     }
 
+    req.body.url = '/images/' + req.file.filename;
     next();
   };
 }

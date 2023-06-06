@@ -8,3 +8,7 @@ export interface RequestWithUser extends Request {
 export interface RequestWithFile extends Request {
   file?: Express.Multer.File;
 }
+
+export interface RequestWithImageUrl extends Request {
+  url: string;
+}

@@ -9,9 +9,10 @@ import CVRoutes from './routes/cvRoutes';
 import MailRoutes from './routes/mailRoutes';
 import SkillsRoutes from './routes/skillRoutes';
 import createStorage from './utils/createStorage';
+import ImageRoutes from './routes/imageRoutes';
 
 validateEnv();
-createStorage(['./uploads', './uploads/skills']);
+createStorage(['./uploads', './uploads/images']);
 
 const app = new App([
   new PostRoutes(),
@@ -19,7 +20,8 @@ const app = new App([
   new AuthenticationRoutes(),
   new CVRoutes(),
   new MailRoutes(),
-  new SkillsRoutes()
+  new SkillsRoutes(),
+  new ImageRoutes()
 ]);
 
 app.listen();

@@ -1,4 +1,5 @@
 import projectModel, { Project } from '../database/models/projectModel';
+import ServerErrorException from '../errors/ServerErrorException';
 
 class ProjectService {
   private project = projectModel;
@@ -7,7 +8,7 @@ class ProjectService {
     try {
       return await this.project.find();
     } catch (error) {
-      throw new Error('Server error!');
+      return new ServerErrorException();
     }
   };
 
@@ -15,7 +16,7 @@ class ProjectService {
     try {
       return await this.project.findById(id);
     } catch (error) {
-      throw new Error('Server error!');
+      return new ServerErrorException();
     }
   };
 
@@ -23,7 +24,7 @@ class ProjectService {
     try {
       return await this.project.create(projectData);
     } catch (error) {
-      throw new Error('Server error!');
+      return new ServerErrorException();
     }
   };
 
@@ -31,7 +32,7 @@ class ProjectService {
     try {
       return this.project.findOneAndUpdate({ _id: id }, projectBody);
     } catch (error) {
-      throw new Error('Server error!');
+      return new ServerErrorException();
     }
   };
 
@@ -39,7 +40,7 @@ class ProjectService {
     try {
       return await this.project.findByIdAndDelete(id);
     } catch (error) {
-      throw new Error('Server error!');
+      return new ServerErrorException();
     }
   };
 }

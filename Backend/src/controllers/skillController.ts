@@ -2,30 +2,52 @@ import { NextFunction, Request, Response } from 'express';
 import SkillService from '../services/skillService';
 import { Skill } from '../database/models/skillModel';
 import NotFoundException from '../errors/NotFoundException';
+import { RequestWithImageUrl } from '../types/request';
+import HttpException from '../errors/HttpException';
 
 class SkillController {
   private skillService = new SkillService();
 
-  public getAllSkills = async (req: Request, res: Response) => {
+  public getAllSkills = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
     const data = await this.skillService.getAllSkills();
+    if (data instanceof HttpException) return next(data);
 
     const skills = data.map((skill) => {
       return {
         name: skill.name,
         alt: skill.alt,
-        type: skill.type
+        type: skill.type,
+        url: skill.url
       };
     });
 
     res.send(skills);
   };
 
-  public createSkill = async (req: Request, res: Response) => {
+  public createSkill = async (
+    req: RequestWithImageUrl,
+    res: Response,
+    next: NextFunction
+  ) => {
     const skillBody = req.body as Skill;
 
-    const addedSkill = await this.skillService.createSkill(skillBody);
+    const data = await this.skillService.createSkill(skillBody);
+    if (data instanceof HttpException) return next(data);
 
-    res.send(addedSkill);
+    res.send({
+      status: 'success',
+      message: 'Skill added successfully!',
+      skill: {
+        name: data.name,
+        alt: data.alt,
+        type: data.type,
+        url: data.url
+      }
+    });
   };
 
   public modifySkill = async (
@@ -36,8 +58,9 @@ class SkillController {
     const { id } = req.params;
     const skillBody = req.body as Skill;
 
-    const modifiedSkill = await this.skillService.modifySkill(id, skillBody);
-    if (!modifiedSkill) return next(new NotFoundException(id, 'Skill'));
+    const data = await this.skillService.createSkill(skillBody);
+    if (data instanceof HttpException) return next(data);
+    if (!data) return next(new NotFoundException(id, 'Skill'));
 
     res.send({ status: 'success', message: 'Skill modified successfully!' });
   };
