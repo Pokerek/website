@@ -4,6 +4,9 @@ import SkillController from '../controllers/skillController';
 import validationMiddleware from '../middleware/validationMiddleware';
 import { createSkillSchema, updateSkillSchema } from '../validations/skill';
 
+import { uploadSkillImage } from '../config/multer';
+import imageMiddleware from '../middleware/imageMiddleware';
+
 class SkillsRoutes implements RouterWithPath {
   public path = '/skills';
   public router = Router();
@@ -18,7 +21,9 @@ class SkillsRoutes implements RouterWithPath {
     this.router.get(this.path, this.skillsController.getAllSkills);
     this.router.post(
       this.path,
+      uploadSkillImage.single('image'),
       validationMiddleware(createSkillSchema),
+      imageMiddleware.imageRequired,
       this.skillsController.createSkill
     );
     this.router.put(

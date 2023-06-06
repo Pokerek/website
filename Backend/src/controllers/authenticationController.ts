@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt';
 import { sign } from 'jsonwebtoken';
 import { NextFunction, Request, Response } from 'express';
-import UserAlreadyExistException from '../errors/UserAlreadyExistException';
+import AlreadyExistException from '../errors/AlreadyExistException';
 import WrongCredentialsException from '../errors/WrongCredentialsException';
 import { LoginAttributes, RegisterAttributes } from '../types/authentication';
 import userModel from '../database/models/userModel';
@@ -17,7 +17,7 @@ class AuthenticationController {
   ) => {
     const userData = req.body as RegisterAttributes;
     if (await this.user.findOne({ email: userData.email })) {
-      next(new UserAlreadyExistException());
+      next(new AlreadyExistException('User'));
     } else {
       const hashedPassword = await bcrypt.hash(userData.password, 10);
       const user = await this.user.create({

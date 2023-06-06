@@ -6,6 +6,7 @@ import path from 'path';
 import RouterWithPath from './types/router';
 import errorMiddleware from './middleware/error.middleware';
 import cors from 'cors';
+import imageMiddleware from './middleware/imageMiddleware';
 
 class App {
   public app: express.Application;
@@ -28,7 +29,7 @@ class App {
         credentials: true
       })
     );
-    this.app.use(bodyParser.json());
+    this.app.use(express.json());
     this.app.use(bodyParser.urlencoded({ extended: false }));
     this.app.use(express.static(path.join(__dirname, './public')));
     this.app.use(cookieParser());
@@ -40,6 +41,7 @@ class App {
   }
   private initializeErrorHandler() {
     this.app.use(errorMiddleware);
+    this.app.use(imageMiddleware.deleteImage);
   }
   private connectDB() {
     const { DB_USER, DB_PASSWORD, DB_PATH } = process.env;

@@ -14,7 +14,8 @@ type SkillDocument = Skill & mongoose.Document;
 const skillSchema = new Schema({
   name: {
     type: String,
-    required: true
+    required: true,
+    unique: true
   },
   url: {
     type: String

@@ -13,6 +13,7 @@ function errorMiddleware(
     code,
     message
   });
+
   next();
 }
 

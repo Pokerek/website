@@ -1,4 +1,5 @@
 import multer from 'multer';
+import { randomUUID } from 'crypto';
 
 const storageCV = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -11,4 +12,15 @@ const storageCV = multer.diskStorage({
 
 const uploadCV = multer({ storage: storageCV });
 
-export default uploadCV;
+const storageSkillImage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads/skills/');
+  },
+  filename: function (req, file, cb) {
+    cb(null, `${randomUUID()}.png`);
+  }
+});
+
+const uploadSkillImage = multer({ storage: storageSkillImage });
+
+export { uploadCV, uploadSkillImage };

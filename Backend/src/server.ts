@@ -8,8 +8,10 @@ import AuthenticationRoutes from './routes/authenticationRoutes';
 import CVRoutes from './routes/cvRoutes';
 import MailRoutes from './routes/mailRoutes';
 import SkillsRoutes from './routes/skillRoutes';
+import createStorage from './utils/createStorage';
 
 validateEnv();
+createStorage(['./uploads', './uploads/skills']);
 
 const app = new App([
   new PostRoutes(),
