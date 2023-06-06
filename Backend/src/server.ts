@@ -7,6 +7,7 @@ import ProjectRoutes from './routes/projectRoutes';
 import AuthenticationRoutes from './routes/authenticationRoutes';
 import CVRoutes from './routes/cvRoutes';
 import MailRoutes from './routes/mailRoutes';
+import SkillsRoutes from './routes/skillRoutes';
 
 validateEnv();
 
@@ -15,7 +16,8 @@ const app = new App([
   new ProjectRoutes(),
   new AuthenticationRoutes(),
   new CVRoutes(),
-  new MailRoutes()
+  new MailRoutes(),
+  new SkillsRoutes()
 ]);
 
 app.listen();
