@@ -11,6 +11,7 @@ import Welcome from "./Welcome/Welcome";
 import "./Main.scss";
 
 const Main = () => {
+  //TODO add to context
   const [firstTime, setFirstTime] = useState(true);
 
   const handleKeyPress = () => {
