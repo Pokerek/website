@@ -1,17 +1,17 @@
-import { Header } from "./components/Layout/header/Header";
-import { Container } from "./components/Layout/container/Container";
-import { Footer } from "./components/Layout/footer/Footer";
+import Header from "./components/layout/header";
+import Container from "./components/layout/container";
+import Footer from "./components/layout/footer";
 
-import Main from "./pages/Main/Main";
-import Journal from "./pages/Journal/journal-page";
+import MainPage from "./pages/main-page";
+import JournalPage from "./pages/journal-page";
 
 function App() {
   return (
     <div className="App">
       <Header />
       <Container>
-        {/* <Main /> */}
-        <Journal />
+        {/* <MainPage /> */}
+        <JournalPage />
       </Container>
       <Footer />
     </div>
