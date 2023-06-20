@@ -8,7 +8,7 @@ import { TPost } from "../../types/Post";
 import { Post } from "./Post";
 
 import "./Post.scss";
-import { Button } from "../../components/custom/Button/Button";
+import { Button } from "../../components/button/button";
 // import useCookies from "react-cookie/cjs/useCookies";
 
 const NEW_POST: TPost = {

@@ -1,0 +1,13 @@
+@import "../../styles/variables";
+
+.btn {
+  background-color: $color-primary;
+  border: none;
+  border-radius: 2rem;
+  padding: 1rem;
+
+  font-size: 1rem;
+  font-weight: 500;
+  font-family: $font-family;
+  color: $color-secondary;
+}
