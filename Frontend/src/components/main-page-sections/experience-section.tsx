@@ -1,6 +1,6 @@
 import Button from "../button/button";
 import ScrollSection from "../scroll-section/scroll-section";
-import "./Experience.scss";
+import "./experience-section.scss";
 
 const ExperienceSection = () => {
   return (

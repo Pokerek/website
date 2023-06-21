@@ -7,6 +7,7 @@ import Skill from "../../types/skill";
 const SkillSection = () => {
   const [skills, setSkills] = useState<Skill[]>([]);
 
+  // TODO add load for this fetch
   const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
   useEffect(() => {

@@ -1,4 +1,4 @@
-import "./Terminal.scss";
+import "./terminal.scss";
 
 const Terminal = () => {
   return (

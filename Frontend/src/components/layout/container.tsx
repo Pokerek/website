@@ -1,5 +1,5 @@
 import { HTMLAttributes } from "react";
-import "./Container.scss";
+import "./container.scss";
 
 const Container = ({ children }: HTMLAttributes<HTMLDivElement>) => (
   <div className="container">{children}</div>

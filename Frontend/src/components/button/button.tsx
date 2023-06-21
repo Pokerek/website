@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./Button.scss";
+import "./button.scss";
 
 type props = React.HTMLAttributes<HTMLButtonElement> & {
   link?: string;
