@@ -1,6 +1,6 @@
 import { HTMLAttributes } from "react";
 
-import "./ScrollSection.scss";
+import "./scroll-section.scss";
 
 const ScrollSection = ({ id, children }: HTMLAttributes<HTMLElement>) => {
   return (

@@ -1,5 +1,5 @@
 import Skill from "../../types/skill";
-import "./SkillsList.scss";
+import "./skills-list.scss";
 
 type Props = {
   elements: Skill[];

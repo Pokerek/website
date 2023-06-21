@@ -1,7 +1,7 @@
 import { useState, FormEvent } from "react";
 
 import Button from "../button/button";
-import "./ContactForm.scss";
+import "./contact-form.scss";
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 

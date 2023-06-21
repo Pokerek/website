@@ -13,10 +13,11 @@ import Button from "../components/button/button";
 
 import "./main-page.scss";
 
-const Main = () => {
+const MainPage = () => {
   //TODO add to context
   const [firstTime, setFirstTime] = useState(true);
 
+  //TODO create hook
   const handleKeyPress = () => {
     setFirstTime(false);
     window.removeEventListener("keypress", handleKeyPress);
@@ -67,4 +68,4 @@ const Main = () => {
   );
 };
 
-export default Main;
+export default MainPage;

@@ -1,4 +1,4 @@
-import "./AuthorImage.scss";
+import "./author-image.scss";
 
 const AuthorImage = () => {
   const handleToggleImage = () => {

@@ -2,7 +2,7 @@ import { Fragment, useState } from "react";
 
 import BurgerMenu from "./burger-menu";
 
-import "./Navigation.scss";
+import "./navigation.scss";
 
 const Navigation = () => {
   const [isActive, setIsActive] = useState(false);

@@ -1,7 +1,7 @@
-import "./Header.scss";
 import Navigation from "./navigation";
-
 import Button from "../button/button";
+
+import "./header.scss";
 
 const Header = () => {
   return (
