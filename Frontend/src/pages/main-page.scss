@@ -1,7 +1,26 @@
 @import "../styles/variables";
 
 .main {
-  overflow: auto;
-  height: calc(100vh - $header-height);
-  scroll-snap-type: y mandatory;
+  & &__box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  @media screen and (min-width: $screen-tablet) {
+    & &__box {
+      flex-direction: row;
+
+      & > * {
+        flex: 1;
+      }
+    }
+  }
+
+  @media screen and (min-height: $scroll-height) {
+    overflow: auto;
+    height: calc(100vh - $header-height);
+    scroll-snap-type: y mandatory;
+  }
 }

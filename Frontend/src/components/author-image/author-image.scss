@@ -1,5 +1,12 @@
+@import "../../styles/variables";
+
 .authorImage {
   width: 256px;
   height: 256px;
   border-radius: 50%;
+
+  @media screen and (min-width: $screen-desktop) {
+    width: 350px;
+    height: 350px;
+  }
 }

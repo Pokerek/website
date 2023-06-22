@@ -30,13 +30,16 @@ img {
   max-width: 100%;
 }
 
-section {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  text-align: center;
-  margin: 2rem 0;
-  scroll-snap-align: start;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  font-family: $font-family;
+  color: $color-text;
+  margin: 0;
 }
 
 // Scrollbar
@@ -48,7 +51,7 @@ section {
 
 /* Chrome, Edge, and Safari */
 *::-webkit-scrollbar {
-  width: 1rem;
+  width: 0px;
 }
 
 *::-webkit-scrollbar-track {
@@ -58,5 +61,5 @@ section {
 *::-webkit-scrollbar-thumb {
   background-color: $color-text;
   border-radius: 10px;
-  border: 3px solid $color-text;
+  border: 1px solid $color-text;
 }
