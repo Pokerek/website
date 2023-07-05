@@ -32,7 +32,7 @@ const SkillSection = () => {
 
   return (
     <ScrollSection id="skills">
-      <h2>Forceful Skills</h2>
+      <h2 className="title">Forceful Skills</h2>
       <SkillsList elements={backendSkills} title="Backend" />
       <SkillsList elements={frontendSkills} title="Frontend" />
       <SkillsList elements={toolSkills} title="Tools" />

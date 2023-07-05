@@ -6,21 +6,26 @@
     flex-direction: column;
     align-items: center;
     gap: 1rem;
+
+    &-description {
+      text-align: center;
+    }
   }
 
   @media screen and (min-width: $screen-tablet) {
     & &__box {
       flex-direction: row;
+      justify-content: center;
+    }
 
-      & > * {
-        flex: 1;
-      }
+    & &__box-description {
+      width: 50%;
     }
   }
 
   @media screen and (min-height: $scroll-height) {
     overflow: auto;
-    height: calc(100vh - $header-height);
+    height: calc(100vh - var(--header-height));
     scroll-snap-type: y mandatory;
   }
 }

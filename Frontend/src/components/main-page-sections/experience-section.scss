@@ -1,5 +1,7 @@
+@import "../../styles/variables";
+
 .experience {
-  --font-size: 0.75rem;
+  --font-size: 1rem;
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -12,7 +14,7 @@
   }
 
   & &__title {
-    font-size: 1.25rem;
+    font-size: 1.25em;
     font-weight: 700;
   }
 
@@ -33,5 +35,9 @@
     &-item {
       font-size: var(--font-size);
     }
+  }
+
+  @media screen and (min-width: $screen-tablet) {
+    --font-size: 1rem;
   }
 }

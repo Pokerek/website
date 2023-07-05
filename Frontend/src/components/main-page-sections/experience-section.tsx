@@ -5,7 +5,7 @@ import "./experience-section.scss";
 const ExperienceSection = () => {
   return (
     <ScrollSection id="experience">
-      <h2>Battle-tested Experience</h2>
+      <h2 className="title">Battle-tested Experience</h2>
       <div className="experience">
         <div className="experience__container">
           <div className="experience__item">

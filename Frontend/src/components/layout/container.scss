@@ -3,7 +3,7 @@
 .container {
   max-width: calc(100% - 2rem);
   margin: 0 auto;
-  margin-top: $header-height;
+  margin-top: var(--header-height);
 
   @media screen and (min-width: $screen-mobile) {
     max-width: calc(#{$screen-mobile} - 2rem);

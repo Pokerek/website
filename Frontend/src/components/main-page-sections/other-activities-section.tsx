@@ -4,7 +4,7 @@ import "./other-activities-section.scss";
 const OtherActivitiesSection = () => {
   return (
     <ScrollSection id="others">
-      <h2>Beyond the Code</h2>
+      <h2 className="title">Beyond the Code</h2>
       <div className="other-activities">
         <div className="other-activities__item">
           <h3 className="other-activities__title">Developer's Journal</h3>

@@ -46,7 +46,7 @@ const MainPage = () => {
           <>
             <ScrollSection id="about">
               <div className="main__box">
-                <div className="main__box-inner">
+                <div className="main__box-description">
                   <h2 className="title">Who am I?</h2>
                   <p className="description">
                     Junior with ambitions to become a Senior. He has worked in
@@ -54,7 +54,7 @@ const MainPage = () => {
                     Perfectionist 90% of the time. Loves to share his knowledge.
                   </p>
                 </div>
-                <div className="main__box-inner">
+                <div className="main__box-image">
                   <AuthorImage />
                 </div>
               </div>

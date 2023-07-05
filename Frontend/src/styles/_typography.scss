@@ -26,6 +26,12 @@
   margin: 0;
 }
 
+@media screen and (min-width: $screen-tablet) {
+  .title {
+    font-size: 1.75rem;
+  }
+}
+
 @media screen and (min-width: $screen-desktop) {
   .title {
     font-size: 2rem;
