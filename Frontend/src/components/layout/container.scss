@@ -10,11 +10,11 @@
   }
 
   @media screen and (min-width: $screen-tablet) {
-    max-width: calc(#{$screen-tablet} - 2rem);
+    max-width: calc(#{$screen-tablet} - 6rem);
   }
 
   @media screen and (min-width: $screen-desktop) {
-    max-width: calc(#{$screen-desktop} - 2rem);
+    max-width: calc(#{$screen-desktop} - 4rem);
   }
 
   @media screen and (max-width: $screen-mobile-s) {

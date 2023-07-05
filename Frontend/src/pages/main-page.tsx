@@ -13,6 +13,7 @@ import Container from "../components/layout/container";
 
 import "./main-page.scss";
 import ContactSection from "../components/main-page-sections/contact-section";
+import LeftMenu from "../components/main-page-sections/left-menu";
 
 const MainPage = () => {
   //TODO add to context
@@ -63,6 +64,7 @@ const MainPage = () => {
             <ExperienceSection />
             <OtherActivitiesSection />
             <ContactSection />
+            <LeftMenu />
           </>
         )}
       </div>

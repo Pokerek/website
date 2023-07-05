@@ -1,6 +1,9 @@
 @import "../styles/variables";
 
 .main {
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+
   & &__box {
     display: flex;
     flex-direction: column;

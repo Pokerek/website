@@ -24,15 +24,49 @@ $menuAnimation: left 0.3s ease-in-out;
 
   & &__item {
     list-style: none;
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     margin: 0;
     padding: 1rem 0;
     width: 100%;
     text-align: center;
   }
 
+  & &__link {
+    text-decoration: none;
+    color: $color-text;
+    transition: color 0.3s ease-in-out;
+
+    &:hover {
+      color: $color-primary;
+    }
+
+    &.active {
+      color: $color-primary;
+    }
+  }
+
   &--active {
     left: 0;
     transition: $menuAnimation;
+  }
+
+  @media screen and (min-width: $screen-tablet) {
+    position: static;
+    height: auto;
+
+    & &__list {
+      flex-direction: row;
+      justify-content: flex-end;
+      gap: 1rem;
+    }
+
+    & &__item {
+      padding: 0;
+      width: auto;
+      &:not(:last-child) {
+        padding-right: 1rem;
+        border-right: 1px solid $color-text;
+      }
+    }
   }
 }
