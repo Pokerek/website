@@ -1,13 +1,19 @@
 @import "../../styles/variables";
 
 .btn {
-  background-color: $color-primary;
   border: none;
   border-radius: 2rem;
-  padding: 1rem;
+  padding: 0.5rem;
 
   font-size: 1rem;
   font-weight: 500;
   font-family: $font-family;
   color: $color-secondary;
+  background-color: $color-primary;
+  cursor: pointer;
+
+  @media screen and (max-width: $screen-mobile-s) {
+    font-size: 0.75rem;
+    padding: 0.25rem;
+  }
 }

@@ -9,9 +9,20 @@ $font-family: "JetBrains Mono", monospace;
 $main-border-space: 0.5rem;
 $main-border-style: 1px solid $color-text;
 
-$header-height: 100px;
+$scroll-height: 600px;
 
 // Screen variable
 $screen-desktop: 1024px;
 $screen-tablet: 768px;
 $screen-mobile: 480px;
+$screen-mobile-s: 320px;
+
+body {
+  --header-height: 100px;
+}
+
+@media screen and (max-height: 300px) {
+  body {
+    --header-height: 50px;
+  }
+}

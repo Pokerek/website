@@ -1,3 +1,5 @@
+@import "variables";
+
 @mixin header() {
   font-weight: 700;
   line-height: 1.2;
@@ -5,33 +7,41 @@
   width: 100%;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p {
-  font-family: $font-family;
-  color: $color-text;
-  margin: 0;
-}
-
 .title {
   font-size: 1.5rem;
+  margin-bottom: 0.5rem;
   @include header();
 }
 
 .subtitle {
-  font-size: 2rem;
-  border-bottom: 1px solid $color-text;
+  font-size: 1.25rem;
   padding-bottom: 0.5rem;
   @include header();
 }
 
-p {
+.description {
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.2;
   margin: 0;
+}
+
+@media screen and (min-width: $screen-tablet) {
+  .title {
+    font-size: 1.75rem;
+  }
+}
+
+@media screen and (min-width: $screen-desktop) {
+  .title {
+    font-size: 2rem;
+  }
+
+  .subtitle {
+    font-size: 1.5rem;
+  }
+
+  .description {
+    font-size: 1.25rem;
+  }
 }

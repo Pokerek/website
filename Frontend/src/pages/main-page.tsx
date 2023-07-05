@@ -8,14 +8,16 @@ import Terminal from "../components/terminal/terminal";
 import CenterBox from "../components/center-box/center-box";
 import AuthorImage from "../components/author-image/author-image";
 import ScrollSection from "../components/scroll-section/scroll-section";
-import ContactForm from "../components/contact-form/contact-form";
-import Button from "../components/button/button";
+
+import Container from "../components/layout/container";
 
 import "./main-page.scss";
+import ContactSection from "../components/main-page-sections/contact-section";
+import LeftMenu from "../components/main-page-sections/left-menu";
 
 const MainPage = () => {
   //TODO add to context
-  const [firstTime, setFirstTime] = useState(true);
+  const [firstTime, setFirstTime] = useState(false);
 
   //TODO create hook
   const handleKeyPress = () => {
@@ -35,36 +37,38 @@ const MainPage = () => {
   }, []);
 
   return (
-    <div className="main">
-      {firstTime ? (
-        <CenterBox>
-          <Terminal />
-        </CenterBox>
-      ) : (
-        <>
-          <ScrollSection id="about">
-            <h2>Who am I?</h2>
-            <p>
-              Junior with ambitions to become a Senior. He has worked in various
-              places, but has always been drawn to programming. Perfectionist
-              90% of the time. Loves to share his knowledge.
-            </p>
-            <AuthorImage />
-          </ScrollSection>
-          <SkillSection />
-          <ExperienceSection />
-          <OtherActivitiesSection />
-          <ScrollSection id="contact">
-            <h2>Send a Transmission</h2>
-            <ContactForm />
-            <p>or use external connection</p>
-            <Button>Email: karolchrobok@gmail.com</Button>
-            <Button>Linkedin: karol-chrobok</Button>
-            <p>May the Force be with You!</p>
-          </ScrollSection>
-        </>
-      )}
-    </div>
+    <Container>
+      <div className="main">
+        {firstTime ? (
+          <CenterBox>
+            <Terminal />
+          </CenterBox>
+        ) : (
+          <>
+            <ScrollSection id="about">
+              <div className="main__box">
+                <div className="main__box-description">
+                  <h2 className="title">Who am I?</h2>
+                  <p className="description">
+                    Junior with ambitions to become a Senior. He has worked in
+                    various places, but has always been drawn to programming.
+                    Perfectionist 90% of the time. Loves to share his knowledge.
+                  </p>
+                </div>
+                <div className="main__box-image">
+                  <AuthorImage />
+                </div>
+              </div>
+            </ScrollSection>
+            <SkillSection />
+            <ExperienceSection />
+            <OtherActivitiesSection />
+            <ContactSection />
+            <LeftMenu />
+          </>
+        )}
+      </div>
+    </Container>
   );
 };
 

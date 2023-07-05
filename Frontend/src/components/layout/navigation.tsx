@@ -1,6 +1,9 @@
 import { Fragment, useState } from "react";
+import { NavLink } from "react-router-dom";
 
 import BurgerMenu from "./burger-menu";
+
+import ROUTES from "../../constants/routes";
 
 import "./navigation.scss";
 
@@ -20,13 +23,28 @@ const Navigation = () => {
       >
         <ul className="navigation__list">
           <li className="navigation__item">
-            <a>About.me</a>
+            <NavLink
+              className="navigation__link"
+              to={ROUTES.HOME_PAGE.PATH}
+            >
+              About.me
+            </NavLink>
           </li>
           <li className="navigation__item">
-            <a>Project.file</a>
+            <NavLink
+              className="navigation__link"
+              to={ROUTES.PROJECT_PAGE.PATH}
+            >
+              Project.file
+            </NavLink>
           </li>
           <li className="navigation__item">
-            <a>Journal.dev</a>
+            <NavLink
+              className="navigation__link"
+              to={ROUTES.JOURNAL_PAGE.PATH}
+            >
+              Journal.dev
+            </NavLink>
           </li>
         </ul>
       </nav>
