@@ -5,3 +5,5 @@ export const MAIN_PAGE_SECTIONS = {
     OTHERS: '#others',
     CONTACT: '#contact'
 }
+
+export const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
