@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response } from 'express';
-import HttpException from '../errors/HttpException';
+import HttpError from '../errors/http-error';
 
 const blockEndpoint = (req: Request, res: Response, next: NextFunction) => {
-  next(new HttpException(500, 'This endpoint is blocked.'));
+  next(new HttpError(500, 'This endpoint is blocked.'));
 };
 
 export default blockEndpoint;

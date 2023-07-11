@@ -1,15 +1,17 @@
 import { Router } from 'express';
-import AuthenticationController from '../controllers/authenticationController';
-import RouterWithPath from '../types/router';
+
+
+import AuthenticationController from '../controllers/authentication-controller';
+import AuthenticationService from '../services/authentication-service';
 import blockEndpoint from '../utils/blockEndpoint';
-import validationMiddleware from '../middleware/validationMiddleware';
-import { loginSchema, registerSchema } from '../validations/authentication';
+
+import RouterWithPath from '../types/router';
 
 class AuthenticationRoutes implements RouterWithPath {
   public path = '/auth';
   public router = Router();
 
-  private authenticationController = new AuthenticationController();
+  private authenticationController = new AuthenticationController(new AuthenticationService());
 
   constructor() {
     this.initializeRoutes();
@@ -18,13 +20,11 @@ class AuthenticationRoutes implements RouterWithPath {
   private initializeRoutes() {
     this.router.post(
       `${this.path}/login`,
-      validationMiddleware(loginSchema),
       this.authenticationController.login
     );
     this.router.post(
       `${this.path}/registration`,
       blockEndpoint,
-      validationMiddleware(registerSchema),
       this.authenticationController.registration
     );
   }

@@ -4,7 +4,7 @@ import App from './app';
 
 import PostRoutes from './routes/postRoutes';
 import ProjectRoutes from './routes/projectRoutes';
-import AuthenticationRoutes from './routes/authenticationRoutes';
+import AuthenticationRoutes from './routes/authentication-route';
 import CVRoutes from './routes/cvRoutes';
 import MailRoutes from './routes/mailRoutes';
 import SkillsRoutes from './routes/skillRoutes';
