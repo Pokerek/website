@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import Joi from 'joi';
 
-import HttpException from '../errors/HttpException';
+import HttpError from '../errors/http-error';
 
 const validationMiddleware = (schema: Joi.ObjectSchema) => {
   return (req: Request, res: Response, next: NextFunction) => {
@@ -15,7 +15,7 @@ const validationMiddleware = (schema: Joi.ObjectSchema) => {
         .map(({ message }) => message)
         .join(',')
         .replaceAll('"', '');
-      next(new HttpException(422, concatMessage));
+      next(new HttpError(422, concatMessage));
     }
 
     req.body = value;

@@ -1,7 +1,7 @@
-import skillModel, { Skill } from '../database/models/skillModel';
-import AlreadyExistException from '../errors/AlreadyExistException';
-import HttpException from '../errors/HttpException';
-import ServerErrorException from '../errors/ServerErrorException';
+import skillModel, { Skill } from '../models/skill-model';
+import AlreadyExistError from '../errors/already-exist-error';
+import HttpError from '../errors/http-error';
+import ServerErrorError from '../errors/server-error';
 
 class SkillService {
   private skill = skillModel;
@@ -10,7 +10,7 @@ class SkillService {
     try {
       return await this.skill.find();
     } catch (error) {
-      return new ServerErrorException();
+      return new ServerErrorError();
     }
   };
 
@@ -19,23 +19,23 @@ class SkillService {
 
     try {
       const isUnique = await this.checkUnique(skillBody.name);
-      if (isUnique instanceof HttpException) return isUnique;
+      if (isUnique instanceof HttpError) return isUnique;
 
       const skill = await this.skill.create(skillBody);
       return skill;
     } catch (error) {
-      return new ServerErrorException();
+      return new ServerErrorError();
     }
   };
 
   public modifySkill = async (id: string, skillBody: Skill) => {
     try {
       const isUnique = await this.checkUnique(skillBody.name);
-      if (isUnique instanceof HttpException) return isUnique;
+      if (isUnique instanceof HttpError) return isUnique;
 
       return await this.skill.findOneAndUpdate({ _id: id }, skillBody);
     } catch (error) {
-      return new ServerErrorException();
+      return new ServerErrorError();
     }
   };
 
@@ -43,16 +43,16 @@ class SkillService {
     try {
       return this.skill.findByIdAndDelete(id);
     } catch (error) {
-      return new ServerErrorException();
+      return new ServerErrorError();
     }
   }
 
   private checkUnique = async (name: string) => {
     try {
       const unique = await this.skill.findOne({ name });
-      if (unique) return new AlreadyExistException('Skill');
+      if (unique) return new AlreadyExistError('Skill');
     } catch (error) {
-      return new ServerErrorException();
+      return new ServerErrorError();
     }
   };
 }

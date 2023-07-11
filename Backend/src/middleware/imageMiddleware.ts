@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import fs from 'fs';
 
-import RequiredException from '../errors/RequiredException';
+import RequiredError from './errors/required-error';
 
 class imageMiddleware {
   static deleteImage = (req: Request, res: Response, next: NextFunction) => {
@@ -14,7 +14,7 @@ class imageMiddleware {
 
   static imageRequired = (req: Request, res: Response, next: NextFunction) => {
     if (!req.file) {
-      throw new RequiredException('Image');
+      throw new RequiredError('Image');
     }
 
     req.body.url = '/images/' + req.file.filename;

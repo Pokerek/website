@@ -1,10 +1,10 @@
 import { NextFunction, Response } from 'express';
 import jwt from 'jsonwebtoken';
+
+import MissedTokenError from './errors/missed-token-error';
+
 import { DataStoredInToken } from '../types/authentication';
-import AuthenticationTokenMissedException from '../errors/AuthenticationTokenMissedException';
-import WrongAuthenticationTokenException from '../errors/WrongAuthenticationTokenException';
 import { RequestWithUser } from '../types/request';
-import userModel from '../database/models/userModel';
 
 async function authMiddleware(
   req: RequestWithUser,
@@ -21,18 +21,19 @@ async function authMiddleware(
       ) as DataStoredInToken;
 
       const id = verificationResponse._id;
-      const user = await userModel.findById(id);
+      // todo: check if user is active
+      const user = null;
       if (user) {
         req.user = user;
         next();
       } else {
-        next(new WrongAuthenticationTokenException());
+        next(new MissedTokenError());
       }
     } catch (error) {
-      next(new WrongAuthenticationTokenException());
+      next(new MissedTokenError());
     }
   } else {
-    next(new AuthenticationTokenMissedException());
+    next(new MissedTokenError());
   }
 }
 

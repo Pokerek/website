@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import NotFoundException from '../errors/NotFoundException';
+import NotFoundError from '../errors/not-found-error';
 import { RequestWithUser } from '../types/request';
 import postModel, { Post } from '../database/models/postModel';
 
@@ -25,7 +25,7 @@ class PostsController {
     const { id } = req.params;
 
     this.post.findById(id).then((post) => {
-      if (!post) next(new NotFoundException(id, 'Post'));
+      if (!post) next(new NotFoundError(id, 'Post'));
 
       res.status(200).json(post);
     });
@@ -42,7 +42,7 @@ class PostsController {
       if (post) {
         res.json({ message: 'Post update!' });
       } else {
-        next(new NotFoundException(id, 'Post'));
+        next(new NotFoundError(id, 'Post'));
       }
     });
   };
@@ -63,7 +63,7 @@ class PostsController {
       if (successResponse) {
         res.json({ message: 'Post deleted' });
       } else {
-        next(new NotFoundException(id, 'Post'));
+        next(new NotFoundError(id, 'Post'));
       }
     });
   };

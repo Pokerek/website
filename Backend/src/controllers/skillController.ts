@@ -1,9 +1,9 @@
 import { NextFunction, Request, Response } from 'express';
 import SkillService from '../services/skillService';
 import { Skill } from '../database/models/skillModel';
-import NotFoundException from '../errors/NotFoundException';
+import NotFoundError from '../errors/not-found-error';
 import { RequestWithImageUrl } from '../types/request';
-import HttpException from '../errors/HttpException';
+import HttpError from '../errors/http-error';
 
 class SkillController {
   private skillService = new SkillService();
@@ -14,7 +14,7 @@ class SkillController {
     next: NextFunction
   ) => {
     const data = await this.skillService.getAllSkills();
-    if (data instanceof HttpException) return next(data);
+    if (data instanceof HttpError) return next(data);
 
     const skills = data.map((skill) => {
       return {
@@ -36,7 +36,7 @@ class SkillController {
     const skillBody = req.body as Skill;
 
     const data = await this.skillService.createSkill(skillBody);
-    if (data instanceof HttpException) return next(data);
+    if (data instanceof HttpError) return next(data);
 
     res.send({
       status: 'success',
@@ -59,8 +59,8 @@ class SkillController {
     const skillBody = req.body as Skill;
 
     const data = await this.skillService.createSkill(skillBody);
-    if (data instanceof HttpException) return next(data);
-    if (!data) return next(new NotFoundException(id, 'Skill'));
+    if (data instanceof HttpError) return next(data);
+    if (!data) return next(new NotFoundError(id, 'Skill'));
 
     res.send({ status: 'success', message: 'Skill modified successfully!' });
   };
@@ -73,7 +73,7 @@ class SkillController {
     const { id } = req.params;
 
     const deletedSkill = await this.skillService.deleteSkill(id);
-    if (!deletedSkill) return next(new NotFoundException(id, 'Skill'));
+    if (!deletedSkill) return next(new NotFoundError(id, 'Skill'));
 
     res.send({ status: 'success', message: 'Skill deleted successfully!' });
   };

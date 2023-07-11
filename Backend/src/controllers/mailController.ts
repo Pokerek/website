@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { transporter, MailOptions } from '../config/mailer';
 import { MailMessage } from '../types/mail';
-import HttpException from '../errors/HttpException';
+import HttpError from '../errors/http-error';
 
 class MailController {
   public sendMail = async (req: Request, res: Response) => {
@@ -13,7 +13,7 @@ class MailController {
       await transporter.sendMail(mailOptions);
       return res.json({ message: 'Email sent' });
     } catch (error) {
-      return new HttpException(500, 'Error sending email');
+      return new HttpError(500, 'Error sending email');
     }
   };
 }
