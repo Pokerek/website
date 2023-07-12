@@ -6,11 +6,10 @@ const loginPageAction = async ({ request }: any) => {
     const username = formData.get('username');
     const password = formData.get('password');
 
-    try {
-        await AuthService.login(username, password);
-    } catch (error) {
-        return error;
-    }
+    console.log(username, password);
+    const response = await AuthService.login(username, password);
+    console.log(response);
+    return null;
 }
 
 export default loginPageAction;

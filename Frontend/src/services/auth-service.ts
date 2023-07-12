@@ -1,21 +1,21 @@
 import { BACKEND_URL } from "../constants";
 
 export default class AuthService {
-    static login = async (email: string, password: string) => {
+    static login = async (username: string, password: string) => {
         const response = await fetch(`${BACKEND_URL}/auth/login`, {
-            method: 'POST',
+            method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ email, password }),
+                'authorization': `Basic ${btoa(`${username}:${password}`)}`
+            }
         });
 
         const data = await response.json();
 
-        if (response.ok) {
-            return data;
-        } else {
+        if (!response.ok) {
             throw new Error(data.message);
         }
+
+        return data;
     }
 }
