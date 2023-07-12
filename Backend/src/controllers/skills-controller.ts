@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import SkillService from '../services/skills-service';
 import { Skill } from '../models/skill-model';
 import NotFoundError from '../errors/not-found-error';
-import { RequestWithImageUrl } from '../types/request';
+import { RequestWithImageUrl } from '../types';
 import HttpError from '../errors/http-error';
 
 export default class SkillsController {

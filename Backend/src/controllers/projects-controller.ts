@@ -1,6 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
 import NotFoundError from '../errors/not-found-error';
-import { RequestWithUser } from '../types/request';
 import { Project } from '../models/project-model';
 import ProjectService from '../services/projects-service';
 import HttpError from '../errors/http-error';
@@ -51,7 +50,7 @@ export default class ProjectsController {
   };
 
   public createProject = async (
-    req: RequestWithUser,
+    req: Request,
     res: Response,
     next: NextFunction
   ) => {
@@ -76,7 +75,7 @@ export default class ProjectsController {
   };
 
   public modifyProject = async (
-    req: RequestWithUser,
+    req: Request,
     res: Response,
     next: NextFunction
   ) => {
@@ -91,7 +90,7 @@ export default class ProjectsController {
   };
 
   public deleteProject = (
-    req: RequestWithUser,
+    req: Request,
     res: Response,
     next: NextFunction
   ) => {

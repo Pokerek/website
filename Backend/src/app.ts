@@ -1,11 +1,12 @@
 import bodyParser from 'body-parser';
-import cookieParser from 'cookie-parser';
 import express from 'express';
 import mongoose from 'mongoose';
-import RouterWithPath from './types/router';
-import errorMiddleware from './middleware/error-middleware';
 import cors from 'cors';
+
+import errorMiddleware from './middleware/error-middleware';
 import imageMiddleware from './middleware/image-middleware';
+
+import RouterWithPath from './types/router';
 
 class App {
     public app: express.Application;
@@ -30,7 +31,6 @@ class App {
         );
         this.app.use(express.json());
         this.app.use(bodyParser.urlencoded({ extended: false }));
-        this.app.use(cookieParser());
     }
     private initializeRoutes(routes: RouterWithPath[]) {
         routes.forEach(({ router }) => {

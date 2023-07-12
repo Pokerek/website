@@ -1,33 +1,27 @@
-import { Router } from 'express';
-
-
 import AuthenticationController from '../controllers/authentication-controller';
 import AuthenticationService from '../services/authentication-service';
+import credentialsMiddleware from '../middleware/authentication-middleware';
 import blockEndpoint from '../utils/blockEndpoint';
 
-import RouterWithPath from '../types/router';
+import GenericRoute from './generic-route';
 
-class AuthenticationRoutes implements RouterWithPath {
-  public path = '/auth';
-  public router = Router();
-
+export default class AuthenticationRoutes extends GenericRoute {
   private authenticationController = new AuthenticationController(new AuthenticationService());
 
-  constructor() {
-    this.initializeRoutes();
-  }
+  constructor(path: string) {
+    super(path);
 
-  private initializeRoutes() {
     this.router.post(
       `${this.path}/login`,
+      credentialsMiddleware,
       this.authenticationController.login
     );
+
     this.router.post(
       `${this.path}/registration`,
       blockEndpoint,
+      credentialsMiddleware,
       this.authenticationController.registration
     );
   }
 }
-
-export default AuthenticationRoutes;

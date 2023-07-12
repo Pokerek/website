@@ -4,14 +4,17 @@ import AccountModel from '../models/account-model';
 import AccountNotFoundError from './errors/account-not-found-error';
 import AccountAlreadyExistsError from './errors/account-already-exists-error';
 
-export interface AccountAttributes {
+export interface Account {
+    id: string;
     username: string;
     email: string;
     password: string;
 }
 
+type AccountAttributes = Omit<Account, 'id'>;
+
 export default class AccountService {
-    getAccount = async (username: string): Promise<AccountAttributes> => {
+    getAccount = async (username: string): Promise<Account> => {
         const account = await AccountModel.findOne({ username });
 
         if (!account) {
@@ -19,15 +22,18 @@ export default class AccountService {
         }
 
         return {
+            id: account._id.toString(),
             username: account.username,
             email: account.email,
             password: account.passwordHash
         };
     }
 
-    createAccount = async ({ email, username, password }: AccountAttributes): Promise<AccountAttributes> => {
-        if (await AccountModel.findOne({ email })) {
-            throw new AccountAlreadyExistsError(email);
+    createAccount = async ({ email, username, password }: AccountAttributes): Promise<Account> => {
+        if (await AccountModel.findOne(
+            { $or: [{ username }, { email }] }
+        )) {
+            throw new AccountAlreadyExistsError();
         }
 
         const passwordHash = await bcrypt.hash(password, 10);
@@ -41,15 +47,10 @@ export default class AccountService {
         await account.save();
 
         return {
+            id: account._id.toString(),
             username: account.username,
             email: account.email,
             password: account.passwordHash
         };
-    }
-
-    checkIfAccountExists = async (username: string): Promise<boolean> => {
-        const account = await AccountModel.findOne({ username });
-
-        return account ? true : false;
     }
 }

@@ -1,9 +1,9 @@
 import { Router } from 'express';
 import PostsController from '../controllers/posts-controller';
 import RouterWithPath from '../types/router';
-import authMiddleware from '../middleware/auth-middleware';
 import validationMiddleware from '../middleware/validation-middleware';
 import { createPostSchema, updatePostSchema } from '../controllers/validations/post-validation';
+import authorizationMiddleware from '../middleware/authorization-middleware';
 
 class PostsRoutes implements RouterWithPath {
   public path = '/posts';
@@ -20,19 +20,19 @@ class PostsRoutes implements RouterWithPath {
     this.router.get(`${this.path}/:id`, this.postsController.getPost);
     this.router.post(
       this.path,
-      authMiddleware,
+      authorizationMiddleware,
       validationMiddleware(createPostSchema),
       this.postsController.createPost
     );
     this.router.patch(
       `${this.path}/:id`,
-      authMiddleware,
+      authorizationMiddleware,
       validationMiddleware(updatePostSchema),
       this.postsController.modifyPost
     );
     this.router.delete(
       `${this.path}/:id`,
-      authMiddleware,
+      authorizationMiddleware,
       this.postsController.deletePost
     );
   }

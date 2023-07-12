@@ -17,7 +17,7 @@ createStorage(['./uploads', './uploads/images']);
 const app = new App([
   new PostRoutes(),
   new ProjectRoutes(),
-  new AuthenticationRoutes(),
+  new AuthenticationRoutes('/auth'),
   new CVRoutes(),
   new MailRoutes(),
   new SkillsRoutes(),

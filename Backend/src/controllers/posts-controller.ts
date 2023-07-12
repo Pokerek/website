@@ -1,6 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
 import NotFoundError from '../errors/not-found-error';
-import { RequestWithUser } from '../types/request';
 import postModel, { Post } from '../models/post-model';
 
 export default class PostsController {
@@ -32,7 +31,7 @@ export default class PostsController {
   };
 
   public modifyPost = (
-    req: RequestWithUser,
+    req: Request,
     res: Response,
     next: NextFunction
   ) => {
@@ -47,14 +46,14 @@ export default class PostsController {
     });
   };
 
-  public createPost = (req: RequestWithUser, res: Response) => {
+  public createPost = (req: Request, res: Response) => {
     const postData: Post = req.body;
     const createdPost = new this.post(postData);
     createdPost.save().then(() => res.json({ message: 'Post created' }));
   };
 
   public deletePost = (
-    req: RequestWithUser,
+    req: Request,
     res: Response,
     next: NextFunction
   ) => {

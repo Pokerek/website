@@ -1,8 +1,10 @@
 import { Router } from 'express';
-import CVController from '../controllers/cv-controller';
-import RouterWithPath from '../types/router';
-import authMiddleware from '../middleware/auth-middleware';
+
 import { uploadCV } from '../config/multer';
+import CVController from '../controllers/cv-controller';
+import authorizationMiddleware from '../middleware/authorization-middleware';
+
+import RouterWithPath from '../types/router';
 
 class CVRoutes implements RouterWithPath {
   public path = '/cv';
@@ -18,7 +20,7 @@ class CVRoutes implements RouterWithPath {
     this.router.get(this.path, this.cvController.getCvFile);
     this.router.post(
       this.path,
-      authMiddleware,
+      authorizationMiddleware,
       uploadCV.single('cv'),
       this.cvController.updateCV
     );

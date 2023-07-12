@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import { RequestWithFile } from '../types/request';
+import { RequestWithFile } from '../types';
 import NotFileException from '../errors/NotFileException';
 
 export default class CVController {
