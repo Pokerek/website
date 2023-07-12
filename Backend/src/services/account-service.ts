@@ -1,5 +1,3 @@
-import bcrypt from 'bcrypt';
-
 import AccountModel from '../models/account-model';
 import AccountNotFoundError from './errors/account-not-found-error';
 import AccountAlreadyExistsError from './errors/account-already-exists-error';
@@ -8,7 +6,7 @@ export interface Account {
     id: string;
     username: string;
     email: string;
-    password: string;
+    passwordHash: string;
 }
 
 type AccountAttributes = Omit<Account, 'id'>;
@@ -25,18 +23,16 @@ export default class AccountService {
             id: account._id.toString(),
             username: account.username,
             email: account.email,
-            password: account.passwordHash
+            passwordHash: account.passwordHash
         };
     }
 
-    createAccount = async ({ email, username, password }: AccountAttributes): Promise<Account> => {
+    createAccount = async ({ email, username, passwordHash }: AccountAttributes): Promise<Account> => {
         if (await AccountModel.findOne(
             { $or: [{ username }, { email }] }
         )) {
             throw new AccountAlreadyExistsError();
         }
-
-        const passwordHash = await bcrypt.hash(password, 10);
 
         const account = new AccountModel({
             username,
@@ -50,7 +46,7 @@ export default class AccountService {
             id: account._id.toString(),
             username: account.username,
             email: account.email,
-            password: account.passwordHash
+            passwordHash: account.passwordHash
         };
     }
 }

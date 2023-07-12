@@ -11,7 +11,7 @@ export default class AuthenticationRoutes extends GenericRoute {
   constructor(path: string) {
     super(path);
 
-    this.router.post(
+    this.router.get(
       `${this.path}/login`,
       credentialsMiddleware,
       this.authenticationController.login
@@ -19,7 +19,6 @@ export default class AuthenticationRoutes extends GenericRoute {
 
     this.router.post(
       `${this.path}/registration`,
-      blockEndpoint,
       credentialsMiddleware,
       this.authenticationController.registration
     );
