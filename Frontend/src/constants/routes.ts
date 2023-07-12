@@ -7,6 +7,9 @@ const ROUTES = {
     },
     PROJECT_PAGE: {
         PATH: '/project',
+    },
+    LOGIN_PAGE: {
+        PATH: '/admin/login',
     }
 }
 

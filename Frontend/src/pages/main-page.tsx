@@ -3,17 +3,15 @@ import { useState, useEffect } from "react";
 import SkillSection from "../components/main-page-sections/skill-section";
 import ExperienceSection from "../components/main-page-sections/experience-section";
 import OtherActivitiesSection from "../components/main-page-sections/other-activities-section";
+import ContactSection from "../components/main-page-sections/contact-section";
+import LeftMenu from "../components/main-page-sections/left-menu";
 
 import Terminal from "../components/terminal/terminal";
 import CenterBox from "../components/center-box/center-box";
 import AuthorImage from "../components/author-image/author-image";
 import ScrollSection from "../components/scroll-section/scroll-section";
 
-import Container from "../components/layout/container";
-
 import "./main-page.scss";
-import ContactSection from "../components/main-page-sections/contact-section";
-import LeftMenu from "../components/main-page-sections/left-menu";
 
 const MainPage = () => {
   //TODO add to context
@@ -37,38 +35,36 @@ const MainPage = () => {
   }, []);
 
   return (
-    <Container>
-      <div className="main">
-        {firstTime ? (
-          <CenterBox>
-            <Terminal />
-          </CenterBox>
-        ) : (
-          <>
-            <ScrollSection id="about">
-              <div className="main__box">
-                <div className="main__box-description">
-                  <h2 className="title">Who am I?</h2>
-                  <p className="description">
-                    Junior with ambitions to become a Senior. He has worked in
-                    various places, but has always been drawn to programming.
-                    Perfectionist 90% of the time. Loves to share his knowledge.
-                  </p>
-                </div>
-                <div className="main__box-image">
-                  <AuthorImage />
-                </div>
+    <div className="main">
+      {firstTime ? (
+        <CenterBox>
+          <Terminal />
+        </CenterBox>
+      ) : (
+        <>
+          <ScrollSection id="about">
+            <div className="main__box">
+              <div className="main__box-description">
+                <h2 className="title">Who am I?</h2>
+                <p className="description">
+                  Junior with ambitions to become a Senior. He has worked in
+                  various places, but has always been drawn to programming.
+                  Perfectionist 90% of the time. Loves to share his knowledge.
+                </p>
               </div>
-            </ScrollSection>
-            <SkillSection />
-            <ExperienceSection />
-            <OtherActivitiesSection />
-            <ContactSection />
-            <LeftMenu />
-          </>
-        )}
-      </div>
-    </Container>
+              <div className="main__box-image">
+                <AuthorImage />
+              </div>
+            </div>
+          </ScrollSection>
+          <SkillSection />
+          <ExperienceSection />
+          <OtherActivitiesSection />
+          <ContactSection />
+          <LeftMenu />
+        </>
+      )}
+    </div>
   );
 };
 

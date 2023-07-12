@@ -2,14 +2,14 @@ import 'dotenv/config';
 import validateEnv from './utils/validateEnv';
 import App from './app';
 
-import PostRoutes from './routes/postRoutes';
-import ProjectRoutes from './routes/projectRoutes';
-import AuthenticationRoutes from './routes/authenticationRoutes';
-import CVRoutes from './routes/cvRoutes';
-import MailRoutes from './routes/mailRoutes';
-import SkillsRoutes from './routes/skillRoutes';
+import PostRoutes from './routes/posts-route';
+import ProjectRoutes from './routes/projects-route';
+import AuthenticationRoutes from './routes/authentication-route';
+import CVRoutes from './routes/cv-route';
+import MailRoutes from './routes/mail-route';
+import SkillsRoutes from './routes/skills-route';
 import createStorage from './utils/createStorage';
-import ImageRoutes from './routes/imageRoutes';
+import ImageRoutes from './routes/image-route';
 
 validateEnv();
 createStorage(['./uploads', './uploads/images']);
@@ -17,7 +17,7 @@ createStorage(['./uploads', './uploads/images']);
 const app = new App([
   new PostRoutes(),
   new ProjectRoutes(),
-  new AuthenticationRoutes(),
+  new AuthenticationRoutes('/auth'),
   new CVRoutes(),
   new MailRoutes(),
   new SkillsRoutes(),
