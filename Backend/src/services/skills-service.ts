@@ -1,5 +1,4 @@
 import skillModel, { Skill } from '../models/skill-model';
-import AlreadyExistError from '../errors/already-exist-error';
 import HttpError from '../errors/http-error';
 import ServerErrorError from '../errors/server-error';
 
@@ -10,7 +9,7 @@ class SkillService {
     try {
       return await this.skill.find();
     } catch (error) {
-      return new ServerErrorError();
+      return new ServerErrorError('Something went wrong');
     }
   };
 
@@ -24,7 +23,7 @@ class SkillService {
       const skill = await this.skill.create(skillBody);
       return skill;
     } catch (error) {
-      return new ServerErrorError();
+      return new ServerErrorError('Something went wrong');
     }
   };
 
@@ -35,7 +34,7 @@ class SkillService {
 
       return await this.skill.findOneAndUpdate({ _id: id }, skillBody);
     } catch (error) {
-      return new ServerErrorError();
+      return new ServerErrorError('Something went wrong');
     }
   };
 
@@ -43,16 +42,18 @@ class SkillService {
     try {
       return this.skill.findByIdAndDelete(id);
     } catch (error) {
-      return new ServerErrorError();
+      return new ServerErrorError('Something went wrong');
     }
   }
 
   private checkUnique = async (name: string) => {
     try {
       const unique = await this.skill.findOne({ name });
-      if (unique) return new AlreadyExistError('Skill');
+      if (unique) {
+        //todo throw error
+      }
     } catch (error) {
-      return new ServerErrorError();
+      return new ServerErrorError('Something went wrong');
     }
   };
 }

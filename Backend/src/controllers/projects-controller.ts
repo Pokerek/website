@@ -1,11 +1,11 @@
 import { NextFunction, Request, Response } from 'express';
 import NotFoundError from '../errors/not-found-error';
 import { RequestWithUser } from '../types/request';
-import { Project } from '../database/models/projectModel';
-import ProjectService from '../services/projectService';
+import { Project } from '../models/project-model';
+import ProjectService from '../services/projects-service';
 import HttpError from '../errors/http-error';
 
-class ProjectsController {
+export default class ProjectsController {
   private projectService = new ProjectService();
 
   public getAllProjects = async (
@@ -104,5 +104,3 @@ class ProjectsController {
     res.send({ status: 'success', message: 'Project deleted successfully!' });
   };
 }
-
-export default ProjectsController;

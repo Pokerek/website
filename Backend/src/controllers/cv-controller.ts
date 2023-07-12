@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import { RequestWithFile } from '../types/request';
 import NotFileException from '../errors/NotFileException';
 
-class CVController {
+export default class CVController {
   public getCvFile = async (
     request: Request,
     response: Response,
@@ -28,5 +28,3 @@ class CVController {
     response.send({ message: 'File uploaded' });
   };
 }
-
-export default CVController;

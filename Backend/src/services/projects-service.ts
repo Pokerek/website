@@ -8,7 +8,7 @@ class ProjectService {
     try {
       return await this.project.find();
     } catch (error) {
-      return new ServerErrorError();
+      return new ServerErrorError('Something went wrong');
     }
   };
 
@@ -16,7 +16,7 @@ class ProjectService {
     try {
       return await this.project.findById(id);
     } catch (error) {
-      return new ServerErrorError();
+      return new ServerErrorError('Something went wrong');
     }
   };
 
@@ -24,7 +24,7 @@ class ProjectService {
     try {
       return await this.project.create(projectData);
     } catch (error) {
-      return new ServerErrorError();
+      return new ServerErrorError('Something went wrong');
     }
   };
 
@@ -32,7 +32,7 @@ class ProjectService {
     try {
       return this.project.findOneAndUpdate({ _id: id }, projectBody);
     } catch (error) {
-      return new ServerErrorError();
+      return new ServerErrorError('Something went wrong');
     }
   };
 
@@ -40,7 +40,7 @@ class ProjectService {
     try {
       return await this.project.findByIdAndDelete(id);
     } catch (error) {
-      return new ServerErrorError();
+      return new ServerErrorError('Something went wrong');
     }
   };
 }

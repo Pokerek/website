@@ -1,12 +1,12 @@
 import { Router } from 'express';
 
-import ProjectsController from '../controllers/projectController';
-import authMiddleware from '../middleware/authMiddleware';
-import validationMiddleware from '../middleware/validationMiddleware';
+import ProjectsController from '../controllers/projects-controller';
+import authMiddleware from '../middleware/auth-middleware';
+import validationMiddleware from '../middleware/validation-middleware';
 import {
   createProjectSchema,
   updateProjectSchema
-} from '../validations/project';
+} from '../controllers/validations/project-validation';
 
 import RouterWithPath from '../types/router';
 

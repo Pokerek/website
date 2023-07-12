@@ -1,11 +1,11 @@
 import { NextFunction, Request, Response } from 'express';
-import SkillService from '../services/skillService';
-import { Skill } from '../database/models/skillModel';
+import SkillService from '../services/skills-service';
+import { Skill } from '../models/skill-model';
 import NotFoundError from '../errors/not-found-error';
 import { RequestWithImageUrl } from '../types/request';
 import HttpError from '../errors/http-error';
 
-class SkillController {
+export default class SkillsController {
   private skillService = new SkillService();
 
   public getAllSkills = async (
@@ -78,5 +78,3 @@ class SkillController {
     res.send({ status: 'success', message: 'Skill deleted successfully!' });
   };
 }
-
-export default SkillController;

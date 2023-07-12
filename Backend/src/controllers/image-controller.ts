@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from 'express';
 import fs from 'fs';
 import NotExistException from '../errors/NotExistException';
 
-class ImageController {
+export default class ImageController {
   public getImage = async (req: Request, res: Response, next: NextFunction) => {
     const { name } = req.params;
 
@@ -12,5 +12,3 @@ class ImageController {
     res.sendFile(`${name}`, { root: './uploads/images' });
   };
 }
-
-export default ImageController;

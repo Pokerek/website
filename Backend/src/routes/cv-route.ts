@@ -1,7 +1,7 @@
 import { Router } from 'express';
-import CVController from '../controllers/cvController';
+import CVController from '../controllers/cv-controller';
 import RouterWithPath from '../types/router';
-import authMiddleware from '../middleware/authMiddleware';
+import authMiddleware from '../middleware/auth-middleware';
 import { uploadCV } from '../config/multer';
 
 class CVRoutes implements RouterWithPath {

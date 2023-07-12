@@ -1,11 +1,11 @@
 import { Router } from 'express';
 import RouterWithPath from '../types/router';
-import SkillController from '../controllers/skillController';
-import validationMiddleware from '../middleware/validationMiddleware';
-import { createSkillSchema, updateSkillSchema } from '../validations/skill';
+import SkillController from '../controllers/skills-controller';
+import validationMiddleware from '../middleware/validation-middleware';
+import { createSkillSchema, updateSkillSchema } from '../controllers/validations/skill-validation';
 
 import { uploadSkillImage } from '../config/multer';
-import imageMiddleware from '../middleware/imageMiddleware';
+import imageMiddleware from '../middleware/image-middleware';
 
 class SkillsRoutes implements RouterWithPath {
   public path = '/skills';

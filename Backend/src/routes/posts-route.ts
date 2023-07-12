@@ -1,9 +1,9 @@
 import { Router } from 'express';
-import PostsController from '../controllers/postController';
+import PostsController from '../controllers/posts-controller';
 import RouterWithPath from '../types/router';
-import authMiddleware from '../middleware/authMiddleware';
-import validationMiddleware from '../middleware/validationMiddleware';
-import { createPostSchema, updatePostSchema } from '../validations/post';
+import authMiddleware from '../middleware/auth-middleware';
+import validationMiddleware from '../middleware/validation-middleware';
+import { createPostSchema, updatePostSchema } from '../controllers/validations/post-validation';
 
 class PostsRoutes implements RouterWithPath {
   public path = '/posts';

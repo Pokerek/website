@@ -3,9 +3,9 @@ import cookieParser from 'cookie-parser';
 import express from 'express';
 import mongoose from 'mongoose';
 import RouterWithPath from './types/router';
-import errorMiddleware from './middleware/error.middleware';
+import errorMiddleware from './middleware/error-middleware';
 import cors from 'cors';
-import imageMiddleware from './middleware/imageMiddleware';
+import imageMiddleware from './middleware/image-middleware';
 
 class App {
     public app: express.Application;

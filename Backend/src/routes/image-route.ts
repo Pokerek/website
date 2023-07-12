@@ -1,7 +1,7 @@
 import { Router } from 'express';
 
 import RouterWithPath from '../types/router';
-import ImageController from '../controllers/imageController';
+import ImageController from '../controllers/image-controller';
 
 class ImageRoutes implements RouterWithPath {
   public path = '/images';

@@ -3,7 +3,7 @@ import { transporter, MailOptions } from '../config/mailer';
 import { MailMessage } from '../types/mail';
 import HttpError from '../errors/http-error';
 
-class MailController {
+export default class MailController {
   public sendMail = async (req: Request, res: Response) => {
     const mailMessage = req.body as MailMessage;
 
@@ -17,5 +17,3 @@ class MailController {
     }
   };
 }
-
-export default MailController;

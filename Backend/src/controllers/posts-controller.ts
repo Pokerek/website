@@ -1,9 +1,9 @@
 import { NextFunction, Request, Response } from 'express';
 import NotFoundError from '../errors/not-found-error';
 import { RequestWithUser } from '../types/request';
-import postModel, { Post } from '../database/models/postModel';
+import postModel, { Post } from '../models/post-model';
 
-class PostsController {
+export default class PostsController {
   private post = postModel;
 
   public getAllPosts = async (req: Request, res: Response) => {
@@ -68,4 +68,3 @@ class PostsController {
     });
   };
 }
-export default PostsController;
