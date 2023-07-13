@@ -1,69 +1,86 @@
-import { NextFunction, Request, Response } from 'express';
-import NotFoundError from '../errors/not-found-error';
-import postModel, { Post } from '../models/post-model';
+import { Request, Response, NextFunction } from 'express';
+
+import PostsService from '../services/posts-service';
+import PostValidation from './validations/post-validation';
 
 export default class PostsController {
-  private post = postModel;
+  private postsService = new PostsService();
 
-  public getAllPosts = async (req: Request, res: Response) => {
+  getAllPosts = async (req: Request, res: Response, next: NextFunction) => {
     const page = req.query.page ? +req.query.page : 1;
 
-    const posts = await this.post
-      .find()
-      .sort({ createdDate: -1 })
-      .skip((page - 1) * 5)
-      .limit(5);
-    const total = await this.post.countDocuments();
+    try {
+      const response = await this.postsService.getAllPosts({ page, limit: 5 });
 
-    const pages = parseInt((total / 5 + 1).toFixed());
-
-    res.status(200).json({ total, pages, posts });
+      res.json(response);
+    } catch (error) {
+      next(error);
+    };
   };
 
-  public getPost = (req: Request, res: Response, next: NextFunction) => {
-    const { id } = req.params;
-
-    this.post.findById(id).then((post) => {
-      if (!post) next(new NotFoundError(id, 'Post'));
-
-      res.status(200).json(post);
-    });
-  };
-
-  public modifyPost = (
+  getPost = async (
     req: Request,
     res: Response,
     next: NextFunction
   ) => {
     const { id } = req.params;
-    const postBody: Post = req.body;
-    this.post.findByIdAndUpdate(id, postBody, { new: true }).then((post) => {
-      if (post) {
-        res.json({ message: 'Post update!' });
-      } else {
-        next(new NotFoundError(id, 'Post'));
-      }
-    });
+
+    try {
+      const post = await this.postsService.getPost(id);
+
+      res.json(post);
+    } catch (error) {
+      next(error);
+    };
   };
 
-  public createPost = (req: Request, res: Response) => {
-    const postData: Post = req.body;
-    const createdPost = new this.post(postData);
-    createdPost.save().then(() => res.json({ message: 'Post created' }));
+  createPost = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    try {
+      const validatedBodyPost = PostValidation.createPost(req.body);
+
+      const post = await this.postsService.createPost(validatedBodyPost);
+
+      res.json(post);
+    } catch (error) {
+      next(error)
+    };
   };
 
-  public deletePost = (
+  modifyPost = async (
     req: Request,
     res: Response,
     next: NextFunction
   ) => {
     const { id } = req.params;
-    this.post.findByIdAndDelete(id).then((successResponse) => {
-      if (successResponse) {
-        res.json({ message: 'Post deleted' });
-      } else {
-        next(new NotFoundError(id, 'Post'));
-      }
-    });
+
+    try {
+      const validatedBodyPost = PostValidation.updatePost(req.body);
+
+      await this.postsService.modifyPost(id, validatedBodyPost);
+
+      res.json({ message: 'Post updated' });
+    } catch (error) {
+      next(error)
+    };
+  };
+
+  deletePost = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    const { id } = req.params;
+
+    try {
+      await this.postsService.deletePost(id);
+
+      res.json({ message: 'Post deleted' });
+    } catch (error) {
+      next(error);
+    };
   };
 }

@@ -2,20 +2,20 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./button.scss";
 
-type props = React.HTMLAttributes<HTMLButtonElement> & {
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   link?: string;
   href?: string;
-  type?: "button" | "submit" | "reset" | undefined;
-};
+}
 
-const Button = (props: props) => {
-  const { className, onClick, children, link, href, type } = props;
-
+const Button = ({ link, href, className, children, ...props }: ButtonProps) => {
   const classes = "btn";
   if (className) classes.concat(" ", className);
 
   let button = (
-    <button type={type} className={classes} onClick={onClick}>
+    <button
+      className={classes}
+      {...props}
+    >
       {children}
     </button>
   );

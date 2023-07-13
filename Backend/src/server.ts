@@ -15,13 +15,13 @@ validateEnv();
 createStorage(['./uploads', './uploads/images']);
 
 const app = new App([
-  new PostRoutes(),
-  new ProjectRoutes(),
+  new PostRoutes('/posts'),
   new AuthenticationRoutes('/auth'),
-  new CVRoutes(),
-  new MailRoutes(),
-  new SkillsRoutes(),
-  new ImageRoutes()
+  // new ProjectRoutes(),
+  // new CVRoutes(),
+  // new MailRoutes(),
+  // new SkillsRoutes(),
+  // new ImageRoutes()
 ]);
 
 app.listen();

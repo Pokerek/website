@@ -4,5 +4,3 @@ interface Skill {
   alt: string;
   type: "frontend" | "backend" | "tool";
 }
-
-export default Skill;

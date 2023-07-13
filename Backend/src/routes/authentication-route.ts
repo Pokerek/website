@@ -1,12 +1,10 @@
+import GenericRoute from './generic-route';
 import AuthenticationController from '../controllers/authentication-controller';
-import AuthenticationService from '../services/authentication-service';
 import credentialsMiddleware from '../middleware/authentication-middleware';
 import blockEndpoint from '../utils/blockEndpoint';
 
-import GenericRoute from './generic-route';
-
 export default class AuthenticationRoutes extends GenericRoute {
-  private authenticationController = new AuthenticationController(new AuthenticationService());
+  private authenticationController = new AuthenticationController();
 
   constructor(path: string) {
     super(path);
@@ -19,6 +17,7 @@ export default class AuthenticationRoutes extends GenericRoute {
 
     this.router.post(
       `${this.path}/registration`,
+      blockEndpoint,
       credentialsMiddleware,
       this.authenticationController.registration
     );

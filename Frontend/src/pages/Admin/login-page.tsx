@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from "react";
 
-import { Form } from "react-router-dom";
+import { Form, useRouteError } from "react-router-dom";
 
 import CenterBox from "../../components/center-box/center-box";
 import Button from "../../components/button/button";
@@ -10,6 +10,8 @@ import "./login-page.scss";
 const LoginPage = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const error = useRouteError();
+  if (error) console.log(error);
 
   const handleUsernameChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) =>
@@ -35,7 +37,7 @@ const LoginPage = () => {
             name="username"
             value={username}
             pattern="[A-Za-z0-9]*"
-            minLength={3}
+            minLength={6}
             maxLength={20}
             required
             className="login-form__input"
@@ -49,7 +51,7 @@ const LoginPage = () => {
             name="password"
             value={password}
             pattern="[A-Za-z0-9]*"
-            minLength={3}
+            minLength={6}
             maxLength={20}
             required
             className="login-form__input"
