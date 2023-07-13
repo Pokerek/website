@@ -6,9 +6,9 @@ const loginPageAction = async ({ request }: any) => {
     const username = formData.get('username');
     const password = formData.get('password');
 
-    console.log(username, password);
-    const response = await AuthService.login(username, password);
-    console.log(response);
+    const response = await AuthService.login(username, password) as { token: string };
+    localStorage.setItem('token', response.token);
+
     return null;
 }
 

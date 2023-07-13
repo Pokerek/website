@@ -10,7 +10,7 @@ interface Post {
     tags: string[];
 }
 
-export type PostInput = Omit<Post, 'id' | 'createdDate'>;
+export type PostInput = Omit<Post, '_id' | 'createdDate'>;
 export type PostUpdateInput = Partial<PostInput>;
 
 export default class PostsService {
@@ -26,7 +26,7 @@ export default class PostsService {
             .find()
             .sort({ createdDate: -1 })
             .skip((page - 1) * limit)
-            .limit(limit) as Post[];
+            .limit(limit);
 
         const total = await PostModel.countDocuments();
         const pages = parseInt((total / limit + 1).toFixed());
@@ -34,7 +34,13 @@ export default class PostsService {
         return {
             total,
             pages,
-            posts
+            posts: posts.map(post => ({
+                id: post._id.toString(),
+                title: post.title as string,
+                createdDate: post.createdDate,
+                text: post.text as string,
+                tags: post.tags
+            }))
         }
     }
 

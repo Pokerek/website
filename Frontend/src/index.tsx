@@ -13,6 +13,7 @@ import ErrorPage from "./pages/ErrorPage/error-page";
 import LoginPage from "./pages/Admin/login-page";
 
 import mainPageLoader from "./loaders/main-page-loader";
+import journalPageLoader from "./loaders/journal-page-loader";
 import loginPageAction from "./actions/login-page-action";
 
 import ROUTES from "./constants/routes";
@@ -33,6 +34,7 @@ const router = createBrowserRouter(
       <Route
         path={ROUTES.JOURNAL_PAGE.PATH}
         element={<JournalPage />}
+        loader={journalPageLoader}
       />
       <Route path="/admin">
         <Route

@@ -16,12 +16,12 @@ createStorage(['./uploads', './uploads/images']);
 
 const app = new App([
   new PostRoutes('/posts'),
-  new ProjectRoutes(),
   new AuthenticationRoutes('/auth'),
-  new CVRoutes(),
-  new MailRoutes(),
-  new SkillsRoutes(),
-  new ImageRoutes()
+  // new ProjectRoutes(),
+  // new CVRoutes(),
+  // new MailRoutes(),
+  // new SkillsRoutes(),
+  // new ImageRoutes()
 ]);
 
 app.listen();

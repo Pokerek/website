@@ -16,6 +16,8 @@ export default class AuthService {
             throw new Error(data.message);
         }
 
-        return data;
+        return {
+
+        };
     }
 }

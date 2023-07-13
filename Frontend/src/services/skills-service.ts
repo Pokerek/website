@@ -1,5 +1,4 @@
 import { BACKEND_URL } from "../constants";
-import Skill from "../types/skill";
 
 export default class SkillsService {
     static async getSkills() {
