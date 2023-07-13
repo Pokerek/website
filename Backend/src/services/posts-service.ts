@@ -1,3 +1,4 @@
+import { isValidObjectId } from 'mongoose';
 import PostModel from '../models/post-model';
 
 import PostNotFoundError from './errors/post-not-found-error';
@@ -10,7 +11,7 @@ interface Post {
     tags: string[];
 }
 
-export type PostInput = Omit<Post, '_id' | 'createdDate'>;
+export type PostInput = Omit<Post, 'id'>;
 export type PostUpdateInput = Partial<PostInput>;
 
 export default class PostsService {
@@ -47,6 +48,10 @@ export default class PostsService {
     getPost = async (
         id: string
     ): Promise<Post> => {
+        if (isValidObjectId(id) === false) {
+            throw new PostNotFoundError(id);
+        }
+
         const post = await PostModel.findById(id);
         if (!post) throw new PostNotFoundError(id);
 

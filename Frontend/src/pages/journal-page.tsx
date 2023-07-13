@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useActionData, useLoaderData, useSubmit } from "react-router-dom";
 
-import JournalPost from "../components/journal-post/journal-post";
+import JournalPost from "../components/journal/journal-post";
 
 import "./journal-page.scss";
 import PostsService from "../services/posts-service";

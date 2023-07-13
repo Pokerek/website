@@ -10,6 +10,9 @@ const ROUTES = {
     },
     LOGIN_PAGE: {
         PATH: '/admin/login',
+    },
+    WRITE_POST_PAGE: {
+        PATH: '/admin/write'
     }
 }
 

@@ -11,10 +11,14 @@ import MainPage from "./pages/main-page";
 import JournalPage from "./pages/journal-page";
 import ErrorPage from "./pages/ErrorPage/error-page";
 import LoginPage from "./pages/Admin/login-page";
+import PostPage from "./pages/Admin/post-page";
 
 import mainPageLoader from "./loaders/main-page-loader";
 import journalPageLoader from "./loaders/journal-page-loader";
+import postPageLoader from "./loaders/post-page-loader";
+
 import loginPageAction from "./actions/login-page-action";
+import postPageAction from "./actions/post-page-action";
 
 import ROUTES from "./constants/routes";
 
@@ -41,6 +45,12 @@ const router = createBrowserRouter(
           path={ROUTES.LOGIN_PAGE.PATH}
           element={<LoginPage />}
           action={loginPageAction}
+        />
+        <Route
+          path={`${ROUTES.WRITE_POST_PAGE.PATH}/:id?`}
+          element={<PostPage />}
+          loader={postPageLoader}
+          action={postPageAction}
         />
       </Route>
       <Route

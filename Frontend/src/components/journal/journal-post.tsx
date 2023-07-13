@@ -7,7 +7,8 @@ interface JournalPostProps {
 }
 
 const JournalPost = ({ post }: JournalPostProps) => {
-  const { title, date, text } = post;
+  const { title, createdDate, text } = post;
+  const date = new Date(createdDate).toLocaleDateString("en-GB");
 
   return (
     <article className="journal-post">

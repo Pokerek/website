@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { Request, Response, NextFunction } from 'express';
 
 import PostsService from '../services/posts-service';
 import PostValidation from './validations/post-validation';
@@ -6,50 +6,81 @@ import PostValidation from './validations/post-validation';
 export default class PostsController {
   private postsService = new PostsService();
 
-  getAllPosts = async (req: Request, res: Response) => {
+  getAllPosts = async (req: Request, res: Response, next: NextFunction) => {
     const page = req.query.page ? +req.query.page : 1;
 
-    const response = await this.postsService.getAllPosts({ page, limit: 5 });
+    try {
+      const response = await this.postsService.getAllPosts({ page, limit: 5 });
 
-    res.json(response);
+      res.json(response);
+    } catch (error) {
+      next(error);
+    };
   };
 
-  getPost = async (req: Request, res: Response) => {
+  getPost = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
     const { id } = req.params;
 
-    const post = await this.postsService.getPost(id);
+    try {
+      const post = await this.postsService.getPost(id);
 
-    res.json(post);
+      res.json(post);
+    } catch (error) {
+      next(error);
+    };
   };
 
-  createPost = async (req: Request, res: Response) => {
-    const validatedBodyPost = PostValidation.createPost(req.body);
+  createPost = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    try {
+      const validatedBodyPost = PostValidation.createPost(req.body);
 
-    const post = await this.postsService.createPost(validatedBodyPost);
+      const post = await this.postsService.createPost(validatedBodyPost);
 
-    res.json(post);
+      res.json(post);
+    } catch (error) {
+      next(error)
+    };
   };
 
   modifyPost = async (
     req: Request,
-    res: Response
+    res: Response,
+    next: NextFunction
   ) => {
     const { id } = req.params;
-    const validatedBodyPost = PostValidation.updatePost(req.body);
 
-    await this.postsService.modifyPost(id, validatedBodyPost);
+    try {
+      const validatedBodyPost = PostValidation.updatePost(req.body);
 
-    res.json({ message: 'Post updated' });
+      await this.postsService.modifyPost(id, validatedBodyPost);
+
+      res.json({ message: 'Post updated' });
+    } catch (error) {
+      next(error)
+    };
   };
 
   deletePost = async (
     req: Request,
-    res: Response
+    res: Response,
+    next: NextFunction
   ) => {
     const { id } = req.params;
 
-    await this.postsService.deletePost(id);
+    try {
+      await this.postsService.deletePost(id);
 
-    res.json({ message: 'Post deleted' });
+      res.json({ message: 'Post deleted' });
+    } catch (error) {
+      next(error);
+    };
   };
 }
