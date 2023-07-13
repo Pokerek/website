@@ -1,16 +1,12 @@
 import { NextFunction, Response } from "express";
 
-import type AuthenticationService from "../services/authentication-service";
+import AuthenticationService from "../services/authentication-service";
 import AuthenticationValidation from "./validations/authentication-validation";
 
 import { AuthenticationRequest } from "../types";
 
 export default class AuthenticationController {
-    private authenticationService: AuthenticationService;
-
-    constructor(authenticationService: AuthenticationService) {
-        this.authenticationService = authenticationService;
-    }
+    private authenticationService = new AuthenticationService();
 
     login = async (req: AuthenticationRequest, res: Response, next: NextFunction) => {
         const { username, password } = req.credentials!;

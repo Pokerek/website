@@ -15,7 +15,7 @@ validateEnv();
 createStorage(['./uploads', './uploads/images']);
 
 const app = new App([
-  new PostRoutes(),
+  new PostRoutes('/posts'),
   new ProjectRoutes(),
   new AuthenticationRoutes('/auth'),
   new CVRoutes(),
