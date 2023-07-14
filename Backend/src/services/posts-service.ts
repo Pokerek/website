@@ -15,7 +15,7 @@ export type PostInput = Omit<Post, 'id'>;
 export type PostUpdateInput = Partial<PostInput>;
 
 export default class PostsService {
-    getAllPosts = async ({
+    getPosts = async ({
         limit = 5,
         page = 1
     }): Promise<{
@@ -79,7 +79,7 @@ export default class PostsService {
         };
     }
 
-    modifyPost = async (
+    updatePost = async (
         id: string,
         postBody: PostUpdateInput
     ): Promise<void> => {

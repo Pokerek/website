@@ -2,7 +2,7 @@ import GenericRoute from './generic-route';
 import PostsController from '../controllers/posts-controller';
 import authorizationMiddleware from '../middleware/authorization-middleware';
 
-class PostsRoutes extends GenericRoute {
+export default class PostsRoutes extends GenericRoute {
   private postsController = new PostsController();
 
   constructor(path: string) {
@@ -10,7 +10,7 @@ class PostsRoutes extends GenericRoute {
 
     this.router.get(
       this.path,
-      this.postsController.getAllPosts
+      this.postsController.getPosts
     );
 
     this.router.get(
@@ -27,7 +27,7 @@ class PostsRoutes extends GenericRoute {
     this.router.patch(
       `${this.path}/:id`,
       authorizationMiddleware,
-      this.postsController.modifyPost
+      this.postsController.updatePost
     );
 
     this.router.delete(
@@ -37,5 +37,3 @@ class PostsRoutes extends GenericRoute {
     );
   }
 }
-
-export default PostsRoutes;

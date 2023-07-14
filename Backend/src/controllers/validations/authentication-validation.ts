@@ -1,6 +1,8 @@
 import Joi from 'joi';
 
-import validationError from '../../errors/validation-error';
+import GenericValidation from './generic-validation';
+
+import type { LoginInput, RegistrationInput } from '../../services/authentication-service';
 
 const loginSchema = Joi.object({
   username: Joi.string().required(),
@@ -13,23 +15,12 @@ const registerSchema = Joi.object({
   email: Joi.string().email().required()
 });
 
-export default class AuthenticationValidation {
-  public static login = (data: unknown) => {
-    const { error, value } = loginSchema.validate(data, { abortEarly: false });
+export default class AuthenticationValidation extends GenericValidation {
+  static login = (
+    data: unknown
+  ) => this.validate<LoginInput>(data, loginSchema);
 
-    if (error) {
-      throw new validationError(error.message);
-    }
-
-    return value;
-  };
-  public static registration = (data: unknown) => {
-    const { error, value } = registerSchema.validate(data, { abortEarly: false });
-
-    if (error) {
-      throw new validationError(error.message);
-    }
-
-    return value;
-  };
+  static registration = (
+    data: unknown
+  ) => this.validate<RegistrationInput>(data, registerSchema);
 }

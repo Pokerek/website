@@ -2,20 +2,8 @@ import mongoose from 'mongoose';
 
 const Schema = mongoose.Schema;
 
-export interface Project {
-    name: string;
-    stack: string[];
-    description: string;
-    imageUrl: string;
-    links: {
-        online: string;
-        github: string;
-    };
-}
-
-type ProjectDocument = Project & mongoose.Document;
-
-const projectSchema = new Schema({
+const ProjectSchema = new Schema({
+    _id: Schema.Types.ObjectId,
     name: { type: String, required: true },
     stack: [String],
     description: { type: String, required: true },
@@ -26,5 +14,5 @@ const projectSchema = new Schema({
     }
 });
 
-const projectModel = mongoose.model<ProjectDocument>('Project', projectSchema);
-export default projectModel;
+const ProjectModel = mongoose.model('Project', ProjectSchema);
+export default ProjectModel;

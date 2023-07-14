@@ -1,6 +1,6 @@
 import Joi from 'joi';
 
-import validationError from '../../errors/validation-error';
+import GenericValidation from './generic-validation';
 
 import type { PostInput, PostUpdateInput } from '../../services/posts-service';
 
@@ -18,24 +18,12 @@ const updatePostSchema = Joi.object({
   tags: Joi.array<string>()
 });
 
-export default class PostValidation {
-  static createPost = (data: unknown): PostInput => {
-    const { error, value } = createPostSchema.validate(data, { abortEarly: false });
+export default class PostValidation extends GenericValidation {
+  static createPost = (
+    data: unknown
+  ) => this.validate<PostInput>(data, createPostSchema);
 
-    if (error) {
-      throw new validationError(error.message);
-    }
-
-    return value as PostInput;
-  };
-
-  static updatePost = (data: unknown): PostUpdateInput => {
-    const { error, value } = updatePostSchema.validate(data, { abortEarly: false });
-
-    if (error) {
-      throw new validationError(error.message);
-    }
-
-    return value as PostUpdateInput;
-  }
+  static updatePost = (
+    data: unknown
+  ) => this.validate<PostUpdateInput>(data, updatePostSchema);
 }

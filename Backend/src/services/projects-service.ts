@@ -1,48 +1,98 @@
-import projectModel, { Project } from '../models/project-model';
-import ServerErrorError from '../errors/server-error';
+import { isValidObjectId } from 'mongoose';
 
-class ProjectService {
-  private project = projectModel;
+import ProjectModel from '../models/project-model';
+import ProjectNotFoundError from './errors/project-not-found-error';
 
-  public getAllProjects = async () => {
-    try {
-      return await this.project.find();
-    } catch (error) {
-      return new ServerErrorError('Something went wrong');
-    }
+interface ProjectLinks {
+  online?: string;
+  github?: string;
+}
+
+interface Project {
+  id: string;
+  name: string;
+  stack: string[];
+  description: string;
+  imageUrl: string;
+  links?: ProjectLinks;
+}
+
+export type ProjectInput = Omit<Project, 'id'>;
+export type ProjectUpdateInput = Partial<ProjectInput>;
+
+export default class ProjectService {
+  getProjects = async (): Promise<Project[]> => {
+    const projects = await ProjectModel.find();
+
+    return projects.map(project => {
+      return {
+        id: project._id.toString(),
+        name: project.name as string,
+        stack: project.stack,
+        description: project.description as string,
+        imageUrl: project.imageUrl as string,
+        links: project.links as ProjectLinks
+      }
+    });
   };
 
-  public getProject = async (id: string) => {
-    try {
-      return await this.project.findById(id);
-    } catch (error) {
-      return new ServerErrorError('Something went wrong');
-    }
+  getProjectById = async (id: string): Promise<Project> => {
+    this.checkId(id);
+    const project = await ProjectModel.findById(id);
+
+    if (!project) throw new ProjectNotFoundError(id);
+
+    return {
+      id: project._id.toString(),
+      name: project.name as string,
+      stack: project.stack,
+      description: project.description as string,
+      imageUrl: project.imageUrl as string,
+      links: project.links as ProjectLinks
+    };
   };
 
-  public createProject = async (projectData: Project) => {
-    try {
-      return await this.project.create(projectData);
-    } catch (error) {
-      return new ServerErrorError('Something went wrong');
-    }
+  createProject = async (
+    projectData: ProjectInput
+  ): Promise<Project> => {
+    const createdProject = new ProjectModel(projectData);
+    await createdProject.save();
+
+    return {
+      id: createdProject._id.toString(),
+      name: createdProject.name as string,
+      stack: createdProject.stack,
+      description: createdProject.description as string,
+      imageUrl: createdProject.imageUrl as string,
+      links: createdProject.links
+    };
   };
 
-  public modifyProject = async (id: string, projectBody: Project) => {
-    try {
-      return this.project.findOneAndUpdate({ _id: id }, projectBody);
-    } catch (error) {
-      return new ServerErrorError('Something went wrong');
-    }
+  updateProject = async (
+    id: string,
+    projectBody: ProjectUpdateInput
+  ): Promise<void> => {
+    this.checkId(id);
+
+    const post = await ProjectModel.findByIdAndUpdate(
+      id,
+      projectBody,
+      { new: true }
+    );
+
+    if (!post) throw new ProjectNotFoundError(id);
   };
 
-  public deleteProject = async (id: string) => {
-    try {
-      return await this.project.findByIdAndDelete(id);
-    } catch (error) {
-      return new ServerErrorError('Something went wrong');
+  deleteProject = async (id: string): Promise<void> => {
+    this.checkId(id);
+
+    const post = await ProjectModel.findByIdAndDelete(id);
+    if (!post) throw new ProjectNotFoundError(id);
+  };
+
+  private checkId = (id: string): void => {
+    if (isValidObjectId(id) === false) {
+      throw new ProjectNotFoundError(id);
     }
   };
 }
-
-export default ProjectService;
