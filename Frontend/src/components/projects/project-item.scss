@@ -1,0 +1,67 @@
+.project-item {
+  padding: 1rem;
+  border-radius: 1rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+
+  background-color: var(--color-secondary);
+
+  & &__image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+
+  & &__content {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  & &__title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  & &__subtitle {
+    font-size: 1rem;
+    font-weight: bold;
+  }
+
+  & &__text {
+    font-size: 0.75rem;
+    height: 8rem;
+  }
+
+  & &__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+    height: 3rem;
+
+    &-item {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      color: var(--color-text);
+
+      &:not(:last-child) {
+        &::after {
+          content: ",";
+        }
+      }
+    }
+  }
+
+  & &__links {
+    margin-top: 0.5rem;
+
+    display: flex;
+    justify-content: space-between;
+  }
+}

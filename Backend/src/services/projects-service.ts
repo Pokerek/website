@@ -17,7 +17,7 @@ interface Project {
   links?: ProjectLinks;
 }
 
-export type ProjectInput = Omit<Project, 'id'>;
+export type ProjectInput = Omit<Project, 'id' | 'imageUrl'>;
 export type ProjectUpdateInput = Partial<ProjectInput>;
 
 export default class ProjectService {
