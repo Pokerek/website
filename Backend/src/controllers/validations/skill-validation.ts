@@ -1,15 +1,24 @@
 import Joi from 'joi';
 
+import GenericValidation from './generic-validation';
+import { SkillInput, SkillUpdateInput } from '../../services/skills-service';
+
 const createSkillSchema = Joi.object({
   name: Joi.string().required().max(20),
-  alt: Joi.string().max(10),
-  type: Joi.string().required().valid('frontend', 'backend', 'tool')
+  category: Joi.string().required().valid('frontend', 'backend', 'tool')
 });
 
 const updateSkillSchema = Joi.object({
   name: Joi.string().max(20),
-  alt: Joi.string().max(10),
-  type: Joi.string().valid('frontend', 'backend', 'tool')
+  category: Joi.string().valid('frontend', 'backend', 'tool')
 });
 
-export { createSkillSchema, updateSkillSchema };
+export default class SkillValidation extends GenericValidation {
+  static createSkill = (
+    data: unknown
+  ) => this.validate<SkillInput>(data, createSkillSchema);
+
+  static updateSkill = (
+    data: unknown
+  ) => this.validate<SkillUpdateInput>(data, updateSkillSchema);
+}

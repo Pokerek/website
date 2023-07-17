@@ -7,8 +7,8 @@ import AuthenticationRoute from './routes/authentication-route';
 import PostsRoute from './routes/posts-route';
 import ProjectsRoute from './routes/projects-route';
 import CVRoutes from './routes/cv-route';
-import MailRoutes from './routes/mail-route';
-import SkillsRoutes from './routes/skills-route';
+import MailRoute from './routes/mail-route';
+import SkillsRoute from './routes/skills-route';
 import ImageRoute from './routes/image-route';
 
 import App from './app';
@@ -20,9 +20,9 @@ const app = new App([
   new AuthenticationRoute(),
   new PostsRoute(),
   new ProjectsRoute(),
-  new MailRoutes(),
+  new MailRoute(),
+  new SkillsRoute(),
   // new CVRoutes(),
-  // new SkillsRoutes(),
   new ImageRoute()
 ]);
 

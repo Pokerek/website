@@ -3,6 +3,7 @@ import { StatusCodes } from 'http-status-codes';
 
 import ProjectService from '../services/projects-service';
 import ProjectValidation from './validations/project-validation';
+import validateId from '../utils/validateId';
 
 export default class ProjectsController {
   private projectService = new ProjectService();
@@ -26,9 +27,8 @@ export default class ProjectsController {
     res: Response,
     next: NextFunction
   ) => {
-    const { id } = req.params;
-
     try {
+      const id = validateId(req.params.id);
       const project = await this.projectService.getProjectById(id);
 
       res.json(project);
@@ -58,14 +58,13 @@ export default class ProjectsController {
     res: Response,
     next: NextFunction
   ) => {
-    const { id } = req.params;
-
     try {
+      const id = validateId(req.params.id);
       const validatedBodyProject = ProjectValidation.updateProject(req.body);
 
       await this.projectService.updateProject(id, validatedBodyProject);
 
-      res.send({ message: 'Project modified successfully!' });
+      res.send({ message: 'Project updated successfully!' });
     } catch (error) {
       next(error);
     }
@@ -76,9 +75,8 @@ export default class ProjectsController {
     res: Response,
     next: NextFunction
   ) => {
-    const { id } = req.params;
-
     try {
+      const id = validateId(req.params.id);
       await this.projectService.deleteProject(id);
 
       res.json({ message: 'Project deleted successfully!' });

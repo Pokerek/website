@@ -2,34 +2,25 @@ import mongoose from 'mongoose';
 
 const Schema = mongoose.Schema;
 
-export interface Skill {
-    name: string;
-    url: string;
-    alt: string;
-    type: 'frontend' | 'backend' | 'tool';
-}
-
-type SkillDocument = Skill & mongoose.Document;
-
 const skillSchema = new Schema({
     name: {
         type: String,
         required: true,
-        unique: true
+        unique: true,
+        default: ''
     },
-    url: {
-        type: String
-    },
-
-    alt: {
-        type: String
-    },
-
-    type: {
+    imageUrl: {
         type: String,
-        required: true
+        required: true,
+        default: ''
+    },
+    category: {
+        type: String,
+        required: true,
+        enum: ['frontend', 'backend', 'tool'],
+        default: 'frontend'
     }
 });
 
-const SkillModel = mongoose.model<SkillDocument>('Skill', skillSchema);
+const SkillModel = mongoose.model('Skill', skillSchema);
 export default SkillModel;

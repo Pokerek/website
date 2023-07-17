@@ -1,5 +1,3 @@
-import { isValidObjectId } from 'mongoose';
-
 import ProjectModel from '../models/project-model';
 import ProjectNotFoundError from './errors/project-not-found-error';
 
@@ -37,7 +35,6 @@ export default class ProjectService {
   };
 
   getProjectById = async (id: string): Promise<Project> => {
-    this.checkId(id);
     const project = await ProjectModel.findById(id);
 
     if (!project) throw new ProjectNotFoundError(id);
@@ -72,8 +69,6 @@ export default class ProjectService {
     id: string,
     projectBody: ProjectUpdateInput
   ): Promise<void> => {
-    this.checkId(id);
-
     const post = await ProjectModel.findByIdAndUpdate(
       id,
       projectBody,
@@ -84,15 +79,7 @@ export default class ProjectService {
   };
 
   deleteProject = async (id: string): Promise<void> => {
-    this.checkId(id);
-
     const post = await ProjectModel.findByIdAndDelete(id);
     if (!post) throw new ProjectNotFoundError(id);
-  };
-
-  private checkId = (id: string): void => {
-    if (isValidObjectId(id) === false) {
-      throw new ProjectNotFoundError(id);
-    }
   };
 }

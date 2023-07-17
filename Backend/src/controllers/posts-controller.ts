@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 
 import PostsService from '../services/posts-service';
 import PostValidation from './validations/post-validation';
+import validateId from '../utils/validateId';
 
 export default class PostsController {
   private postsService = new PostsService();
@@ -23,9 +24,8 @@ export default class PostsController {
     res: Response,
     next: NextFunction
   ) => {
-    const { id } = req.params;
-
     try {
+      const id = validateId(req.params.id);
       const post = await this.postsService.getPost(id);
 
       res.json(post);
@@ -55,9 +55,8 @@ export default class PostsController {
     res: Response,
     next: NextFunction
   ) => {
-    const { id } = req.params;
-
     try {
+      const id = validateId(req.params.id);
       const validatedBodyPost = PostValidation.updatePost(req.body);
 
       await this.postsService.updatePost(id, validatedBodyPost);
@@ -73,9 +72,8 @@ export default class PostsController {
     res: Response,
     next: NextFunction
   ) => {
-    const { id } = req.params;
-
     try {
+      const id = validateId(req.params.id);
       await this.postsService.deletePost(id);
 
       res.json({ message: 'Post deleted successfully!' });
