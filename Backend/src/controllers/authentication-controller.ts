@@ -9,11 +9,9 @@ export default class AuthenticationController {
     private authenticationService = new AuthenticationService();
 
     login = async (req: AuthenticationRequest, res: Response, next: NextFunction) => {
-        const { username, password } = req.credentials!;
-
         try {
-            await AuthenticationValidation.login({ username, password });
-            const response = await this.authenticationService.login(username, password);
+            const loginInput = AuthenticationValidation.login(req.credentials!);
+            const response = await this.authenticationService.login(loginInput);
             res.send(response);
         }
         catch (error) {
@@ -22,12 +20,11 @@ export default class AuthenticationController {
     }
 
     registration = async (req: AuthenticationRequest, res: Response, next: NextFunction) => {
-        const { username, password } = req.credentials!;
         const { email } = req.body;
 
         try {
-            await AuthenticationValidation.registration({ username, email, password });
-            const response = await this.authenticationService.registration(username, email, password);
+            const registerInput = AuthenticationValidation.registration({ ...req.credentials!, email });
+            const response = await this.authenticationService.registration(registerInput);
             res.send(response);
         }
         catch (error) {

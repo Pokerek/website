@@ -9,12 +9,14 @@ import {
 import App from "./App";
 import MainPage from "./pages/main-page";
 import JournalPage from "./pages/journal-page";
+import ProjectsPage from "./pages/projects-page";
 import ErrorPage from "./pages/ErrorPage/error-page";
 import LoginPage from "./pages/Admin/login-page";
 import PostPage from "./pages/Admin/post-page";
 
 import mainPageLoader from "./loaders/main-page-loader";
 import journalPageLoader from "./loaders/journal-page-loader";
+import projectsPageLoader from "./loaders/projects-page-loader";
 import postPageLoader from "./loaders/post-page-loader";
 
 import loginPageAction from "./actions/login-page-action";
@@ -34,6 +36,11 @@ const router = createBrowserRouter(
         path={ROUTES.HOME_PAGE.PATH}
         element={<MainPage />}
         loader={mainPageLoader}
+      />
+      <Route
+        path={ROUTES.PROJECT_PAGE.PATH}
+        element={<ProjectsPage />}
+        loader={projectsPageLoader}
       />
       <Route
         path={ROUTES.JOURNAL_PAGE.PATH}

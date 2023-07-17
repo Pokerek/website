@@ -1,27 +1,29 @@
 import 'dotenv/config';
-import validateEnv from './utils/validateEnv';
-import App from './app';
 
-import PostRoutes from './routes/posts-route';
-import ProjectRoutes from './routes/projects-route';
-import AuthenticationRoutes from './routes/authentication-route';
+import validateEnv from './utils/validateEnv';
+import createStorage from './utils/createStorage';
+
+import AuthenticationRoute from './routes/authentication-route';
+import PostsRoute from './routes/posts-route';
+import ProjectsRoute from './routes/projects-route';
 import CVRoutes from './routes/cv-route';
 import MailRoutes from './routes/mail-route';
 import SkillsRoutes from './routes/skills-route';
-import createStorage from './utils/createStorage';
-import ImageRoutes from './routes/image-route';
+import ImageRoute from './routes/image-route';
+
+import App from './app';
 
 validateEnv();
 createStorage(['./uploads', './uploads/images']);
 
 const app = new App([
-  new PostRoutes('/posts'),
-  new AuthenticationRoutes('/auth'),
-  // new ProjectRoutes(),
+  new AuthenticationRoute('/auth'),
+  new PostsRoute('/posts'),
+  new ProjectsRoute('/projects'),
   // new CVRoutes(),
   // new MailRoutes(),
   // new SkillsRoutes(),
-  // new ImageRoutes()
+  new ImageRoute()
 ]);
 
 app.listen();

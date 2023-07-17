@@ -1,105 +1,89 @@
 import { NextFunction, Request, Response } from 'express';
-import NotFoundError from '../errors/not-found-error';
-import { Project } from '../models/project-model';
+import { StatusCodes } from 'http-status-codes';
+
 import ProjectService from '../services/projects-service';
-import HttpError from '../errors/http-error';
+import ProjectValidation from './validations/project-validation';
 
 export default class ProjectsController {
   private projectService = new ProjectService();
 
-  public getAllProjects = async (
+  getProjects = async (
     req: Request,
     res: Response,
     next: NextFunction
   ) => {
-    const data = await this.projectService.getAllProjects();
-    if (data instanceof HttpError) return next(data);
+    try {
+      const projects = await this.projectService.getProjects();
 
-    const projects = data.map((project) => {
-      return {
-        name: project.name,
-        stack: project.stack,
-        description: project.description,
-        imageUrl: project.imageUrl,
-        links: project.links
-      };
-    });
-
-    res.send(projects);
+      res.json(projects);
+    } catch (error) {
+      next(error);
+    }
   };
 
-  public getProject = async (
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ) => {
-    const { id } = req.params;
-    const data = await this.projectService.getProject(id);
-    if (data instanceof HttpError) return next(data);
-    if (!data) return next(new NotFoundError(id, 'Project'));
-
-    const project = {
-      name: data.name,
-      stack: data.stack,
-      description: data.description,
-      imageUrl: data.imageUrl,
-      links: data.links
-    };
-
-    res.send(project);
-  };
-
-  public createProject = async (
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ) => {
-    const projectBody = req.body as Project;
-
-    const data = await this.projectService.createProject(projectBody);
-    if (data instanceof HttpError) return next(data);
-
-    const project = {
-      name: data.name,
-      stack: data.stack,
-      description: data.description,
-      imageUrl: data.imageUrl,
-      links: data.links
-    };
-
-    res.send({
-      status: 'success',
-      message: 'Project added successfully!',
-      project
-    });
-  };
-
-  public modifyProject = async (
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ) => {
-    const { id } = req.params;
-    const projectBody = req.body as Project;
-
-    const data = await this.projectService.modifyProject(id, projectBody);
-    if (data instanceof HttpError) return next(data);
-    if (!data) return next(new NotFoundError(id, 'Project'));
-
-    res.send({ status: 'success', message: 'Project modified successfully!' });
-  };
-
-  public deleteProject = (
+  getProject = async (
     req: Request,
     res: Response,
     next: NextFunction
   ) => {
     const { id } = req.params;
 
-    const data = this.projectService.deleteProject(id);
-    if (data instanceof HttpError) return next(data);
-    if (!data) return next(new NotFoundError(id, 'project'));
+    try {
+      const project = await this.projectService.getProjectById(id);
 
-    res.send({ status: 'success', message: 'Project deleted successfully!' });
+      res.json(project);
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  createProject = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    try {
+      const validatedBodyProject = ProjectValidation.createProject(req.body);
+
+      const project = await this.projectService.createProject(validatedBodyProject);
+
+      res.status(StatusCodes.CREATED).json(project);
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  updateProject = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    const { id } = req.params;
+
+    try {
+      const validatedBodyProject = ProjectValidation.updateProject(req.body);
+
+      await this.projectService.updateProject(id, validatedBodyProject);
+
+      res.send({ message: 'Project modified successfully!' });
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  deleteProject = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    const { id } = req.params;
+
+    try {
+      await this.projectService.deleteProject(id);
+
+      res.json({ message: 'Project deleted successfully!' });
+    } catch (error) {
+      next(error);
+    }
   };
 }

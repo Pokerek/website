@@ -6,11 +6,11 @@ import PostValidation from './validations/post-validation';
 export default class PostsController {
   private postsService = new PostsService();
 
-  getAllPosts = async (req: Request, res: Response, next: NextFunction) => {
+  getPosts = async (req: Request, res: Response, next: NextFunction) => {
     const page = req.query.page ? +req.query.page : 1;
 
     try {
-      const response = await this.postsService.getAllPosts({ page, limit: 5 });
+      const response = await this.postsService.getPosts({ page, limit: 5 });
 
       res.json(response);
     } catch (error) {
@@ -50,7 +50,7 @@ export default class PostsController {
     };
   };
 
-  modifyPost = async (
+  updatePost = async (
     req: Request,
     res: Response,
     next: NextFunction
@@ -60,9 +60,9 @@ export default class PostsController {
     try {
       const validatedBodyPost = PostValidation.updatePost(req.body);
 
-      await this.postsService.modifyPost(id, validatedBodyPost);
+      await this.postsService.updatePost(id, validatedBodyPost);
 
-      res.json({ message: 'Post updated' });
+      res.json({ message: 'Post modified successfully' });
     } catch (error) {
       next(error)
     };
@@ -78,7 +78,7 @@ export default class PostsController {
     try {
       await this.postsService.deletePost(id);
 
-      res.json({ message: 'Post deleted' });
+      res.json({ message: 'Post deleted successfully!' });
     } catch (error) {
       next(error);
     };
