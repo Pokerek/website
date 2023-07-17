@@ -1,8 +1,7 @@
 import { useLoaderData } from "react-router-dom";
 
-import ScrollSection from "../scroll-section/scroll-section";
-import SkillsList from "../skills-list/skills-list";
-import Skill from "../../types/skill";
+import ScrollSection from "../layout/scroll-section";
+import SkillsList from "./skills-list";
 
 const SkillSection = () => {
   const skills = useLoaderData() as Skill[];

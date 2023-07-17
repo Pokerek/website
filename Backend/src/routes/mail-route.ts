@@ -1,23 +1,14 @@
-import { Router } from 'express';
-import MailController from '../controllers/mail-controller';
-import RouterWithPath from '../types/router';
-import validationMiddleware from '../middleware/validation-middleware';
-import { mailSchema } from '../controllers/validations/mail-validation';
+import GenericRoute from "./generic-route";
+import MailController from "../controllers/mail-controller";
 
-class MailRoutes implements RouterWithPath {
-  public path = '/message';
-  public router = Router();
-
+class MailRoutes extends GenericRoute {
   private mailController = new MailController();
 
   constructor() {
-    this.config();
-  }
+    super("/sendMessage");
 
-  config(): void {
     this.router.post(
       this.path,
-      validationMiddleware(mailSchema),
       this.mailController.sendMail
     );
   }

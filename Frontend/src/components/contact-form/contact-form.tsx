@@ -1,9 +1,11 @@
-import { useState, FormEvent } from "react";
+import { useState, FormEvent, useEffect } from "react";
+import { useActionData, useSubmit } from "react-router-dom";
 
-import Button from "../button/button";
+import Button from "../custom/button";
+import Message from "../custom/message";
+import type ActionResult from "../../generics/action-result";
+
 import "./contact-form.scss";
-
-const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -12,39 +14,38 @@ const ContactForm = () => {
     subject: "",
     message: "",
   });
+  const [visibleMessage, setVisibleMessage] = useState(false);
+  const actionData = useActionData() as ActionResult | undefined;
+  const [isSending, setIsSending] = useState(false);
+  const submit = useSubmit();
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    try {
-      const response = await fetch(`${BACKEND_URL}/message`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (response.status !== 200) {
-        throw new Error("Error occurred while submitting form");
-      }
-
+  useEffect(() => {
+    if (actionData?.success) {
       setFormData({
         name: "",
         email: "",
         subject: "",
         message: "",
       });
-    } catch (error) {
-      console.error(error);
     }
-  };
+    setVisibleMessage(true);
+    setIsSending(false);
+    setTimeout(() => {
+      setVisibleMessage(false);
+    }, 3000);
+  }, [actionData]);
 
   const handleChange = (
     e: FormEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { name, value } = e.currentTarget;
     setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSending(true);
+    submit(e.currentTarget, { method: "POST" });
   };
 
   return (
@@ -90,7 +91,12 @@ const ContactForm = () => {
         required
         onChange={handleChange}
       />
-      <Button type="submit">Send</Button>
+      <Button type="submit" disabled={isSending}>
+        {isSending ? "Sending..." : "Send"}
+      </Button>
+      {actionData && visibleMessage && (
+        <Message text={actionData.message} type={actionData.success ? 'success' : 'error'} />
+      )}
     </form>
   );
 };

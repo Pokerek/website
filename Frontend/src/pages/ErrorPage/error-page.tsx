@@ -1,4 +1,4 @@
-import Button from "../../components/button/button";
+import Button from "../../components/custom/button";
 
 import "./error-page.scss";
 

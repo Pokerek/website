@@ -1,15 +1,15 @@
 import { useState, useEffect } from "react";
 
-import SkillSection from "../components/main-page-sections/skill-section";
+import SkillSection from "../components/skills/skill-section";
 import ExperienceSection from "../components/main-page-sections/experience-section";
 import OtherActivitiesSection from "../components/main-page-sections/other-activities-section";
 import ContactSection from "../components/main-page-sections/contact-section";
 import LeftMenu from "../components/main-page-sections/left-menu";
 
 import Terminal from "../components/terminal/terminal";
-import CenterBox from "../components/center-box/center-box";
+import CenterBox from "../components/layout/center-box";
 import AuthorImage from "../components/author-image/author-image";
-import ScrollSection from "../components/scroll-section/scroll-section";
+import ScrollSection from "../components/layout/scroll-section";
 
 import "./main-page.scss";
 

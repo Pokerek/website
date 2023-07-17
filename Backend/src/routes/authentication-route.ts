@@ -6,8 +6,8 @@ import blockEndpoint from '../utils/blockEndpoint';
 export default class AuthenticationRoutes extends GenericRoute {
   private authenticationController = new AuthenticationController();
 
-  constructor(path: string) {
-    super(path);
+  constructor() {
+    super('/auth');
 
     this.router.get(
       `${this.path}/login`,

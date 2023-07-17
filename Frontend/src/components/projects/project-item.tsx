@@ -1,5 +1,5 @@
 import { BACKEND_URL } from "../../constants";
-import Button from "../button/button";
+import Button from "../custom/button";
 
 import "./project-item.scss";
 

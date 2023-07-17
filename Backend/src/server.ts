@@ -17,11 +17,11 @@ validateEnv();
 createStorage(['./uploads', './uploads/images']);
 
 const app = new App([
-  new AuthenticationRoute('/auth'),
-  new PostsRoute('/posts'),
-  new ProjectsRoute('/projects'),
+  new AuthenticationRoute(),
+  new PostsRoute(),
+  new ProjectsRoute(),
+  new MailRoutes(),
   // new CVRoutes(),
-  // new MailRoutes(),
   // new SkillsRoutes(),
   new ImageRoute()
 ]);
