@@ -1,4 +1,4 @@
-import ScrollSection from "../scroll-section/scroll-section";
+import ScrollSection from "../layout/scroll-section";
 import "./other-activities-section.scss";
 
 const OtherActivitiesSection = () => {

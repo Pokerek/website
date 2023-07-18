@@ -1,68 +1,59 @@
 import { NextFunction, Request, Response } from 'express';
+import { StatusCodes } from 'http-status-codes';
+
 import SkillService from '../services/skills-service';
-import { Skill } from '../models/skill-model';
-import NotFoundError from '../errors/not-found-error';
-import { RequestWithImageUrl } from '../types';
-import HttpError from '../errors/http-error';
+import SkillValidation from './validations/skill-validation';
+import validateId from '../utils/validateId';
 
 export default class SkillsController {
   private skillService = new SkillService();
 
-  public getAllSkills = async (
+  getSkills = async (
     req: Request,
     res: Response,
     next: NextFunction
   ) => {
-    const data = await this.skillService.getAllSkills();
-    if (data instanceof HttpError) return next(data);
+    try {
+      const skills = await this.skillService.getSkills();
 
-    const skills = data.map((skill) => {
-      return {
-        name: skill.name,
-        alt: skill.alt,
-        type: skill.type,
-        url: skill.url
-      };
-    });
-
-    res.send(skills);
+      res.json(skills);
+    } catch (error) {
+      next(error);
+    }
   };
 
-  public createSkill = async (
-    req: RequestWithImageUrl,
-    res: Response,
-    next: NextFunction
-  ) => {
-    const skillBody = req.body as Skill;
-
-    const data = await this.skillService.createSkill(skillBody);
-    if (data instanceof HttpError) return next(data);
-
-    res.send({
-      status: 'success',
-      message: 'Skill added successfully!',
-      skill: {
-        name: data.name,
-        alt: data.alt,
-        type: data.type,
-        url: data.url
-      }
-    });
-  };
-
-  public modifySkill = async (
+  createSkill = async (
     req: Request,
     res: Response,
     next: NextFunction
   ) => {
-    const { id } = req.params;
-    const skillBody = req.body as Skill;
+    try {
+      const validatedBodySkill = SkillValidation.createSkill(req.body);
 
-    const data = await this.skillService.createSkill(skillBody);
-    if (data instanceof HttpError) return next(data);
-    if (!data) return next(new NotFoundError(id, 'Skill'));
+      const skill = await this.skillService.createSkill(validatedBodySkill);
 
-    res.send({ status: 'success', message: 'Skill modified successfully!' });
+      res.status(StatusCodes.CREATED).json(skill);
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  public updateSkill = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    try {
+      const id = validateId(req.params.id);
+
+      const validatedBodySkill = SkillValidation.updateSkill(req.body);
+
+      await this.skillService.updateSkill(id, validatedBodySkill);
+
+      res.send({ message: 'Skill updated successfully!' });
+    } catch (error) {
+      next(error);
+    }
   };
 
   public deleteSkill = async (
@@ -70,11 +61,15 @@ export default class SkillsController {
     res: Response,
     next: NextFunction
   ) => {
-    const { id } = req.params;
 
-    const deletedSkill = await this.skillService.deleteSkill(id);
-    if (!deletedSkill) return next(new NotFoundError(id, 'Skill'));
+    try {
+      const id = validateId(req.params.id);
 
-    res.send({ status: 'success', message: 'Skill deleted successfully!' });
+      await this.skillService.deleteSkill(id);
+
+      res.send({ message: 'Skill deleted successfully!' });
+    } catch (error) {
+      next(error);
+    }
   };
 }

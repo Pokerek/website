@@ -5,8 +5,8 @@ import authorizationMiddleware from '../middleware/authorization-middleware';
 export default class PostsRoutes extends GenericRoute {
   private postsController = new PostsController();
 
-  constructor(path: string) {
-    super(path);
+  constructor() {
+    super('/posts');
 
     this.router.get(
       this.path,

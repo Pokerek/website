@@ -2,8 +2,8 @@ import React, { useCallback, useState } from "react";
 
 import { Form, useRouteError } from "react-router-dom";
 
-import CenterBox from "../../components/center-box/center-box";
-import Button from "../../components/button/button";
+import CenterBox from "../../components/layout/center-box";
+import Button from "../../components/custom/button";
 
 import "./login-page.scss";
 

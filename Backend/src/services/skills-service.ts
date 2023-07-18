@@ -1,61 +1,55 @@
-import skillModel, { Skill } from '../models/skill-model';
-import HttpError from '../errors/http-error';
-import ServerErrorError from '../errors/server-error';
+import SkillModel from '../models/skill-model';
+import SkillNotFoundError from './errors/skill-not-found-error';
 
-class SkillService {
-  private skill = skillModel;
+type SkillCategory = 'frontend' | 'backend' | 'tool';
 
-  public getAllSkills = async () => {
-    try {
-      return await this.skill.find();
-    } catch (error) {
-      return new ServerErrorError('Something went wrong');
-    }
-  };
-
-  public createSkill = async (skillBody: Skill) => {
-    if (!skillBody.alt) skillBody.alt = `${skillBody.name} logo`;
-
-    try {
-      const isUnique = await this.checkUnique(skillBody.name);
-      if (isUnique instanceof HttpError) return isUnique;
-
-      const skill = await this.skill.create(skillBody);
-      return skill;
-    } catch (error) {
-      return new ServerErrorError('Something went wrong');
-    }
-  };
-
-  public modifySkill = async (id: string, skillBody: Skill) => {
-    try {
-      const isUnique = await this.checkUnique(skillBody.name);
-      if (isUnique instanceof HttpError) return isUnique;
-
-      return await this.skill.findOneAndUpdate({ _id: id }, skillBody);
-    } catch (error) {
-      return new ServerErrorError('Something went wrong');
-    }
-  };
-
-  public deleteSkill(id: string) {
-    try {
-      return this.skill.findByIdAndDelete(id);
-    } catch (error) {
-      return new ServerErrorError('Something went wrong');
-    }
-  }
-
-  private checkUnique = async (name: string) => {
-    try {
-      const unique = await this.skill.findOne({ name });
-      if (unique) {
-        //todo throw error
-      }
-    } catch (error) {
-      return new ServerErrorError('Something went wrong');
-    }
-  };
+interface Skill {
+  id: string;
+  name: string;
+  category: SkillCategory;
+  imageUrl: string;
 }
 
-export default SkillService;
+export type SkillInput = Omit<Skill, 'id' | 'imageUrl'>;
+export type SkillUpdateInput = Partial<SkillInput>;
+
+export default class SkillService {
+  getSkills = async () => {
+    const skills = (await SkillModel.find()).map(skill => {
+      return {
+        id: skill._id.toString(),
+        name: skill.name,
+        category: skill.category as SkillCategory,
+        imageUrl: skill.imageUrl
+      };
+    });
+
+    return skills;
+  };
+
+  createSkill = async (skillBody: SkillInput): Promise<Skill> => {
+    const skill = await SkillModel.create(skillBody);
+
+    return {
+      id: skill._id.toString(),
+      name: skill.name,
+      category: skill.category as SkillCategory,
+      imageUrl: skill.imageUrl
+    };
+  };
+
+  updateSkill = async (
+    id: string,
+    skillBody: SkillUpdateInput
+  ): Promise<void> => {
+    const skill = await SkillModel.findByIdAndUpdate(id, skillBody);
+    if (!skill) throw new SkillNotFoundError(id);
+  };
+
+  deleteSkill = async (
+    id: string
+  ): Promise<void> => {
+    const skill = await SkillModel.findByIdAndDelete(id);
+    if (!skill) throw new SkillNotFoundError(id);
+  }
+}

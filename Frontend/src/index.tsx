@@ -21,6 +21,7 @@ import postPageLoader from "./loaders/post-page-loader";
 
 import loginPageAction from "./actions/login-page-action";
 import postPageAction from "./actions/post-page-action";
+import sendMailAction from "./actions/send-mail-action";
 
 import ROUTES from "./constants/routes";
 
@@ -36,6 +37,7 @@ const router = createBrowserRouter(
         path={ROUTES.HOME_PAGE.PATH}
         element={<MainPage />}
         loader={mainPageLoader}
+        action={sendMailAction}
       />
       <Route
         path={ROUTES.PROJECT_PAGE.PATH}

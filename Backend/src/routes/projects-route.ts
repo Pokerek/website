@@ -5,8 +5,8 @@ import authorizationMiddleware from '../middleware/authorization-middleware';
 export default class ProjectsRoutes extends GenericRoute {
   private projectsController = new ProjectsController();
 
-  constructor(path: string) {
-    super(path);
+  constructor() {
+    super('/projects');
 
     this.router.get(
       this.path,

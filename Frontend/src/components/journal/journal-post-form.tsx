@@ -1,6 +1,6 @@
 import { Form } from "react-router-dom";
 
-import Button from "../button/button";
+import Button from "../custom/button";
 
 import "./journal-post-form.scss";
 

@@ -5,7 +5,7 @@ import JournalPost from "../components/journal/journal-post";
 
 import "./journal-page.scss";
 import PostsService from "../services/posts-service";
-import Button from "../components/button/button";
+import Button from "../components/custom/button";
 
 export default function JournalPage() {
   const [page, setPage] = useState(2);

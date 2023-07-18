@@ -1,22 +1,21 @@
-import bodyParser from 'body-parser';
 import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
 
 import errorMiddleware from './middleware/error-middleware';
-import imageMiddleware from './middleware/image-middleware';
 
-import RouterWithPath from './types/router';
+import type GenericRoute from './routes/generic-route';
 
-class App {
+export default class App {
     public app: express.Application;
-    constructor(routes: RouterWithPath[]) {
+    constructor(routes: GenericRoute[]) {
         this.app = express();
 
         this.connectDB();
         this.initializeMiddleware();
         this.initializeRoutes(routes);
-        this.initializeErrorHandler();
+
+        this.app.use(errorMiddleware);
     }
 
     public listen() {
@@ -30,17 +29,14 @@ class App {
             })
         );
         this.app.use(express.json());
-        this.app.use(bodyParser.urlencoded({ extended: false }));
+        this.app.use(express.urlencoded({ extended: false }));
     }
-    private initializeRoutes(routes: RouterWithPath[]) {
+    private initializeRoutes(routes: GenericRoute[]) {
         routes.forEach(({ router }) => {
             this.app.use('/', router);
         });
     }
-    private initializeErrorHandler() {
-        this.app.use(errorMiddleware);
-        this.app.use(imageMiddleware.deleteImage);
-    }
+
     private connectDB() {
         const { DB_USER, DB_PASSWORD, DB_PATH } = process.env;
         mongoose.connect(`mongodb+srv://${DB_USER}:${DB_PASSWORD}@${DB_PATH}`);
@@ -55,5 +51,3 @@ class App {
             : `https://www.${URL}`;
     }
 }
-
-export default App;

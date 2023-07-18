@@ -7,7 +7,11 @@ import MissingTokenError from './errors/missing-token-error';
 import { AuthorizationRequest } from '../types';
 import JWTService from '../services/jwt-service';
 
-export default function authorizationMiddleware(req: AuthorizationRequest, res: Response, next: NextFunction) {
+export default function authorizationMiddleware(
+    req: AuthorizationRequest,
+    res: Response,
+    next: NextFunction
+) {
     const { authorization } = req.headers;
     if (!authorization) {
         throw new MissingAuthorizationHeaderError();
