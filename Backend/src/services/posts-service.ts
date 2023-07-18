@@ -1,6 +1,4 @@
-import { isValidObjectId } from 'mongoose';
 import PostModel from '../models/post-model';
-
 import PostNotFoundError from './errors/post-not-found-error';
 
 interface Post {

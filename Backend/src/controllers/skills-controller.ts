@@ -5,8 +5,6 @@ import SkillService from '../services/skills-service';
 import SkillValidation from './validations/skill-validation';
 import validateId from '../utils/validateId';
 
-import { RequestWithImageUrl } from '../types';
-
 export default class SkillsController {
   private skillService = new SkillService();
 
@@ -25,7 +23,7 @@ export default class SkillsController {
   };
 
   createSkill = async (
-    req: RequestWithImageUrl,
+    req: Request,
     res: Response,
     next: NextFunction
   ) => {

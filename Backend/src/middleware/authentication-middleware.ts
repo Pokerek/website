@@ -10,7 +10,11 @@ import MissingCredentialsError from "./errors/missing-credentials-error";
 
 import { AuthenticationRequest } from "../types";
 
-export default function authenticationMiddleware(req: AuthenticationRequest, res: Response, next: NextFunction): void {
+export default function authenticationMiddleware(
+    req: AuthenticationRequest,
+    res: Response,
+    next: NextFunction
+): void {
     const { authorization } = req.headers;
 
     if (!authorization) {

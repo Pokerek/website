@@ -15,11 +15,3 @@ export type JWTUserInfo = {
 export type AuthorizationRequest = {
   user?: JWTUserInfo,
 } & ExpressRequest;
-
-export interface RequestWithFile extends ExpressRequest {
-  file?: Express.Multer.File;
-}
-
-export interface RequestWithImageUrl extends ExpressRequest {
-  url: string;
-}

@@ -8,7 +8,9 @@ const validateEnv = () => {
     PORT: port(),
     JWT_SECRET: str(),
     EMAIL: email(),
-    EMAIL_PASSWORD: str()
+    EMAIL_PASSWORD: str(),
+    UPLOAD_TEMP_DIR: str(),
+    UPLOAD_DIR: str(),
   });
 };
 

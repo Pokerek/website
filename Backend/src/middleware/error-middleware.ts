@@ -1,7 +1,13 @@
-import { Request, Response, NextFunction } from 'express';
+import {
+  Request,
+  Response,
+  NextFunction
+} from 'express';
+
+
 import HttpError from '../errors/http-error';
 
-function errorMiddleware(
+export default function errorMiddleware(
   error: HttpError,
   req: Request,
   res: Response,
@@ -16,5 +22,3 @@ function errorMiddleware(
 
   next();
 }
-
-export default errorMiddleware;

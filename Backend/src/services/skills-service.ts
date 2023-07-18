@@ -1,5 +1,3 @@
-import { isValidObjectId } from 'mongoose';
-
 import SkillModel from '../models/skill-model';
 import SkillNotFoundError from './errors/skill-not-found-error';
 
