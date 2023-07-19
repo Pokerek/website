@@ -1,6 +1,6 @@
 import express from 'express';
 import mongoose from 'mongoose';
-import cors from 'cors';
+import cors, { CorsOptions } from 'cors';
 import cookieParser from 'cookie-parser';
 import fs from 'fs';
 
@@ -17,11 +17,20 @@ export default class App {
 
         this.connectDB();
 
+        const whiteList = this.createWhiteList();
+        const corsOptions: CorsOptions = {
+            origin: function (origin: any, callback: any) {
+                if (whiteList.indexOf(origin) !== -1) {
+                    callback(null, true);
+                } else {
+                    callback(new Error('Not allowed by CORS'));
+                }
+            },
+            credentials: true
+        }
+
         this.app.use(
-            cors({
-                origin: this.separateUrls(),
-                credentials: true
-            })
+            cors(corsOptions)
         );
         this.app.use(express.json());
         this.app.use(express.urlencoded({ extended: false }));
@@ -47,7 +56,7 @@ export default class App {
         mongoose.connect(`mongodb+srv://${DB_USER}:${DB_PASSWORD}@${DB_PATH}`);
     }
 
-    private separateUrls() {
+    private createWhiteList() {
         const URLString = process.env.FRONTEND_URL;
         if (!URLString) {
             throw new Error('FRONTEND_URL environment variable is not set');
