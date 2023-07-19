@@ -1,6 +1,6 @@
 import { redirect } from "react-router-dom";
 import PostsService from "../services/posts-service";
-import ROUTES from "../constants/routes";
+import { routesPaths } from "../routes";
 
 export default async function postPageLoader({ params }: any) {
     const { id } = params;
@@ -8,7 +8,7 @@ export default async function postPageLoader({ params }: any) {
 
     const post = await PostsService.getPost(id);
     if (!post) {
-        return redirect(ROUTES.WRITE_POST_PAGE.PATH);
+        return redirect(routesPaths.WRITE_POST_PAGE);
     }
 
     return post;

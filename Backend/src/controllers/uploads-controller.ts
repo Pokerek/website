@@ -26,11 +26,13 @@ export default class UploadController {
         next: NextFunction
     ) => {
         const { name } = req.body;
-        const path = await this.uploadsService.uploadImage(req.file!.path, name);
 
-        console.log(path, name);
-
-        res.send({ message: 'Image uploaded', path });
+        try {
+            const path = await this.uploadsService.uploadImage(req.file!.path, name);
+            res.send({ message: 'Image uploaded', path });
+        } catch (error) {
+            next(error);
+        }
     };
 
     getCv = async (

@@ -21,7 +21,10 @@ const PostPage = () => {
         method={post ? "PATCH" : "POST"}
       />
       <h2 className="title">Preview</h2>
-      <JournalPost post={newPost} />
+      <JournalPost
+        post={newPost}
+        showActions={false}
+      />
     </div>
   );
 };

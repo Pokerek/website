@@ -1,73 +1,15 @@
 import { createRoot } from "react-dom/client";
 import {
-  Route,
   RouterProvider,
   createBrowserRouter,
-  createRoutesFromElements,
 } from "react-router-dom";
 
-import App from "./App";
-import MainPage from "./pages/main-page";
-import JournalPage from "./pages/journal-page";
-import ProjectsPage from "./pages/projects-page";
-import ErrorPage from "./pages/ErrorPage/error-page";
-import LoginPage from "./pages/Admin/login-page";
-import PostPage from "./pages/Admin/post-page";
-
-import mainPageLoader from "./loaders/main-page-loader";
-import journalPageLoader from "./loaders/journal-page-loader";
-import projectsPageLoader from "./loaders/projects-page-loader";
-import postPageLoader from "./loaders/post-page-loader";
-
-import loginPageAction from "./actions/login-page-action";
-import postPageAction from "./actions/post-page-action";
-import sendMailAction from "./actions/send-mail-action";
-
-import ROUTES from "./constants/routes";
-
 import "./styles/index.scss";
+import routes from "./routes";
+import { StrictMode } from "react";
+import { AuthProvider } from "./contexts/auth-context";
 
-const router = createBrowserRouter(
-  createRoutesFromElements(
-    <Route
-      path="/"
-      element={<App />}
-    >
-      <Route
-        path={ROUTES.HOME_PAGE.PATH}
-        element={<MainPage />}
-        loader={mainPageLoader}
-        action={sendMailAction}
-      />
-      <Route
-        path={ROUTES.PROJECT_PAGE.PATH}
-        element={<ProjectsPage />}
-        loader={projectsPageLoader}
-      />
-      <Route
-        path={ROUTES.JOURNAL_PAGE.PATH}
-        element={<JournalPage />}
-        loader={journalPageLoader}
-      />
-      <Route path="/admin">
-        <Route
-          path={ROUTES.LOGIN_PAGE.PATH}
-          element={<LoginPage />}
-          action={loginPageAction}
-        />
-        <Route
-          path={`${ROUTES.WRITE_POST_PAGE.PATH}/:id?`}
-          element={<PostPage />}
-          loader={postPageLoader}
-          action={postPageAction}
-        />
-      </Route>
-      <Route
-        path="*"
-        element={<ErrorPage />}
-      />
-    </Route>,
-  ),
+const router = createBrowserRouter(routes
 );
 
 const container = document.getElementById("root");
@@ -76,4 +18,10 @@ if (!container) {
 }
 
 const root = createRoot(container);
-root.render(<RouterProvider router={router} />);
+root.render(
+  <StrictMode>
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
+  </StrictMode>
+);

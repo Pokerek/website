@@ -6,10 +6,12 @@ import Container from "./components/layout/container";
 function App() {
   return (
     <main className="App">
+
       <Header />
       <Container>
         <Outlet />
       </Container>
+
     </main>
   );
 }

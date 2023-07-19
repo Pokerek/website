@@ -1,4 +1,5 @@
 import type { Request as ExpressRequest } from 'express';
+import { CheckSessionInput } from './controllers/validations/authentication-validation';
 
 export type AuthenticationRequest = {
   credentials?: {
@@ -8,10 +9,11 @@ export type AuthenticationRequest = {
 } & ExpressRequest;
 
 export type JWTUserInfo = {
-  id: number,
-  username: string
+  id: string,
+  username: string,
+  exp: number,
 }
 
 export type AuthorizationRequest = {
-  user?: JWTUserInfo,
+  user?: CheckSessionInput,
 } & ExpressRequest;

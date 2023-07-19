@@ -33,6 +33,7 @@ export default function JournalPage() {
           <JournalPost
             key={post.id}
             post={post}
+            showActions={true}
           />
         ))}
       </div>

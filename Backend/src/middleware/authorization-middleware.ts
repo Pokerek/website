@@ -12,25 +12,28 @@ export default function authorizationMiddleware(
     res: Response,
     next: NextFunction
 ) {
-    const { authorization } = req.headers;
-    if (!authorization) {
+    const { cookie } = req.headers;
+    if (!cookie) {
         throw new MissingAuthorizationHeaderError();
     }
 
     const [
         authorizationType,
         authorizationToken
-    ] = authorization.split(" ");
-    if (authorizationType.toLowerCase() !== "bearer") {
-        throw new InvalidAuthorizationTypeError(authorizationType.toLowerCase(), "bearer");
+    ] = cookie.split("=");
+    if (authorizationType.toLowerCase() !== "token") {
+        throw new InvalidAuthorizationTypeError(authorizationType.toLowerCase(), "token");
     }
     if (!authorizationToken) {
         throw new MissingTokenError();
     }
 
     const token = JWTService.verify(authorizationToken);
-
-    req.user = token;
+    req.user = {
+        id: token.id,
+        username: token.username,
+        expiresAt: new Date(token.exp * 1000),
+    };
 
     next();
 }

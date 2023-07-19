@@ -4,7 +4,7 @@ $menuAnimation: left 0.3s ease-in-out;
 
 .navigation {
   position: absolute;
-  z-index: 100;
+  z-index: 1000;
   width: 100%;
   top: var(--header-height);
   height: calc(100vh - var(--header-height));
@@ -50,7 +50,7 @@ $menuAnimation: left 0.3s ease-in-out;
     transition: $menuAnimation;
   }
 
-  @media screen and (min-width: $screen-tablet) {
+  @media screen and (min-width: $navigation-breakpoint) {
     position: static;
     height: auto;
 
