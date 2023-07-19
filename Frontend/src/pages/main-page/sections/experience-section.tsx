@@ -2,10 +2,11 @@ import { useLoaderData } from 'react-router-dom';
 
 import { routesPaths } from "../../../routes";
 import Button from "../../../components/custom/button";
+import Carousel from "../../../components/carousel/carousel";
+
 
 import ScrollSection from "../components/scroll-section";
 import ExperienceItem from "../components/experience-item";
-import Carousel from "../components/carousel";
 
 import "./experience-section.scss";
 

@@ -1,4 +1,4 @@
-@import "../../../styles/variables";
+@import "../../styles/variables";
 
 .carousel {
   position: relative;
@@ -40,9 +40,9 @@
 
     background-color: var(--color-primary);
 
-    // &:disabled {
-    //   visibility: hidden;
-    // }
+    &:disabled {
+      visibility: hidden;
+    }
   }
 
   @media screen and (min-width: $screen-mobile) {
