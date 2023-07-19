@@ -1,5 +1,12 @@
-import { MAIN_PAGE_SECTIONS } from "../../constants";
 import "./left-menu.scss";
+
+const MAIN_PAGE_SECTIONS = {
+  ABOUT: '#about',
+  SKILLS: '#skills',
+  EXPERIENCE: '#experience',
+  OTHERS: '#others',
+  CONTACT: '#contact'
+}
 
 const LeftMenu = () => {
   return (

@@ -14,7 +14,7 @@ const SkillsList = ({ elements, title }: Props) => {
       <div className="skillsList__inner">
         {elements.map((skill) => (
           <div key={skill.name} className="skillsList__item">
-            <img src={BACKEND_URL + skill.url} alt={skill.alt} />
+            <img src={BACKEND_URL + skill.imageUrl} alt={skill.name} />
           </div>
         ))}
       </div>

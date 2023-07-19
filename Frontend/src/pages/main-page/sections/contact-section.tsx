@@ -1,6 +1,7 @@
-import ScrollSection from "../layout/scroll-section";
-import ContactForm from "../contact-form/contact-form";
-import Button from "../custom/button";
+import Button from "../../../components/custom/button";
+
+import ScrollSection from "../components/scroll-section";
+import ContactForm from "../components/contact-form";
 
 const ContactSection = () => {
   return (

@@ -1,9 +1,16 @@
-import { useState, FormEvent, useEffect } from "react";
-import { useActionData, useSubmit } from "react-router-dom";
+import {
+  useState,
+  FormEvent,
+  useEffect
+} from "react";
+import {
+  useActionData,
+  useSubmit
+} from "react-router-dom";
 
-import Button from "../custom/button";
-import Message from "../custom/message";
-import type ActionResult from "../../generics/action-result";
+import Button from "../../../components/custom/button";
+import Message from "../../../components/custom/message";
+import type ActionResult from "../../../generics/action-result";
 
 import "./contact-form.scss";
 

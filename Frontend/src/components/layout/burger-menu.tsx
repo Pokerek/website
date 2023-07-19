@@ -1,23 +1,15 @@
-import { useState } from "react";
-
 import "./burger-menu.scss";
 
 type props = {
+  isActive: boolean;
   onClick: () => void;
 };
 
-const BurgerMenu = ({ onClick }: props) => {
-  const [isActive, setIsActive] = useState(false);
-
-  const handleToggleBurgerMenu = () => {
-    onClick();
-    setIsActive((prevStatus) => !prevStatus);
-  };
-
+const BurgerMenu = ({ isActive, onClick }: props) => {
   return (
     <button
       className={`hamburger ${isActive ? "hamburger--active" : ""}`}
-      onClick={handleToggleBurgerMenu}
+      onClick={onClick}
     >
       <span className="hamburger__box">
         <span className="hamburger__inner"></span>

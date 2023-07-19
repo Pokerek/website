@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useActionData, useLoaderData, useSubmit } from "react-router-dom";
+import { useLoaderData } from "react-router-dom";
 
 import JournalPost from "../components/journal/journal-post";
 

@@ -17,7 +17,7 @@ const AdminPage = () => {
 
     useEffect(() => {
         login();
-    }, []);
+    }, [login]);
 
     const handleLogout = () => {
         logout();
