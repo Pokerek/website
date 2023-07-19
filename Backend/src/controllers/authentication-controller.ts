@@ -20,6 +20,7 @@ export default class AuthenticationController {
                     httpOnly: true,
                     expires: response.expiresAt,
                     sameSite: 'none',
+                    secure: true,
                 }
             ).send(
                 {
