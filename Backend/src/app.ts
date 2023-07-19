@@ -19,7 +19,7 @@ export default class App {
 
         this.app.use(
             cors({
-                origin: this.formatFrontendURL(),
+                origin: this.separateUrls(),
                 credentials: true
             })
         );
@@ -47,13 +47,15 @@ export default class App {
         mongoose.connect(`mongodb+srv://${DB_USER}:${DB_PASSWORD}@${DB_PATH}`);
     }
 
-    private formatFrontendURL() {
-        const URL = process.env.FRONTEND_URL;
-        if (!URL) return '*';
+    private separateUrls() {
+        const URLString = process.env.FRONTEND_URL;
+        if (!URLString) {
+            throw new Error('FRONTEND_URL environment variable is not set');
+        }
 
-        return URL.includes('localhost')
-            ? `http://${process.env.FRONTEND_URL}:${process.env.FRONTEND_PORT}`
-            : `https://www.${URL}`;
+        const urls = URLString.split(';');
+
+        return urls;
     }
 
     private createUploadsFolder() {
