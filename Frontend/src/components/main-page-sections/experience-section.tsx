@@ -1,3 +1,4 @@
+import { routesPaths } from "../../routes";
 import Button from "../custom/button";
 import ScrollSection from "../layout/scroll-section";
 import "./experience-section.scss";
@@ -43,7 +44,7 @@ const ExperienceSection = () => {
           </div>
         </div>
       </div>
-      <Button>Go to projects</Button>
+      <Button link={routesPaths.PROJECT_PAGE}>Go to projects</Button>
     </ScrollSection>
   );
 };
