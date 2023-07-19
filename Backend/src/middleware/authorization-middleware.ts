@@ -17,11 +17,16 @@ export default function authorizationMiddleware(
         throw new MissingAuthorizationHeaderError();
     }
 
+    const tokenCookie = cookie.split(";").filter((cookie) => cookie.includes("token"))[0];
+    if (!tokenCookie) {
+        throw new MissingTokenError();
+    }
+
     const [
         authorizationType,
         authorizationToken
-    ] = cookie.split("=");
-    if (authorizationType.toLowerCase() !== "token") {
+    ] = tokenCookie.split("=");
+    if (authorizationType.trim().toLowerCase() !== "token") {
         throw new InvalidAuthorizationTypeError(authorizationType.toLowerCase(), "token");
     }
     if (!authorizationToken) {

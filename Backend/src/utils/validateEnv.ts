@@ -12,6 +12,7 @@ const validateEnv = () => {
     UPLOAD_TEMP_DIR: str(),
     UPLOAD_DIR: str(),
     FRONTEND_URL: str(),
+
   });
 };
 

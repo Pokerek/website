@@ -49,7 +49,7 @@ const Navigation = () => {
               Journal.dev
             </NavLink>
           </li>
-          {authenticated &&
+          {authenticated && (
             <li className="navigation__item">
               <NavLink
                 className="navigation__link"
@@ -58,7 +58,7 @@ const Navigation = () => {
                 Admin Panel
               </NavLink>
             </li>
-          }
+          )}
         </ul>
       </nav>
     </Fragment>
