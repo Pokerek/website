@@ -1,7 +1,7 @@
 import GenericRoute from './generic-route';
 
 import SkillController from '../controllers/skills-controller';
-import authenticationMiddleware from '../middleware/authentication-middleware';
+import authorizationMiddleware from '../middleware/authorization-middleware';
 
 export default class SkillsRoutes extends GenericRoute {
   private skillsController = new SkillController();
@@ -16,19 +16,19 @@ export default class SkillsRoutes extends GenericRoute {
 
     this.router.post(
       this.path,
-      authenticationMiddleware,
+      authorizationMiddleware,
       this.skillsController.createSkill
     );
 
     this.router.patch(
       `${this.path}/:id`,
-      authenticationMiddleware,
+      authorizationMiddleware,
       this.skillsController.updateSkill
     );
 
     this.router.delete(
       `${this.path}/:id`,
-      authenticationMiddleware,
+      authorizationMiddleware,
       this.skillsController.deleteSkill
     );
   }

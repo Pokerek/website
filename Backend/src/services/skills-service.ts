@@ -10,7 +10,7 @@ interface Skill {
   imageUrl: string;
 }
 
-export type SkillInput = Omit<Skill, 'id' | 'imageUrl'>;
+export type SkillInput = Omit<Skill, 'id'>;
 export type SkillUpdateInput = Partial<SkillInput>;
 
 export default class SkillService {

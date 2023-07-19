@@ -50,7 +50,7 @@ const LoginPage = () => {
             type="password"
             name="password"
             value={password}
-            pattern="[A-Za-z0-9]*"
+            pattern="[\S]*"
             minLength={6}
             maxLength={20}
             required
