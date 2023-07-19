@@ -4,14 +4,7 @@ import AccountService from "./account-service";
 import IncorrectPasswordError from "./errors/incorrect-password-error";
 import JWTService from "./jwt-service";
 
-export interface LoginInput {
-    username: string;
-    password: string;
-}
-
-export interface RegistrationInput extends LoginInput {
-    email: string;
-}
+import { LoginInput, RegistrationInput } from '../controllers/validations/authentication-validation';
 
 export default class AuthenticationService {
     private accountService: AccountService = new AccountService();
@@ -24,9 +17,14 @@ export default class AuthenticationService {
             throw new IncorrectPasswordError();
         }
 
-        const token = JWTService.sign({ id: account.id, username: account.username });
+        const { token, expiresAt } = JWTService.sign({ id: account.id, username: account.username });
 
-        return { token };
+        return {
+            token,
+            username: account.username,
+            expiresAt,
+            message: 'Logged in successfully!',
+        };
     }
 
     registration = async ({ username, email, password }: RegistrationInput) => {
@@ -34,8 +32,13 @@ export default class AuthenticationService {
 
         const account = await this.accountService.createAccount({ username, email, passwordHash });
 
-        const token = JWTService.sign({ id: account.id, username: account.username });
+        const { token, expiresAt } = JWTService.sign({ id: account.id, username: account.username });
 
-        return { token };
+        return {
+            token,
+            username: account.username,
+            expiresAt,
+            message: 'Account created successfully!',
+        };
     }
 }

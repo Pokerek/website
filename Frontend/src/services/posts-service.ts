@@ -37,21 +37,16 @@ export default class PostsService {
         }
     }
 
-    static async createPost({ title, text, createdDate }: Post) {
-        const token = localStorage.getItem("token");
-        if (!token) {
-            console.error("No token found");
-            return null;
-        }
+    static async createPost({ title, text }: PostInput) {
 
         try {
             const response = await fetch(`${BACKEND_URL}/posts/`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    "authorization": `Bearer ${token}`
                 },
-                body: JSON.stringify({ title, text, createdDate })
+                credentials: "include",
+                body: JSON.stringify({ title, text, createdDate: new Date() })
             });
             if (!response.ok) {
                 throw new Error("Failed to create post");
@@ -66,20 +61,15 @@ export default class PostsService {
         }
     }
 
-    static async updatePost({ id, title, text }: Post) {
-        const token = localStorage.getItem("token");
-        if (!token) {
-            console.error("No token found");
-            return null;
-        }
+    static async updatePost({ id, title, text }: PostUpdateInput) {
 
         try {
             const response = await fetch(`${BACKEND_URL}/posts/${id}`, {
                 method: "PATCH",
                 headers: {
                     "Content-Type": "application/json",
-                    "authorization": `Bearer ${token}`
                 },
+                credentials: "include",
                 body: JSON.stringify({ title, text })
             });
             if (!response.ok) {

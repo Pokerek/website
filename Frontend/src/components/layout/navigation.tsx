@@ -3,9 +3,10 @@ import { NavLink } from "react-router-dom";
 
 import BurgerMenu from "./burger-menu";
 
-import ROUTES from "../../constants/routes";
+import { routesPaths } from "../../routes";
 
 import "./navigation.scss";
+import useAuth from "../../hooks/useAuth";
 
 const Navigation = () => {
   const [isActive, setIsActive] = useState(false);
@@ -13,6 +14,8 @@ const Navigation = () => {
   const handleToggleNavigation = () => {
     setIsActive((prevStatus) => !prevStatus);
   };
+
+  const { authenticated } = useAuth();
 
   return (
     <Fragment>
@@ -25,7 +28,7 @@ const Navigation = () => {
           <li className="navigation__item">
             <NavLink
               className="navigation__link"
-              to={ROUTES.HOME_PAGE.PATH}
+              to={routesPaths.HOME_PAGE}
             >
               About.me
             </NavLink>
@@ -33,7 +36,7 @@ const Navigation = () => {
           <li className="navigation__item">
             <NavLink
               className="navigation__link"
-              to={ROUTES.PROJECT_PAGE.PATH}
+              to={routesPaths.PROJECT_PAGE}
             >
               Project.file
             </NavLink>
@@ -41,11 +44,21 @@ const Navigation = () => {
           <li className="navigation__item">
             <NavLink
               className="navigation__link"
-              to={ROUTES.JOURNAL_PAGE.PATH}
+              to={routesPaths.JOURNAL_PAGE}
             >
               Journal.dev
             </NavLink>
           </li>
+          {authenticated && (
+            <li className="navigation__item">
+              <NavLink
+                className="navigation__link"
+                to={routesPaths.ADMIN_PAGE}
+              >
+                Admin Panel
+              </NavLink>
+            </li>
+          )}
         </ul>
       </nav>
     </Fragment>

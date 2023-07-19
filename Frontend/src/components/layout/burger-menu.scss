@@ -61,7 +61,7 @@ $timing: 0.3s;
     transform: translateY(-10px) rotate(-45deg);
   }
 
-  @media screen and (min-width: $screen-tablet) {
+  @media screen and (min-width: $navigation-breakpoint) {
     display: none;
   }
 }

@@ -2,7 +2,7 @@ import { redirect } from 'react-router-dom';
 
 import PostsService from '../services/posts-service';
 
-import ROUTES from '../constants/routes';
+import { routesPaths } from '../routes';
 
 export default async function postPageAction({ request }: any) {
     const form = await request.formData()
@@ -10,24 +10,20 @@ export default async function postPageAction({ request }: any) {
     const title = form.get('title')
     const text = form.get('text')
 
+    let post = null;
     switch (request.method) {
-        case 'POST': {
-            const post = await PostsService.createPost({ title, text, createdDate: new Date() });
-            if (!post) {
-                return null;
-            }
+        case 'POST':
+            post = await PostsService.createPost({ title, text });
+            break;
 
-            return redirect(ROUTES.JOURNAL_PAGE.PATH);
-        }
-        case 'PATCH': {
-            const post = await PostsService.updatePost({ id, title, text, createdDate: new Date() });
-            if (!post) {
-                return null;
-            }
-
-            return redirect(ROUTES.JOURNAL_PAGE.PATH);
-        }
+        case 'PATCH':
+            post = await PostsService.updatePost({ id, title, text });
+            break;
     }
 
-    return null;
+    if (!post) {
+        return null;
+    }
+
+    return redirect(routesPaths.JOURNAL_PAGE)
 }
