@@ -1,0 +1,35 @@
+@import "../../../styles/variables";
+
+@mixin line {
+  --border-space: 2rem;
+  padding-bottom: var(--border-space);
+  border-bottom: $main-border-style;
+  margin-bottom: var(--border-space);
+}
+
+@mixin clearLine {
+  padding-bottom: 0;
+  margin-bottom: 0;
+  border-bottom: none;
+}
+
+.scrollSection {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+
+  @include line;
+
+  &:last-child {
+    @include clearLine;
+    margin-bottom: 1rem;
+  }
+
+  @media screen and (min-height: $scroll-height) and (min-width: $scroll-width) {
+    height: calc(100vh - var(--header-height));
+    scroll-snap-align: start;
+    @include clearLine;
+  }
+}

@@ -1,34 +1,34 @@
 {
-  "name": "website",
-  "version": "1.0.0",
-  "author": "Pokerek <karolchrobok@gmail.com>",
-  "license": "MIT",
-  "private": true,
-  "description": "Website create with React and Express",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Pokerek/website_v2.git"
-  },
-  "bugs": {
-    "url": "https://github.com/Pokerek/website_v2/issues"
-  },
-  "homepage": "https://github.com/Pokerek/website_v2#readme",
-  "workspaces": [
-    "backend",
-    "frontend"
-  ],
-  "scripts": {
-    "app": "yarn workspace frontend start",
-    "server": "yarn workspace backend dev",
-    "build-app": "yarn workspace frontend build",
-    "build-server": "yarn workspace backend build",
-    "start": "concurrently --kill-others-on-fail \"yarn app\" \"yarn server\"",
-    "build": "concurrently --kill-others-on-fail \"yarn build-app\" \"yarn build-server\""
-  },
-  "engines": {
-    "node": "16.17.0"
-  },
-  "dependencies": {
-    "concurrently": "^7.5.0"
-  }
+   "name": "website",
+   "version": "1.0.0",
+   "author": "Pokerek <karolchrobok@gmail.com>",
+   "license": "MIT",
+   "private": true,
+   "description": "Website create with React and Express",
+   "repository": {
+      "type": "git",
+      "url": "git+https://github.com/Pokerek/website_v2.git"
+   },
+   "bugs": {
+      "url": "https://github.com/Pokerek/website_v2/issues"
+   },
+   "homepage": "https://github.com/Pokerek/website_v2#readme",
+   "workspaces": [
+      "backend",
+      "frontend"
+   ],
+   "scripts": {
+      "app": "yarn workspace frontend dev",
+      "server": "yarn workspace backend dev",
+      "build-app": "yarn workspace frontend build",
+      "build-server": "yarn workspace backend build",
+      "start": "concurrently --kill-others-on-fail \"yarn app\" \"yarn server\"",
+      "build": "concurrently --kill-others-on-fail \"yarn build-app\" \"yarn build-server\""
+   },
+   "engines": {
+      "node": "18.16.0"
+   },
+   "dependencies": {
+      "concurrently": "^7.5.0"
+   }
 }

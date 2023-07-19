@@ -1,0 +1,23 @@
+@import "../../styles/variables";
+
+.container {
+  max-width: calc(100% - 2rem);
+  margin: 0 auto;
+  margin-top: var(--header-height);
+
+  @media screen and (min-width: $screen-mobile) {
+    max-width: calc(100% - 4rem);
+  }
+
+  @media screen and (min-width: $screen-tablet) {
+    max-width: calc(#{$screen-tablet} - 6rem);
+  }
+
+  @media screen and (min-width: $screen-desktop) {
+    max-width: calc(#{$screen-desktop} - 4rem);
+  }
+
+  @media screen and (max-width: $screen-mobile-s) {
+    max-width: calc(100% - 1rem);
+  }
+}

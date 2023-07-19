@@ -1,0 +1,36 @@
+@import "../../../styles/variables";
+
+$line-height: 20px;
+
+.terminal {
+  width: 100%;
+  text-align: left;
+  & &__header {
+    height: 20px;
+    background-color: $color-secondary;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0.5rem 0.5rem 0 0;
+  }
+
+  & &__title {
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 400;
+  }
+
+  & &__body {
+    background-color: black;
+    min-height: 160px;
+    padding: 0.5rem;
+    border-radius: 0 0 0.5rem 0.5rem;
+  }
+
+  & &__text {
+    color: $color-primary;
+    line-height: $line-height;
+    min-height: $line-height;
+  }
+}

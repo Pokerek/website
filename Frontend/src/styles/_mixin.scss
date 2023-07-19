@@ -1,23 +1,16 @@
-@use './variable';
-
-@mixin hamburger-line {
-   width: 100%;
-   height: 3px;
-   background-color: variable.$font-color;
-   position: absolute;
-}
+@import "./variables";
 
 @mixin hover-animation {
-   transition: color .5s ease-in;
-   color: variable.$font-color;
-   &:hover {
-       color: variable.$font-alter;
-       transition: color .5s ease-in;
-   }   
+  transition: color 0.5s ease-in;
+  color: $color-text;
+  &:hover {
+    color: $color-primary;
+    transition: color 0.5s ease-in;
+  }
 }
 
 @mixin mq($size) {
-	@media (max-width: #{$size}) {
-		@content;
-	}	
+  @media (max-width: #{$size}) {
+    @content;
+  }
 }

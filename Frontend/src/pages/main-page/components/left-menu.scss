@@ -1,0 +1,33 @@
+@import "../../../styles/variables";
+
+.left-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  height: 100%;
+  padding-top: var(--header-height);
+  padding-left: 0.5rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+
+  & &__link {
+    color: var(--color-text);
+    text-decoration: none;
+    text-orientation: mixed;
+    writing-mode: vertical-rl;
+
+    &:hover {
+      color: var(--color-primary);
+      transition: color 0.3s ease-in-out;
+    }
+  }
+
+  @media screen and ((max-height: $scroll-height) or (max-width: 520px)) {
+    display: none;
+  }
+}

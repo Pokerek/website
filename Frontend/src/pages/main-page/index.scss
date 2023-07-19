@@ -1,0 +1,34 @@
+@import "../../styles/variables";
+
+.main {
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+
+  & &__box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+
+    &-description {
+      text-align: center;
+    }
+  }
+
+  @media screen and (min-width: $screen-tablet) {
+    & &__box {
+      flex-direction: row;
+      justify-content: center;
+    }
+
+    & &__box-description {
+      width: 50%;
+    }
+  }
+
+  @media screen and (min-height: $scroll-height) {
+    overflow: auto;
+    height: calc(100vh - var(--header-height));
+    scroll-snap-type: y mandatory;
+  }
+}

@@ -1,0 +1,16 @@
+@import "../../../styles/variables";
+
+.authorImage {
+  --image-size: 256px;
+  width: var(--image-size);
+  height: var(--image-size);
+  border-radius: 50%;
+
+  @media screen and (min-width: $screen-desktop) {
+    --image-size: 350px;
+  }
+
+  @media screen and (max-width: $screen-mobile-s) {
+    --image-size: 200px;
+  }
+}

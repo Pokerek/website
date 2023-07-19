@@ -1,0 +1,29 @@
+@import "../../styles/variables";
+
+.btn {
+  border: none;
+  border-radius: 2rem;
+  padding: 0.5rem 1.5rem;
+
+  font-size: 1rem;
+  font-weight: 500;
+  font-family: $font-family;
+  color: $color-secondary;
+  background-color: $color-primary;
+  cursor: pointer;
+
+  &:disabled {
+    background-color: var(--color-secondary);
+    color: white;
+    cursor: not-allowed;
+  }
+
+  @media screen and (min-width: $screen-tablet) {
+    font-size: 1.25rem;
+  }
+
+  @media screen and (max-width: $screen-mobile-s) {
+    font-size: 0.75rem;
+    padding: 0.25rem;
+  }
+}

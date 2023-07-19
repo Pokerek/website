@@ -1,18 +1,27 @@
 import 'dotenv/config';
-import App from './app';
-import AuthenticationController from './authentication/authentication.controller';
-import CVController from './pdf/cv.controller';
-import PostsController from './posts/posts.controller';
-import ProjectsController from './projects/projects.controller';
+
 import validateEnv from './utils/validateEnv';
+
+import AuthenticationRoute from './routes/authentication-route';
+import PostsRoute from './routes/posts-route';
+import ProjectsRoute from './routes/projects-route';
+import MailRoute from './routes/mail-route';
+import SkillsRoute from './routes/skills-route';
+import UploadsRoute from './routes/uploads-route';
+
+import App from './app';
+import ExperiencesRoute from './routes/experience-route';
 
 validateEnv();
 
 const app = new App([
-  new PostsController(),
-  new ProjectsController(),
-  new AuthenticationController(),
-  new CVController()
+  new AuthenticationRoute(),
+  new PostsRoute(),
+  new ProjectsRoute(),
+  new MailRoute(),
+  new SkillsRoute(),
+  new UploadsRoute(),
+  new ExperiencesRoute()
 ]);
 
 app.listen();

@@ -1,0 +1,65 @@
+@import "./variables";
+@import "./mixin";
+@import "./font";
+@import "./typography";
+@import "./root";
+
+// Custom style
+* {
+  box-sizing: border-box;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  color: $color-text;
+  font-family: $font-family;
+  background-color: $color-background;
+  margin: 0;
+}
+
+img {
+  max-width: 100%;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  font-family: $font-family;
+  color: $color-text;
+  margin: 0;
+}
+
+// Scrollbar
+/* Firefox */
+* {
+  scrollbar-width: auto;
+  scrollbar-color: $color-text;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 0px;
+}
+
+*::-webkit-scrollbar-track {
+  background: $color-background;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: $color-text;
+  border-radius: 10px;
+  border: 1px solid $color-text;
+}

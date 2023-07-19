@@ -1,28 +1,27 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
-import { CookiesProvider } from "react-cookie";
+import { createRoot } from "react-dom/client";
+import {
+  RouterProvider,
+  createBrowserRouter,
+} from "react-router-dom";
 
-import { WriteProvider } from "./context/WriteContext";
-import { AuthProvider } from "./context/AuthContext";
+import "./styles/index.scss";
+import routes from "./routes";
+import { StrictMode } from "react";
+import { AuthProvider } from "./contexts/auth-context";
 
-import "./index.scss";
-import App from "./App";
-
-const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement,
+const router = createBrowserRouter(routes
 );
 
+const container = document.getElementById("root");
+if (!container) {
+  throw new Error("No root element found");
+}
+
+const root = createRoot(container);
 root.render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <CookiesProvider>
-        <WriteProvider>
-          <AuthProvider>
-            <App />
-          </AuthProvider>
-        </WriteProvider>
-      </CookiesProvider>
-    </BrowserRouter>
-  </React.StrictMode>,
+  <StrictMode>
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
+  </StrictMode>
 );
