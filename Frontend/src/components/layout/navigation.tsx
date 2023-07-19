@@ -49,14 +49,16 @@ const Navigation = () => {
               Journal.dev
             </NavLink>
           </li>
-          <li className="navigation__item">
-            <NavLink
-              className="navigation__link"
-              to={routesPaths.ADMIN_PAGE}
-            >
-              Admin Panel
-            </NavLink>
-          </li>
+          {authenticated &&
+            <li className="navigation__item">
+              <NavLink
+                className="navigation__link"
+                to={routesPaths.ADMIN_PAGE}
+              >
+                Admin Panel
+              </NavLink>
+            </li>
+          }
         </ul>
       </nav>
     </Fragment>
