@@ -24,6 +24,9 @@ export default class UploadsService {
         }
 
         const ext = tempPath.split('.').pop();
+        if (!fs.existsSync(`${UPLOAD_DIRECTION}/images`)) {
+            fs.mkdirSync(`${UPLOAD_DIRECTION}/images`);
+        }
 
         const path = `${UPLOAD_DIRECTION}/images/${name}.${ext}`;
         fs.copyFileSync(tempPath, path);

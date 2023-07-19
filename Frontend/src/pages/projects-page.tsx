@@ -9,14 +9,19 @@ const ProjectsPage = () => {
   return (
     <div className="projects-page">
       <h1>Projects</h1>
-      <div className="projects-page__projects">
-        {projects.map((project) => (
-          <ProjectItem
-            key={project.id}
-            project={project}
-          />
-        ))}
-      </div>
+      {
+        projects.length ?
+          <div className="projects-page__projects">
+            {projects.map((project) => (
+              <ProjectItem
+                key={project.id}
+                project={project}
+              />
+            ))}
+          </div>
+          :
+          <div className="projects-page__no-projects">No projects.</div>
+      }
     </div>
   );
 };
