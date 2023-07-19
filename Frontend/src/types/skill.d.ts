@@ -1,6 +1,6 @@
 interface Skill {
+  id: string;
   name: string;
-  url: string;
-  alt: string;
-  type: "frontend" | "backend" | "tool";
+  category: "frontend" | "backend" | "tool";
+  imageUrl: string;
 }

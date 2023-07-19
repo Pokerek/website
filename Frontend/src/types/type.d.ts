@@ -7,3 +7,8 @@ interface AuthResponse {
 interface ErrorResponse {
     message: string;
 }
+
+interface MainPageLoaderResponse {
+    skills: Skill[];
+    experiences: Experience[];
+}

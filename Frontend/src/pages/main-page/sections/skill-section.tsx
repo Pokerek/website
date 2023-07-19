@@ -1,16 +1,15 @@
 import { useLoaderData } from "react-router-dom";
 
-import ScrollSection from "../layout/scroll-section";
-import SkillsList from "./skills-list";
+import ScrollSection from "../components/scroll-section";
+import SkillsList from "../components/skills-list";
 
 const SkillSection = () => {
-  const skills = useLoaderData() as Skill[];
+  const { skills } = useLoaderData() as MainPageLoaderResponse;
+  if (skills.length === 0) return null;
 
-  if (!skills.length) return <></>;
-
-  const frontendSkills = skills.filter((skill) => skill.type === "frontend");
-  const backendSkills = skills.filter((skill) => skill.type === "backend");
-  const toolSkills = skills.filter((skill) => skill.type === "tool");
+  const frontendSkills = skills.filter((skill) => skill.category === "frontend");
+  const backendSkills = skills.filter((skill) => skill.category === "backend");
+  const toolSkills = skills.filter((skill) => skill.category === "tool");
 
   return (
     <ScrollSection id="skills">

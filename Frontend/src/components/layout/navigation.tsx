@@ -19,7 +19,7 @@ const Navigation = () => {
 
   return (
     <Fragment>
-      <BurgerMenu onClick={handleToggleNavigation} />
+      <BurgerMenu onClick={handleToggleNavigation} isActive={isActive} />
       <nav
         onClick={handleToggleNavigation}
         className={`navigation ${isActive ? "navigation--active" : ""}`}

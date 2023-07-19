@@ -21,7 +21,7 @@ const useAuth = () => {
         if (data.isSession) {
             setAuthenticated(true);
         }
-    }
+    };
 
     return { authenticated, login, logout };
 }
