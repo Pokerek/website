@@ -1,8 +1,8 @@
 import GenericRoute from './generic-route';
 import AuthenticationController from '../controllers/authentication-controller';
 import credentialsMiddleware from '../middleware/authentication-middleware';
-import blockEndpoint from '../utils/blockEndpoint';
 import authorizationMiddleware from '../middleware/authorization-middleware';
+import blockEndpoint from '../utils/blockEndpoint';
 
 export default class AuthenticationRoutes extends GenericRoute {
   private authenticationController = new AuthenticationController();

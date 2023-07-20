@@ -19,5 +19,7 @@ export default function errorMiddleware(
     message
   });
 
+  if (code === 500) console.error(error);
+
   next();
 }

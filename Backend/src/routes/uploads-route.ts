@@ -1,3 +1,5 @@
+import cors from 'cors';
+
 import GenericRoute from "./generic-route";
 
 import UploadController from '../controllers/uploads-controller';
@@ -16,16 +18,16 @@ export default class uploadsRoute extends GenericRoute {
             this.uploadsController.getCv
         );
 
+        this.router.get(
+            `${this.path}/images/:name`,
+            this.uploadsController.getImage
+        );
+
         this.router.post(
             `${this.path}/cv`,
             authorizationMiddleware,
             uploadsMiddleware.single('cv'),
             this.uploadsController.uploadCv
-        );
-
-        this.router.get(
-            `${this.path}/images/:name`,
-            this.uploadsController.getImage
         );
 
         this.router.post(
