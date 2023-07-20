@@ -10,7 +10,7 @@ import SkillsRoute from './routes/skills-route';
 import UploadsRoute from './routes/uploads-route';
 
 import App from './app';
-import ExperiencesRoute from './routes/experience-route';
+import ExperiencesRoute from './routes/experiences-route';
 
 validateEnv();
 

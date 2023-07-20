@@ -27,6 +27,23 @@ export default class SkillService {
     return skills;
   };
 
+  getSkill = async (
+    id: string
+  ): Promise<Skill> => {
+    const skill = await SkillModel.findById(id);
+
+    if (!skill) {
+      throw new SkillNotFoundError(id);
+    }
+
+    return {
+      id: skill._id.toString(),
+      name: skill.name,
+      category: skill.category as SkillCategory,
+      imageUrl: skill.imageUrl
+    };
+  }
+
   createSkill = async (skillBody: SkillInput): Promise<Skill> => {
     const skill = await SkillModel.create(skillBody);
 
