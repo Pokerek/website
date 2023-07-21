@@ -3,7 +3,7 @@ import { useLoaderData } from "react-router-dom";
 import JournalPost from "../../components/journal/journal-post";
 import JournalPostForm from "../../components/journal/journal-post-form";
 
-const PostPage = () => {
+const PostEditor = () => {
   const post = useLoaderData() as Post | null;
   const [newPost, setNewPost] = useState(
     post || {
@@ -29,4 +29,4 @@ const PostPage = () => {
   );
 };
 
-export default PostPage;
+export default PostEditor;

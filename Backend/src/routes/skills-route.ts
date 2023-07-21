@@ -46,7 +46,6 @@ export default class SkillsRoutes extends GenericRoute {
 
     this.router.get(
       SKILLS_ROUTES.GET_SKILL.path,
-      authorizationMiddleware,
       this.skillsController.getSkill
     );
 

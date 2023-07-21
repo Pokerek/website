@@ -18,7 +18,14 @@ const protectedRoutes = [
     ...Object.values(SKILLS_ROUTES),
     ...Object.values(AUTHENTICATION_ROUTES),
     ...Object.values(UPLOADS_ROUTES)
-].filter(route => route.protected);
+]
+    .filter(route => route.protected)
+    .map(route => {
+        return {
+            method: route.method,
+            path: route.path.split(':')[0]
+        }
+    });
 
 export default function corsMiddleware(
     req: Request,
@@ -26,7 +33,15 @@ export default function corsMiddleware(
     next: NextFunction
 ) {
     const isProtectedRoute = protectedRoutes.some(route => {
-        return (route.method === req.method || req.method === 'OPTIONS') && route.path === req.path;
+        return (
+            route.method === req.method
+            ||
+            req.method === 'OPTIONS'
+        ) && (
+                route.path === req.path
+                ||
+                route.path === `/${req.path.split('/')[1]}/`
+            )
     });
 
     if (!isProtectedRoute) {

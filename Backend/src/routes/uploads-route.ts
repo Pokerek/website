@@ -24,7 +24,7 @@ export const UPLOADS_ROUTES = {
         protected: true
     },
     UPLOAD_IMAGE: {
-        path: `${PATH}/images`,
+        path: `${PATH}/image`,
         method: 'POST',
         protected: true
     }

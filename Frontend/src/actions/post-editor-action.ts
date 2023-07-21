@@ -4,7 +4,7 @@ import PostsService from '../services/posts-service';
 
 import { routesPaths } from '../routes';
 
-export default async function postPageAction({ request }: any) {
+export default async function postEditorAction({ request }: any) {
     const form = await request.formData()
     const id = form.get('id')
     const title = form.get('title')

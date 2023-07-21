@@ -2,7 +2,7 @@ import { redirect } from "react-router-dom";
 import PostsService from "../services/posts-service";
 import { routesPaths } from "../routes";
 
-export default async function postPageLoader({ params }: any) {
+export default async function postEditorLoader({ params }: any) {
     const { id } = params;
     if (!id) return null;
 

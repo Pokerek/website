@@ -32,7 +32,7 @@ export default class UploadsService {
         fs.copyFileSync(tempPath, path);
         fs.unlinkSync(tempPath);
 
-        return path;
+        return path.slice(1);
     }
 
     checkIfImageExists = async (name: string): Promise<void> => {
