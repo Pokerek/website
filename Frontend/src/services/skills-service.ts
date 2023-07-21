@@ -13,4 +13,56 @@ export default class SkillsService {
             return [];
         }
     }
+
+    static async getSkill(id: string) {
+        try {
+            const response = await fetch(`${BACKEND_URL}/skills/${id}`);
+            if (!response.ok) throw new Error("Failed to fetch skill");
+
+            return await response.json() as Skill;
+        } catch (error) {
+            console.error(error);
+            return null;
+        }
+    }
+
+    static async createSkill(skillInput: SkillInput) {
+        try {
+            const response = await fetch(`${BACKEND_URL}/skills`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                credentials: "include",
+                body: JSON.stringify(skillInput),
+            });
+            if (!response.ok) throw new Error("Failed to create skill");
+
+            return await response.json() as Skill;
+        } catch (error) {
+            console.error(error);
+            return null;
+        }
+    }
+
+    static async updateSkill(skill: Skill) {
+        const { id, ...skillInput } = skill;
+        try {
+            const response = await fetch(`${BACKEND_URL}/skills/${id}`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                credentials: "include",
+                body: JSON.stringify(skillInput),
+            });
+
+            if (!response.ok) throw new Error("Failed to update skill");
+
+            return await response.json() as Skill;
+        } catch (error) {
+            console.error(error);
+            return null;
+        }
+    }
 }

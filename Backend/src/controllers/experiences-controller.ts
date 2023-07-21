@@ -19,9 +19,26 @@ export default class ExperiencesController {
         try {
             const experiences = await this.experiencesService.getExperiences();
 
+            res.header('cache-control', 'public, max-age=3600')
             res.json(experiences);
         } catch (error) {
             next(error);
+        };
+    }
+
+    getExperience = async (
+        req: Request,
+        res: Response,
+        next: NextFunction
+    ) => {
+        try {
+            const id = validateId(req.params.id);
+
+            const experience = await this.experiencesService.getExperience(id);
+
+            res.json(experience);
+        } catch (error) {
+            next(error)
         };
     }
 

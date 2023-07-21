@@ -25,6 +25,27 @@ export default class ExperienceService {
         }));
     }
 
+    getExperience = async (
+        id: string
+    ): Promise<Experience> => {
+        const experience = await ExperienceModel.findById(id);
+
+        if (!experience) {
+            throw new ExperienceNotFoundError(id);
+        }
+
+        return {
+            id: experience._id.toString(),
+            title: experience.title as string,
+            company: experience.company as string,
+            location: experience.location as string,
+            startDate: experience.startDate as Date,
+            endDate: experience.endDate,
+            technologies: experience.technologies,
+            description: experience.description as string,
+        };
+    }
+
     createExperience = async (
         experienceInput: ExperienceInput
     ): Promise<Experience> => {

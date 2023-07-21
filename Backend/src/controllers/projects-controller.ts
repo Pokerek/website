@@ -16,6 +16,7 @@ export default class ProjectsController {
     try {
       const projects = await this.projectService.getProjects();
 
+      res.header('cache-control', 'public, max-age=3600')
       res.json(projects);
     } catch (error) {
       next(error);

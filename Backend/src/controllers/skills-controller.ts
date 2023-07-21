@@ -16,7 +16,24 @@ export default class SkillsController {
     try {
       const skills = await this.skillService.getSkills();
 
+      res.header('cache-control', 'public, max-age=3600')
       res.json(skills);
+    } catch (error) {
+      next(error);
+    }
+  };
+
+  getSkill = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    try {
+      const id = validateId(req.params.id);
+
+      const skill = await this.skillService.getSkill(id);
+
+      res.json(skill);
     } catch (error) {
       next(error);
     }
@@ -38,7 +55,7 @@ export default class SkillsController {
     }
   };
 
-  public updateSkill = async (
+  updateSkill = async (
     req: Request,
     res: Response,
     next: NextFunction
@@ -56,7 +73,7 @@ export default class SkillsController {
     }
   };
 
-  public deleteSkill = async (
+  deleteSkill = async (
     req: Request,
     res: Response,
     next: NextFunction

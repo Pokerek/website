@@ -41,6 +41,7 @@ export default class AuthenticationController {
         try {
             const registerInput = AuthenticationValidation.registration({ ...req.credentials!, email });
             const response = await this.authenticationService.registration(registerInput);
+
             res.cookie(
                 "token",
                 response.token,

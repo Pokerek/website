@@ -5,31 +5,56 @@ import UploadController from '../controllers/uploads-controller';
 import authorizationMiddleware from '../middleware/authorization-middleware';
 import uploadsMiddleware from "../middleware/uploads-middleware";
 
+const PATH = '/uploads';
+
+export const UPLOADS_ROUTES = {
+    GET_CV: {
+        path: `${PATH}/cv`,
+        method: 'GET',
+        protected: false,
+    },
+    GET_IMAGE: {
+        path: `${PATH}/images/:name`,
+        method: 'GET',
+        protected: false,
+    },
+    UPLOAD_CV: {
+        path: `${PATH}/cv`,
+        method: 'POST',
+        protected: true
+    },
+    UPLOAD_IMAGE: {
+        path: `${PATH}/image`,
+        method: 'POST',
+        protected: true
+    }
+}
+
 export default class uploadsRoute extends GenericRoute {
     private uploadsController = new UploadController();
 
     constructor() {
-        super("/uploads");
+        super(PATH);
 
         this.router.get(
-            `${this.path}/cv`,
+            UPLOADS_ROUTES.GET_CV.path,
             this.uploadsController.getCv
         );
 
+        this.router.get(
+            UPLOADS_ROUTES.GET_IMAGE.path,
+            this.uploadsController.getImage
+        );
+
         this.router.post(
-            `${this.path}/cv`,
+            UPLOADS_ROUTES.UPLOAD_CV.path,
             authorizationMiddleware,
             uploadsMiddleware.single('cv'),
             this.uploadsController.uploadCv
         );
 
-        this.router.get(
-            `${this.path}/images/:name`,
-            this.uploadsController.getImage
-        );
-
         this.router.post(
-            `${this.path}/images`,
+            UPLOADS_ROUTES.UPLOAD_IMAGE.path,
             authorizationMiddleware,
             uploadsMiddleware.single('image'),
             this.uploadsController.uploadImage

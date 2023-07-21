@@ -9,8 +9,8 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const Button = ({ link, href, navLink, className, children, ...props }: ButtonProps) => {
-  const classes = "btn";
-  if (className) classes.concat(" ", className);
+  let classes = "btn";
+  if (className) classes = classes + " " + className;
 
   let buttonComponent = (
     <button

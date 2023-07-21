@@ -2,17 +2,23 @@ import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 
 import "./experience-item.scss";
 
+const convertDate = (date: Date) => {
+    return date.getMonth() + 1 + "/" + date.getFullYear();
+}
+
 const ExperienceItem = ({ experience }: { experience: Experience }) => {
-    const { title, description, technologies } = experience;
+    const { title, description, technologies, startDate, endDate, company, location } = experience;
+    const date = {
+        start: convertDate(new Date(startDate)),
+        end: endDate ? convertDate(new Date(endDate)) : "Present"
+    }
 
     return (
         <div className="experience-item">
             <h3 className="experience-item__title">{title}</h3>
             <div className="experience-item__section">
-                <h4 className="experience-item__subtitle">
-                    Description
-                </h4>
-                <ReactMarkdown className="experience-item__description">{description}</ReactMarkdown>
+                <p className="experience-item__text">{`${date.start} - ${date.end}`}</p>
+                <p className="experience-item__text">{`${company}, ${location}`}</p>
             </div>
             <div className="experience-item__section">
                 <h4 className="experience-item__subtitle">
@@ -25,6 +31,12 @@ const ExperienceItem = ({ experience }: { experience: Experience }) => {
                         </li>
                     ))}
                 </ul>
+            </div>
+            <div className="experience-item__section">
+                <h4 className="experience-item__subtitle">
+                    Description
+                </h4>
+                <ReactMarkdown className="experience-item__description">{description}</ReactMarkdown>
             </div>
 
         </div>

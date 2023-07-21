@@ -14,6 +14,7 @@ export default class UploadController {
         try {
             await this.uploadsService.checkIfImageExists(name);
 
+            res.header('cache-control', 'public, max-age=3600');
             res.sendFile(`${name}`, { root: './uploads/images' });
         } catch (error) {
             next(error);

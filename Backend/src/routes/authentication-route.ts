@@ -1,35 +1,60 @@
 import GenericRoute from './generic-route';
 import AuthenticationController from '../controllers/authentication-controller';
 import credentialsMiddleware from '../middleware/authentication-middleware';
-import blockEndpoint from '../utils/blockEndpoint';
 import authorizationMiddleware from '../middleware/authorization-middleware';
+import blockEndpoint from '../utils/blockEndpoint';
+
+const PATH = '/auth';
+
+export const AUTHENTICATION_ROUTES = {
+  LOGIN: {
+    path: `${PATH}/login`,
+    method: 'GET',
+    protected: true,
+  },
+  LOGOUT: {
+    path: `${PATH}/logout`,
+    method: 'GET',
+    protected: true,
+  },
+  CHECK_SESSION: {
+    path: `${PATH}/checkSession`,
+    method: 'GET',
+    protected: true,
+  },
+  REGISTRATION: {
+    path: `${PATH}/registration`,
+    method: 'POST',
+    protected: true,
+  }
+}
 
 export default class AuthenticationRoutes extends GenericRoute {
   private authenticationController = new AuthenticationController();
 
   constructor() {
-    super('/auth');
+    super(PATH);
 
     this.router.get(
-      `${this.path}/login`,
+      AUTHENTICATION_ROUTES.LOGIN.path,
       credentialsMiddleware,
       this.authenticationController.login
     );
 
     this.router.get(
-      `${this.path}/logout`,
+      AUTHENTICATION_ROUTES.LOGOUT.path,
       authorizationMiddleware,
       this.authenticationController.logout
     );
 
     this.router.get(
-      `${this.path}/checkSession`,
+      AUTHENTICATION_ROUTES.CHECK_SESSION.path,
       authorizationMiddleware,
       this.authenticationController.checkSession
     );
 
     this.router.post(
-      `${this.path}/registration`,
+      AUTHENTICATION_ROUTES.REGISTRATION.path,
       blockEndpoint,
       credentialsMiddleware,
       this.authenticationController.registration
