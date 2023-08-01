@@ -8,6 +8,7 @@ interface Skill {
   name: string;
   category: SkillCategory;
   imageUrl: string;
+  order: number;
 }
 
 export type SkillInput = Omit<Skill, 'id'>;
@@ -20,7 +21,8 @@ export default class SkillService {
         id: skill._id.toString(),
         name: skill.name,
         category: skill.category as SkillCategory,
-        imageUrl: skill.imageUrl
+        imageUrl: skill.imageUrl,
+        order: skill.order
       };
     });
 
@@ -40,7 +42,8 @@ export default class SkillService {
       id: skill._id.toString(),
       name: skill.name,
       category: skill.category as SkillCategory,
-      imageUrl: skill.imageUrl
+      imageUrl: skill.imageUrl,
+      order: skill.order
     };
   }
 
@@ -51,7 +54,8 @@ export default class SkillService {
       id: skill._id.toString(),
       name: skill.name,
       category: skill.category as SkillCategory,
-      imageUrl: skill.imageUrl
+      imageUrl: skill.imageUrl,
+      order: skill.order
     };
   };
 

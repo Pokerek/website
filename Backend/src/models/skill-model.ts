@@ -19,7 +19,12 @@ const skillSchema = new Schema({
         required: true,
         enum: ['frontend', 'backend', 'tool'],
         default: 'frontend'
-    }
+    },
+    order: {
+        type: Number,
+        required: true,
+        default: 0
+    },
 });
 
 const SkillModel = mongoose.model('Skill', skillSchema);

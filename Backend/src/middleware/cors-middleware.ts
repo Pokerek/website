@@ -11,8 +11,10 @@ import { EXPERIENCES_ROUTES } from '../routes/experiences-route';
 import { SKILLS_ROUTES } from '../routes/skills-route';
 import { AUTHENTICATION_ROUTES } from '../routes/authentication-route';
 import { UPLOADS_ROUTES } from '../routes/uploads-route';
+import { POSTS_ROUTES } from '../routes/posts-route';
 
 const protectedRoutes = [
+    ...Object.values(POSTS_ROUTES),
     ...Object.values(PROJECTS_ROUTES),
     ...Object.values(EXPERIENCES_ROUTES),
     ...Object.values(SKILLS_ROUTES),
@@ -47,6 +49,5 @@ export default function corsMiddleware(
     if (!isProtectedRoute) {
         return cors(corsOptions)(req, res, next);
     }
-
     cors(corsProtectedOptions)(req, res, next);
 }

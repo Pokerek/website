@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
+import { StatusCodes } from 'http-status-codes';
 
 import PostsService from '../services/posts-service';
 import PostValidation from './validations/post-validation';
@@ -44,7 +45,7 @@ export default class PostsController {
 
       const post = await this.postsService.createPost(validatedBodyPost);
 
-      res.json(post);
+      res.status(StatusCodes.CREATED).json(post);
     } catch (error) {
       next(error)
     };

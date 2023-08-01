@@ -1,5 +1,5 @@
 import { Fragment, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 import BurgerMenu from "./burger-menu";
 
@@ -7,6 +7,8 @@ import { routesPaths } from "../../routes";
 
 import "./navigation.scss";
 import useAuth from "../../hooks/useAuth";
+import Button from "../custom/button";
+import { BACKEND_URL } from "../../constants";
 
 const Navigation = () => {
   const [isActive, setIsActive] = useState(false);
@@ -48,6 +50,15 @@ const Navigation = () => {
             >
               Journal.dev
             </NavLink>
+          </li>
+          <li className="navigation__item">
+            <Link
+              className="navigation__link"
+              to={`${BACKEND_URL}/uploads/cv`}
+              target="_blank"
+            >
+              CV
+            </Link>
           </li>
           {authenticated && (
             <li className="navigation__item">

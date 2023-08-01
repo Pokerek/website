@@ -19,6 +19,7 @@ const SkillEditor = () => {
         skill || {
             name: "",
             category: "",
+            order: 0
         },
     );
 
@@ -78,6 +79,21 @@ const SkillEditor = () => {
                         <option value="backend">Backend</option>
                         <option value="tool">Tool</option>
                     </select>
+                </label>
+                <label
+                    htmlFor="order"
+                    className="skill-editor__label"
+                >
+                    Order
+                    <input
+                        type="number"
+                        name="order"
+                        id="order"
+                        className="skill-editor__input"
+                        value={newSkill.order}
+                        onChange={(e) => setNewSkill({ ...newSkill, order: parseInt(e.target.value) })}
+                        min={0}
+                    />
                 </label>
                 <label
                     htmlFor="image"
