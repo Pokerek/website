@@ -20,7 +20,7 @@ $screen-mobile: 480px;
 $screen-mobile-s: 320px;
 
 body {
-  --header-height: 100px;
+  --header-height: 4rem;
 }
 
 @media screen and (max-height: 300px) {

@@ -40,7 +40,7 @@ export default class PostsService {
     static async createPost({ title, text }: PostInput) {
 
         try {
-            const response = await fetch(`${BACKEND_URL}/posts/`, {
+            const response = await fetch(`${BACKEND_URL}/posts`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

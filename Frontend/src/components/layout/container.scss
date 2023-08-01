@@ -6,7 +6,7 @@
   margin-top: var(--header-height);
 
   @media screen and (min-width: $screen-mobile) {
-    max-width: calc(100% - 4rem);
+    max-width: calc(100% - 5rem);
   }
 
   @media screen and (min-width: $screen-tablet) {

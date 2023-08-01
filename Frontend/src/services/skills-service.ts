@@ -7,7 +7,18 @@ export default class SkillsService {
             if (!response.ok) throw new Error("Failed to fetch skills");
 
 
-            return await response.json() as Skill[];
+            const skills = await response.json() as Skill[];
+
+
+            return skills.sort((a, b) => {
+                if (a.category < b.category) { return -1; }
+                if (a.category > b.category) { return 1; }
+
+                if (a.order < b.order) { return -1; }
+                if (a.order > b.order) { return 1; }
+
+                return b.name < a.name ? 1 : -1;
+            });
         } catch (error) {
             console.error(error);
             return [];

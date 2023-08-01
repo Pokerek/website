@@ -1,0 +1,19 @@
+@import "../../../styles/variables";
+
+.skills-list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 1rem;
+
+  & &__item {
+    width: 100%;
+  }
+
+  @media screen and (min-width: $screen-mobile) {
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  @media screen and (min-width: $screen-desktop) {
+    grid-template-columns: repeat(8, 1fr);
+  }
+}

@@ -20,10 +20,9 @@ const AdminSettings = () => {
                     <ul className="admin-settings__list-body">
                         {
                             skills
-                                .sort((a, b) => a.category < b.category ? -1 : 1)
                                 .map(skill => (
                                     <li className="admin-settings__item">
-                                        {`${skill.name} | ${skill.category}`}
+                                        {`${skill.name} | ${skill.category} | ${skill.order}`}
                                         <p className="admin-settings__item-actions">
                                             <Button link={`${routesPaths.SKILL_FORM_PAGE}/${skill.id}`} className="admin-settings__button">Edit</Button>
                                         </p>

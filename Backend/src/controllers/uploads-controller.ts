@@ -44,6 +44,7 @@ export default class UploadController {
         try {
             await this.uploadsService.checkIfCvExists();
 
+            res.header('cache-control', 'public, max-age=3600');
             res.sendFile('cv.pdf', { root: './uploads' });
         } catch (error) {
             next(error);
