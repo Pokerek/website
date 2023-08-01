@@ -57,7 +57,7 @@ export default class UploadController {
         next: NextFunction
     ) => {
         try {
-            await this.uploadsService.uploadCv(req.file!.path);
+            await this.uploadsService.uploadCv(req.file?.path);
 
             res.send({ message: 'Cv uploaded' });
         } catch (error) {

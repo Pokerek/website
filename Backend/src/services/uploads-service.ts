@@ -6,8 +6,8 @@ import FileNotExistsError from './errors/file-not-exists-error';
 const UPLOAD_DIRECTION = process.env.UPLOAD_DIR || './uploads';
 
 export default class UploadsService {
-    uploadCv = async (tempPath: string) => {
-        if (!fs.existsSync(tempPath)) {
+    uploadCv = async (tempPath: string | undefined) => {
+        if (!tempPath || !fs.existsSync(tempPath)) {
             throw new ServerError('Something went wrong while uploading the cv');
         }
 

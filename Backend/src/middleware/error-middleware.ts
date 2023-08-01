@@ -27,6 +27,5 @@ export default function errorMiddleware(
     message
   });
 
-
   next();
 }
