@@ -30,12 +30,12 @@
   }
 
   & &__subtitle {
-    font-size: 1rem;
+    font-size: 1.25rem;
     font-weight: bold;
   }
 
   & &__text {
-    font-size: 0.75rem;
+    font-size: 1rem;
     height: 8rem;
   }
 
@@ -46,7 +46,7 @@
     height: 3rem;
 
     &-item {
-      font-size: 0.75rem;
+      font-size: 1rem;
       text-transform: uppercase;
       color: var(--color-text);
 

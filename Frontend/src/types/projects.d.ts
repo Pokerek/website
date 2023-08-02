@@ -11,3 +11,5 @@ interface Project {
     imageUrl: string;
     links?: ProjectLinks;
 }
+
+type ProjectInput = Omit<Project, "id">;

@@ -1,5 +1,5 @@
 import { BACKEND_URL } from "../../constants";
-import Button from "../custom/button";
+import Button from "../../components/custom/button";
 
 import "./project-item.scss";
 
@@ -14,7 +14,7 @@ const ProjectItem = ({ project }: ProjectItemProps) => {
     <div className="project-item">
       <img
         className="project-item__image"
-        src={`${BACKEND_URL}/images/57d55c34-e748-432e-8b33-db9cb3690e46.png`}
+        src={`${BACKEND_URL}${project.imageUrl}`}
         alt={name}
       />
       <h3 className="project-item__title">{name}</h3>

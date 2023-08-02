@@ -9,9 +9,13 @@ import {
 } from "react-router-dom";
 
 import Button from "../../components/custom/button";
+import {
+    Editor,
+    Form,
+    Input,
+    Select
+} from "../../components/editor";
 import useUploadImage from "../../hooks/useUploadImage";
-
-import "./skill-editor.scss";
 
 const SkillEditor = () => {
     const skill = useLoaderData() as Skill | null;
@@ -47,69 +51,42 @@ const SkillEditor = () => {
     };
 
     return (
-        <div className="skill-editor">
+        <Editor>
             <h1>Skill Editor</h1>
-            <form className="skill-editor__form" onSubmit={handleSubmit}>
-                <label htmlFor="name"
-                    className="skill-editor__label"
-                >
-                    Name
-                    <input
-                        type="text"
-                        name="name"
-                        id="name"
-                        className="skill-editor__input"
-                        value={newSkill.name}
-                        onChange={(e) => setNewSkill({ ...newSkill, name: e.target.value })}
-                    />
-                </label>
-                <label
-                    htmlFor="category"
-                    className="skill-editor__label"
-                >
-                    Category
-                    <select
-                        name="category"
-                        id="category"
-                        value={newSkill.category}
-                        className="skill-editor__input"
-                        onChange={(e) => setNewSkill({ ...newSkill, category: e.target.value })}
-                    >
-                        <option value="frontend">Frontend</option>
-                        <option value="backend">Backend</option>
-                        <option value="tool">Tool</option>
-                    </select>
-                </label>
-                <label
-                    htmlFor="order"
-                    className="skill-editor__label"
-                >
-                    Order
-                    <input
-                        type="number"
-                        name="order"
-                        id="order"
-                        className="skill-editor__input"
-                        value={newSkill.order}
-                        onChange={(e) => setNewSkill({ ...newSkill, order: parseInt(e.target.value) })}
-                        min={0}
-                    />
-                </label>
-                <label
-                    htmlFor="image"
-                    className="skill-editor__label"
-                >
-                    Image
-                    <input
-                        type="file"
-                        name="image"
-                        id="image"
-                        className="skill-editor__input"
-                        onChange={handleImageChange}
-                        accept="image/*"
-
-                    />
-                </label>
+            <Form onSubmit={handleSubmit}>
+                <Input
+                    type="text"
+                    name="name"
+                    id="name"
+                    value={newSkill.name}
+                    onChange={(e) => setNewSkill({ ...newSkill, name: e.target.value })}
+                />
+                <Select
+                    name="category"
+                    id="category"
+                    value={newSkill.category}
+                    onChange={(e) => setNewSkill({ ...newSkill, category: e.target.value })}
+                    options={[
+                        'frontend',
+                        'backend',
+                        'tool'
+                    ]}
+                />
+                <Input
+                    type="number"
+                    name="order"
+                    id="order"
+                    value={newSkill.order}
+                    onChange={(e) => setNewSkill({ ...newSkill, order: parseInt(e.target.value) })}
+                    min={0}
+                />
+                <Input
+                    type="file"
+                    name="image"
+                    id="image"
+                    onChange={handleImageChange}
+                    accept="image/*"
+                />
                 {skill && (
                     <>
                         <input type="hidden" name="id" value={skill.id} />
@@ -117,8 +94,8 @@ const SkillEditor = () => {
                     </>
                 )}
                 <Button type="submit">Submit</Button>
-            </form>
-        </div>
+            </Form>
+        </Editor>
     )
 }
 

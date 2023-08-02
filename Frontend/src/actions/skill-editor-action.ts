@@ -2,7 +2,6 @@ import { redirect } from "react-router-dom";
 
 import SkillsService from "../services/skills-service";
 
-
 import { routesPaths } from "../routes";
 
 export default async function skillEditorAction({ request }: any) {

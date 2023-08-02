@@ -5,9 +5,9 @@ import "./admin-settings.scss";
 import { routesPaths } from "../../routes";
 
 const AdminSettings = () => {
-    const data = useLoaderData() as { skills: Skill[] };
+    const data = useLoaderData() as { skills: Skill[], projects: Project[] };
 
-    const { skills } = data;
+    const { skills, projects } = data;
 
     return (
         <div className="admin-settings">
@@ -21,13 +21,30 @@ const AdminSettings = () => {
                         {
                             skills
                                 .map(skill => (
-                                    <li className="admin-settings__item">
+                                    <li key={skill.id} className="admin-settings__item">
                                         {`${skill.name} | ${skill.category} | ${skill.order}`}
                                         <p className="admin-settings__item-actions">
                                             <Button link={`${routesPaths.SKILL_FORM_PAGE}/${skill.id}`} className="admin-settings__button">Edit</Button>
                                         </p>
                                     </li>
                                 ))
+                        }
+                    </ul>
+                </div>
+                <div className="admin-settings__list">
+                    <h3 className="admin-settings__list-header">
+                        Projects
+                    </h3>
+                    <ul className="admin-settings__list-body">
+                        {
+                            projects.map(project => (
+                                <li key={project.id} className="admin-settings__item">
+                                    {`${project.name}`}
+                                    <p className="admin-settings__item-actions">
+                                        <Button link={`${routesPaths.PROJECT_FORM_PAGE}/${project.id}`} className="admin-settings__button">Edit</Button>
+                                    </p>
+                                </li>
+                            ))
                         }
                     </ul>
                 </div>

@@ -1,6 +1,6 @@
 import { useLoaderData } from "react-router-dom";
 
-import ProjectItem from "../components/projects/project-item";
+import ProjectItem from "./project-item";
 
 import "./projects-page.scss";
 
