@@ -2,13 +2,15 @@ import { RouteObject } from "react-router-dom";
 
 import MainPage from "./pages/main-page";
 import JournalPage from "./pages/journal-page";
-import ProjectsPage from "./pages/projects-page";
+import ProjectsPage from "./pages/projects/projects-page";
 import ErrorPage from "./pages/ErrorPage/error-page";
 
 import AdminPage from "./pages/Admin/admin-page";
 import LoginPage from "./pages/Admin/login-page";
 import AdminSettings from "./pages/Admin/admin-settings";
 import PostEditor from "./pages/Admin/post-editor";
+import SkillEditor from "./pages/Admin/skill-editor";
+import ProjectEditor from "./pages/Admin/project-editor";
 
 import mainPageLoader from "./loaders/main-page-loader";
 import journalPageLoader from "./loaders/journal-page-loader";
@@ -16,16 +18,17 @@ import projectsPageLoader from "./loaders/projects-page-loader";
 import postEditorLoader from "./loaders/post-editor-loader";
 import authLoader from "./loaders/auth-loader";
 import adminSettingsLoader from "./loaders/admin-settings-loader";
+import skillEditorLoader from "./loaders/skill-editor-loader";
+import projectEditorLoader from "./loaders/project-editor-loader";
 
 import loginPageAction from "./actions/login-page-action";
 import logoutAction from "./actions/logout-action";
 import postEditorAction from "./actions/post-editor-action";
 import sendMailAction from "./actions/send-mail-action";
+import skillEditorAction from "./actions/skill-editor-action";
+import projectEditorAction from "./actions/project-editor-action";
 
 import App from "./App";
-import SkillEditor from "./pages/Admin/skill-editor";
-import skillEditorLoader from "./loaders/skill-editor-loader";
-import skillEditorAction from "./actions/skill-editor-action";
 
 export const routesPaths = {
     HOME_PAGE: '/',
@@ -36,12 +39,14 @@ export const routesPaths = {
     LOGOUT_PAGE: '/admin/logout',
     WRITE_POST_PAGE: '/admin/write',
     SKILL_FORM_PAGE: '/admin/skill',
+    PROJECT_FORM_PAGE: '/admin/project',
 }
 
 const routes: RouteObject[] = [
     {
         path: '/',
         element: < App />,
+        errorElement: <ErrorPage />,
         children: [
             {
                 path: routesPaths.HOME_PAGE,
@@ -87,15 +92,17 @@ const routes: RouteObject[] = [
                         action: postEditorAction,
                     },
                     {
+                        path: `${routesPaths.PROJECT_FORM_PAGE}/:id?`,
+                        element: <ProjectEditor />,
+                        loader: projectEditorLoader,
+                        action: projectEditorAction,
+                    },
+                    {
                         path: routesPaths.LOGOUT_PAGE,
                         action: logoutAction,
                     }
                 ],
-            },
-            {
-                path: "*",
-                element: <ErrorPage />,
-            },
+            }
         ]
     }
 ];

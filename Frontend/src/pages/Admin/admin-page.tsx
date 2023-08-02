@@ -29,6 +29,7 @@ const AdminPage = () => {
             <div className="admin-page__actions">
                 <Button navLink="/admin/write">Write a post</Button>
                 <Button navLink="/admin/skill">Add skill</Button>
+                <Button navLink="/admin/project">Add project</Button>
                 <Button onClick={handleLogout}>Logout</Button>
             </div>
             <Outlet />

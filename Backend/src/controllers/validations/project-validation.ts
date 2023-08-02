@@ -8,9 +8,10 @@ const createProjectSchema = Joi.object({
   name: Joi.string().required().max(50),
   description: Joi.string().required(),
   stack: Joi.array<string>(),
+  imageUrl: Joi.string().required(),
   links: Joi.object({
-    online: Joi.string(),
-    github: Joi.string()
+    online: Joi.string().default('').allow(''),
+    github: Joi.string().default('').allow('')
   })
 });
 
@@ -18,9 +19,10 @@ const updateProjectSchema = Joi.object({
   name: Joi.string().max(50),
   description: Joi.string(),
   stack: Joi.array<string>(),
+  imageUrl: Joi.string(),
   links: Joi.object({
-    online: Joi.string(),
-    github: Joi.string()
+    online: Joi.string().allow(''),
+    github: Joi.string().allow('')
   })
 });
 

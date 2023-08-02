@@ -3,7 +3,6 @@ import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 const ProjectSchema = new Schema({
-    _id: Schema.Types.ObjectId,
     name: { type: String, required: true },
     stack: [String],
     description: { type: String, required: true },

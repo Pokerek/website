@@ -15,7 +15,7 @@ interface Project {
   links?: ProjectLinks;
 }
 
-export type ProjectInput = Omit<Project, 'id' | 'imageUrl'>;
+export type ProjectInput = Omit<Project, 'id'>;
 export type ProjectUpdateInput = Partial<ProjectInput>;
 
 export default class ProjectService {
@@ -52,16 +52,15 @@ export default class ProjectService {
   createProject = async (
     projectData: ProjectInput
   ): Promise<Project> => {
-    const createdProject = new ProjectModel(projectData);
-    await createdProject.save();
+    const project = await ProjectModel.create(projectData);
 
     return {
-      id: createdProject._id.toString(),
-      name: createdProject.name as string,
-      stack: createdProject.stack,
-      description: createdProject.description as string,
-      imageUrl: createdProject.imageUrl as string,
-      links: createdProject.links
+      id: project._id.toString(),
+      name: project.name as string,
+      stack: project.stack,
+      description: project.description as string,
+      imageUrl: project.imageUrl as string,
+      links: project.links
     };
   };
 
