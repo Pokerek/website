@@ -26,7 +26,7 @@ const ExperienceSection = () => {
   return (
     <ScrollSection id="experience">
       <h2 className="title">Battle-tested Experience</h2>
-      <Carousel elements={experienceItems} />
+      <Carousel elements={experienceItems} isDots />
       <Button link={routesPaths.PROJECT_PAGE}>Go to projects</Button>
     </ScrollSection>
   );

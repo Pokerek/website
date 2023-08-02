@@ -7,7 +7,6 @@ import "./skill-section.scss";
 
 const SkillSection = () => {
   const { skills } = useLoaderData() as MainPageLoaderResponse;
-  console.log(skills);
   if (skills.length === 0) return null;
 
   return (
