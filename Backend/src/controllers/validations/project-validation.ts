@@ -10,8 +10,8 @@ const createProjectSchema = Joi.object({
   stack: Joi.array<string>(),
   imageUrl: Joi.string().required(),
   links: Joi.object({
-    online: Joi.string().default('').allow(''),
-    github: Joi.string().default('').allow('')
+    online: Joi.string().allow(''),
+    github: Joi.string().allow('')
   })
 });
 
