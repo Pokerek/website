@@ -8,25 +8,32 @@ import ErrorPage from "./pages/ErrorPage/error-page";
 import AdminPage from "./pages/Admin/admin-page";
 import LoginPage from "./pages/Admin/login-page";
 import AdminSettings from "./pages/Admin/admin-settings";
-import PostEditor from "./pages/Admin/post-editor";
-import SkillEditor from "./pages/Admin/skill-editor";
-import ProjectEditor from "./pages/Admin/project-editor";
 
 import mainPageLoader from "./loaders/main-page-loader";
 import journalPageLoader from "./loaders/journal-page-loader";
 import projectsPageLoader from "./loaders/projects-page-loader";
-import postEditorLoader from "./loaders/post-editor-loader";
 import authLoader from "./loaders/auth-loader";
 import adminSettingsLoader from "./loaders/admin-settings-loader";
-import skillEditorLoader from "./loaders/skill-editor-loader";
-import projectEditorLoader from "./loaders/project-editor-loader";
 
 import loginPageAction from "./actions/login-page-action";
 import logoutAction from "./actions/logout-action";
-import postEditorAction from "./actions/post-editor-action";
 import sendMailAction from "./actions/send-mail-action";
+
+import PostEditor from "./pages/Admin/post-editor";
+import postEditorLoader from "./loaders/post-editor-loader";
+import postEditorAction from "./actions/post-editor-action";
+
+import SkillEditor from "./pages/Admin/skill-editor";
+import skillEditorLoader from "./loaders/skill-editor-loader";
 import skillEditorAction from "./actions/skill-editor-action";
+
+import ProjectEditor from "./pages/Admin/project-editor";
+import projectEditorLoader from "./loaders/project-editor-loader";
 import projectEditorAction from "./actions/project-editor-action";
+
+import ExperienceEditor from "./pages/Admin/experience-editor";
+import experienceEditorLoader from "./loaders/experience-editor-loader";
+import experienceEditorAction from "./actions/experience-editor-action";
 
 import App from "./App";
 
@@ -40,6 +47,7 @@ export const routesPaths = {
     WRITE_POST_PAGE: '/admin/write',
     SKILL_FORM_PAGE: '/admin/skill',
     PROJECT_FORM_PAGE: '/admin/project',
+    EXPERIENCE_FORM_PAGE: '/admin/experience',
 }
 
 const routes: RouteObject[] = [
@@ -96,6 +104,12 @@ const routes: RouteObject[] = [
                         element: <ProjectEditor />,
                         loader: projectEditorLoader,
                         action: projectEditorAction,
+                    },
+                    {
+                        path: `${routesPaths.EXPERIENCE_FORM_PAGE}/:id?`,
+                        element: <ExperienceEditor />,
+                        loader: experienceEditorLoader,
+                        action: experienceEditorAction
                     },
                     {
                         path: routesPaths.LOGOUT_PAGE,

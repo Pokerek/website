@@ -3,8 +3,10 @@ interface Experience {
     title: string;
     company: string;
     location: string;
-    startDate: Date;
-    endDate?: Date;
+    startDate: string;
+    endDate?: string;
     technologies: string[];
     description: string;
 }
+
+type ExperienceInput = Omit<Experience, "id">;

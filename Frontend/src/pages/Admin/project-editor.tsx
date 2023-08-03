@@ -59,6 +59,7 @@ const ProjectEditor = () => {
                     type="text"
                     name="name"
                     id="name"
+                    label="Name"
                     value={name}
                     onChange={handleNameChange}
                 />
@@ -66,12 +67,14 @@ const ProjectEditor = () => {
                     type="text"
                     name="description"
                     id="description"
+                    label="Description"
                     value={description}
                     onChange={handleDescriptionChange}
                 />
                 <Select
                     name="stack"
                     id="stack"
+                    label="Stack"
                     value={stack}
                     options={data?.skills.map(skill => skill.name) || []}
                     onChange={handleStackChange}
@@ -81,6 +84,7 @@ const ProjectEditor = () => {
                     type="text"
                     name="github"
                     id="github"
+                    label="GitHub"
                     value={gitHubLink}
                     onChange={handleGitHubLinkChange}
                 />
@@ -88,6 +92,7 @@ const ProjectEditor = () => {
                     type="text"
                     name="online"
                     id="online"
+                    label="Online"
                     value={onlineLink}
                     onChange={handleOnlineLinkChange}
                 />
@@ -95,6 +100,7 @@ const ProjectEditor = () => {
                     type="file"
                     name="image"
                     id="image"
+                    label="Image"
                     onChange={handleImageChange}
                 />
                 {data.project && (
