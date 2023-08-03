@@ -3,6 +3,7 @@ import {
     Response,
     NextFunction
 } from 'express';
+import { StatusCodes } from 'http-status-codes';
 
 import ExperienceService from '../services/experiences-service';
 import ExperienceValidation from './validations/experience-validation';
@@ -52,7 +53,7 @@ export default class ExperiencesController {
 
             const experience = await this.experiencesService.createExperience(validatedBodyExperience);
 
-            res.json(experience);
+            res.status(StatusCodes.CREATED).json(experience);
         } catch (error) {
             next(error)
         };
@@ -69,7 +70,7 @@ export default class ExperiencesController {
 
             await this.experiencesService.updateExperience(id, validatedBodyExperience);
 
-            res.json();
+            res.json({ message: 'Experience updated successfully' });
         } catch (error) {
             next(error)
         };

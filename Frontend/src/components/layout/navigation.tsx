@@ -7,7 +7,6 @@ import { routesPaths } from "../../routes";
 
 import "./navigation.scss";
 import useAuth from "../../hooks/useAuth";
-import Button from "../custom/button";
 import { BACKEND_URL } from "../../constants";
 
 const Navigation = () => {
@@ -66,7 +65,7 @@ const Navigation = () => {
                 className="navigation__link"
                 to={routesPaths.ADMIN_PAGE}
               >
-                Admin Panel
+                Admin
               </NavLink>
             </li>
           )}

@@ -30,6 +30,7 @@ const AdminPage = () => {
                 <Button navLink="/admin/write">Write a post</Button>
                 <Button navLink="/admin/skill">Add skill</Button>
                 <Button navLink="/admin/project">Add project</Button>
+                <Button navLink="/admin/experience">Add experience</Button>
                 <Button onClick={handleLogout}>Logout</Button>
             </div>
             <Outlet />

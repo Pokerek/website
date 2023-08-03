@@ -58,12 +58,14 @@ const SkillEditor = () => {
                     type="text"
                     name="name"
                     id="name"
+                    label="Name"
                     value={newSkill.name}
                     onChange={(e) => setNewSkill({ ...newSkill, name: e.target.value })}
                 />
                 <Select
                     name="category"
                     id="category"
+                    label="Category"
                     value={newSkill.category}
                     onChange={(e) => setNewSkill({ ...newSkill, category: e.target.value })}
                     options={[
@@ -76,6 +78,7 @@ const SkillEditor = () => {
                     type="number"
                     name="order"
                     id="order"
+                    label="Order"
                     value={newSkill.order}
                     onChange={(e) => setNewSkill({ ...newSkill, order: parseInt(e.target.value) })}
                     min={0}
@@ -84,6 +87,7 @@ const SkillEditor = () => {
                     type="file"
                     name="image"
                     id="image"
+                    label="Image"
                     onChange={handleImageChange}
                     accept="image/*"
                 />
