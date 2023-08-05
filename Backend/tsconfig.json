@@ -5,7 +5,8 @@
     "rootDir": "./src",
     "moduleResolution": "node",
     "types": [
-      "node"
+      "node",
+      "jest"
     ],
     "resolveJsonModule": true,
     "sourceMap": true,

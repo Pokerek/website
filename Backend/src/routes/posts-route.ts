@@ -1,6 +1,7 @@
 import GenericRoute from './generic-route';
 import PostsController from '../controllers/posts-controller';
 import authorizationMiddleware from '../middleware/authorization-middleware';
+import PostsService from '../services/posts-service';
 
 const PATH = '/posts';
 
@@ -33,7 +34,7 @@ export const POSTS_ROUTES = {
 }
 
 export default class PostsRoutes extends GenericRoute {
-  private postsController = new PostsController();
+  private postsController = new PostsController(new PostsService());
 
   constructor() {
     super(PATH);

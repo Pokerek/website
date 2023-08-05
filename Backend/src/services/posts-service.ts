@@ -28,13 +28,13 @@ export default class PostsService {
             .limit(limit);
 
         const total = await PostModel.countDocuments();
-        const pages = parseInt((total / limit + 1).toFixed());
+        const pages = Math.ceil(total / limit);
 
         return {
             total,
             pages,
             posts: posts.map(post => ({
-                id: post._id.toString(),
+                id: post.id,
                 title: post.title as string,
                 createdDate: post.createdDate,
                 text: post.text as string,
@@ -50,7 +50,7 @@ export default class PostsService {
         if (!post) throw new PostNotFoundError(id);
 
         return {
-            id: post._id.toString(),
+            id: post.id,
             title: post.title as string,
             createdDate: post.createdDate,
             text: post.text as string,
@@ -61,15 +61,14 @@ export default class PostsService {
     createPost = async (
         postData: PostInput
     ): Promise<Post> => {
-        const createdPost = new PostModel(postData);
-        await createdPost.save();
+        const post = await PostModel.create(postData);
 
         return {
-            id: createdPost._id.toString(),
-            title: createdPost.title as string,
-            createdDate: createdPost.createdDate,
-            text: createdPost.text as string,
-            tags: createdPost.tags
+            id: post.id,
+            title: post.title as string,
+            createdDate: post.createdDate,
+            text: post.text as string,
+            tags: post.tags
         };
     }
 
